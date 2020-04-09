@@ -60,6 +60,7 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="Views" />
     <Folder Include="PublishProfiles" />
+    <Folder Include="SeedScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Teams.sql" />

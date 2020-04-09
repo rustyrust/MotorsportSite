@@ -38,6 +38,7 @@ namespace MotorsportSite.API
             //add a new one of these for every interface
             services.AddTransient<IDataReader, DataReader>();
             services.AddTransient<IConnectionProvider, ConnectionProvider>();
+            services.AddTransient<IDataWriter, DataWriter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

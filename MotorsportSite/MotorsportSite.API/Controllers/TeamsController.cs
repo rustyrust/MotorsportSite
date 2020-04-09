@@ -14,9 +14,12 @@ namespace MotorsportSite.API.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly IDataReader _dataReader;
-        public TeamsController(IDataReader dataReader)
+        private readonly IDataWriter _dataWriter;
+
+        public TeamsController(IDataReader dataReader, IDataWriter dataWriter)
         {
             _dataReader = dataReader;
+            _dataWriter = dataWriter;
         }
 
         [Route("{id}")]
@@ -24,7 +27,17 @@ namespace MotorsportSite.API.Controllers
         public async Task<ActionResult<Team>> GetATeamById(int id)
         {
             var result = await _dataReader.GetTeamById(id);
-            return Team.Map(result);
+            return Team.MapFromDb(result);
+        }
+
+        [Route("")]
+        [HttpPost]
+        public async Task<ActionResult> InsertATeam([FromBody]InsertTeam team)
+        {
+            var mappedData = InsertTeam.MapFromAPI(team);
+            var teamId = await _dataWriter.CreateTeam(mappedData);
+
+            return CreatedAtAction(nameof(GetATeamById), new { id = teamId}, null);
         }
     }
 }

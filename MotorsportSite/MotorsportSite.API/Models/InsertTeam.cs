@@ -5,32 +5,17 @@ using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Models
 {
-    public class Team
+    public class InsertTeam
     {
-        public int Id { get; set; }
         public string TeamName { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
         public string TeamColours { get; set; }
 
-
-        public static Team MapFromDb(MotorsportSite.DataLevel.Models.Team dataModel)
-        {
-            return new Team
-            {
-                Id = dataModel.Id,
-                TeamName = dataModel.TeamName,
-                EntryDate = dataModel.EntryDate,
-                LeaveDate = dataModel.LeaveDate,
-                TeamColours = dataModel.TeamColours
-            };
-        }
-
-        public static MotorsportSite.DataLevel.Models.Team MapFromAPI(Team dataModel)
+        public static MotorsportSite.DataLevel.Models.Team MapFromAPI(InsertTeam dataModel)
         {
             return new MotorsportSite.DataLevel.Models.Team
             {
-                Id = dataModel.Id,
                 TeamName = dataModel.TeamName,
                 EntryDate = dataModel.EntryDate,
                 LeaveDate = dataModel.LeaveDate,
