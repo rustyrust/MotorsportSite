@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MotorsportSite.DataLevel.DataAccess;
+using MotorsportSite.DataLevel.DataAccess.Interfaces;
 
 namespace MotorsportSite.API
 {
@@ -34,7 +36,8 @@ namespace MotorsportSite.API
             });
 
             //add a new one of these for every interface
-            //services.AddTransient<interfacename, class>();
+            services.AddTransient<IDataReader, DataReader>();
+            services.AddTransient<IConnectionProvider, ConnectionProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
