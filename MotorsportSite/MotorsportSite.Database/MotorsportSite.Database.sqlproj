@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Teams.sql" />
+    <Build Include="Tables\Drivers.sql" />
+    <Build Include="Tables\DriversTeamMovement.sql" />
+    <Build Include="Tables\RacingCategory.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />

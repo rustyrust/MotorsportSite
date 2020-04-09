@@ -42,4 +42,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="EntryDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0a211b25-6ff4-45e2-b9f8-453c2f0cb82f" ChangeDateTime="04/09/2020 14:02:06">
+    <Property Name="ElementName" Value="[dbo].[Drivers].[Nat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Drivers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Nationality" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ca603ba0-b358-4bbd-942a-557b260d7a97" ChangeDateTime="04/09/2020 14:04:16">
+    <Property Name="ElementName" Value="[dbo].[DriversTeamMovement].[RacingCatogory]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DriversTeamMovement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RacingCatogoryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c2c6e5d0-f4f1-42fc-8a6e-2ab5c81d113d" ChangeDateTime="04/09/2020 14:09:30">
+    <Property Name="ElementName" Value="[dbo].[RacingCatagory].[CatagoryName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RacingCatagory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CategoryName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3c1f8253-3cf0-4c70-8ce9-edf1d16431ea" ChangeDateTime="04/09/2020 14:09:53">
+    <Property Name="ElementName" Value="[dbo].[DriversTeamMovement].[RacingCatogoryId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DriversTeamMovement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RacingCategoryId" />
+  </Operation>
 </Operations>
