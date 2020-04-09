@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MotorsportSite.API.Models;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
+using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Controllers
 {
@@ -37,7 +33,16 @@ namespace MotorsportSite.API.Controllers
             var mappedData = InsertTeam.MapFromAPI(team);
             var teamId = await _dataWriter.CreateTeam(mappedData);
 
-            return CreatedAtAction(nameof(GetATeamById), new { id = teamId}, null);
+            return CreatedAtAction(nameof(GetATeamById), new { id = teamId }, null);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<ActionResult> InsertATeam(int id)
+        {
+            await _dataWriter.UpdateTeamDeletedStatus(id, true);
+
+            return Ok();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace MotorsportSite.DataLevel.DataAccess
                                    [TeamColours]
                                  FROM [dbo].Teams
                                  WHERE id = @id
+                                    AND isDeleted = 0
                                 ";
 
             using (var conn = _connectionProvider.Get())

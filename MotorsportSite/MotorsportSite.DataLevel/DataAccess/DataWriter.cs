@@ -22,7 +22,19 @@ namespace MotorsportSite.DataLevel.DataAccess
 
             using (var conn = _connectionProvider.Get())
             {
-                return await conn.ExecuteScalarAsync<int>(sql, team).ConfigureAwait(false);                
+                return await conn.ExecuteScalarAsync<int>(sql, team);                
+            }
+        }
+
+        public async Task UpdateTeamDeletedStatus(int id, bool deleted)
+        {
+            var sql = @"UPDATE [dbo].Teams
+                        SET IsDeleted = @deleted
+                        WHERE id = @id";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                await conn.ExecuteAsync(sql, new { id, deleted});
             }
         }
     }
