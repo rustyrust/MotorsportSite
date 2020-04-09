@@ -32,6 +32,9 @@ namespace MotorsportSite.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MotorsportSite Api", Version = "v1" });
             });
+
+            //add a new one of these for every interface
+            //services.AddTransient<interfacename, class>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
