@@ -17,6 +17,25 @@ namespace MotorsportSite.DataLevel.DataAccess
             _connectionProvider = connectionProvider;
         }
 
+        public async Task<List<Team>> GetAllTeams()
+        {
+            const string sql = @"SELECT
+                                   [Id], 
+                                   [TeamName], 
+                                   [EntryDate], 
+                                   [LeaveDate],
+                                   [TeamColours]
+                                 FROM [dbo].Teams
+                                 WHERE isDeleted = 0
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data =  await conn.QueryAsync<Team>(sql);
+                return data.AsList();
+            }
+        }
+
         public async Task<Team> GetTeamById(int id)
         {
             const string sql = @"SELECT
@@ -32,7 +51,7 @@ namespace MotorsportSite.DataLevel.DataAccess
 
             using (var conn = _connectionProvider.Get())
             {
-                return await conn.QuerySingleOrDefaultAsync<Team>(sql, new { id }).ConfigureAwait(false);
+                return await conn.QuerySingleOrDefaultAsync<Team>(sql, new { id });
             }
 
         }

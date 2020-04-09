@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotorsportSite.API.Models;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MotorsportSite.API.Controllers
 {
@@ -16,6 +18,15 @@ namespace MotorsportSite.API.Controllers
         {
             _dataReader = dataReader;
             _dataWriter = dataWriter;
+        }
+
+        [Route("")]
+        [HttpGet]
+        public async Task<ActionResult<List<Team>>> GetAllTeams()
+        {
+            var result = await _dataReader.GetAllTeams();
+
+            return result.Select(x => Team.MapFromDb(x)).ToList();
         }
 
         [Route("{id}")]
@@ -44,5 +55,6 @@ namespace MotorsportSite.API.Controllers
 
             return Ok();
         }
+
     }
 }

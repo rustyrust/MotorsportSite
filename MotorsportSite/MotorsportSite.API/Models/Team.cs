@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Models
 {
@@ -12,7 +9,6 @@ namespace MotorsportSite.API.Models
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
         public string TeamColours { get; set; }
-
 
         public static Team MapFromDb(MotorsportSite.DataLevel.Models.Team dataModel)
         {
@@ -25,19 +21,5 @@ namespace MotorsportSite.API.Models
                 TeamColours = dataModel.TeamColours
             };
         }
-
-        public static MotorsportSite.DataLevel.Models.Team MapFromAPI(Team dataModel)
-        {
-            return new MotorsportSite.DataLevel.Models.Team
-            {
-                Id = dataModel.Id,
-                TeamName = dataModel.TeamName,
-                EntryDate = dataModel.EntryDate,
-                LeaveDate = dataModel.LeaveDate,
-                TeamColours = dataModel.TeamColours
-            };
-        }
-
     }
-
 }
