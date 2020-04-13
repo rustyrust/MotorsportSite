@@ -4,6 +4,6 @@
     [TeamName] NVARCHAR(100) NOT NULL, 
     [EntryDate] DATETIME2 NOT NULL, 
     [LeaveDate] DATETIME2 NULL, 
-    [TeamColours] NVARCHAR(255) NOT NULL, 
+    [Livery] NVARCHAR(255) NOT NULL, 
     [IsDeleted] BIT NOT NULL DEFAULT 0
 )

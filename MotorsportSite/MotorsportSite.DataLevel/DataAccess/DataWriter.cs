@@ -16,8 +16,8 @@ namespace MotorsportSite.DataLevel.DataAccess
 
         public async Task<int> CreateTeam(Team team)
         {
-            var sql = @"INSERT INTO [dbo].Teams (TeamName, EntryDate, LeaveDate, TeamColours)
-                            VALUES (@TeamName, @EntryDate, @LeaveDate, @TeamColours)
+            var sql = @"INSERT INTO [dbo].Teams (TeamName, EntryDate, LeaveDate, Livery)
+                            VALUES (@TeamName, @EntryDate, @LeaveDate, @Livery)
                          SELECT CAST (SCOPE_IDENTITY() as int);";
 
             using (var conn = _connectionProvider.Get())

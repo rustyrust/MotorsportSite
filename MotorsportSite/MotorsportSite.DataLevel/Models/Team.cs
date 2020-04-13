@@ -10,6 +10,6 @@ namespace MotorsportSite.DataLevel.Models
         public string TeamName { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
-        public string TeamColours { get; set; }
+        public string Livery { get; set; }
     }
 }

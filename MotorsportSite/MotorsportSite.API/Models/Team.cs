@@ -8,7 +8,7 @@ namespace MotorsportSite.API.Models
         public string TeamName { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
-        public string TeamColours { get; set; }
+        public string Livery { get; set; }
 
         public static Team MapFromDb(MotorsportSite.DataLevel.Models.Team dataModel)
         {
@@ -18,7 +18,7 @@ namespace MotorsportSite.API.Models
                 TeamName = dataModel.TeamName,
                 EntryDate = dataModel.EntryDate,
                 LeaveDate = dataModel.LeaveDate,
-                TeamColours = dataModel.TeamColours
+                Livery = dataModel.Livery
             };
         }
     }
