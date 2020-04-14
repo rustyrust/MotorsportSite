@@ -52,7 +52,7 @@ namespace MotorsportSite.API.Controllers
         [HttpDelete]
         public async Task<ActionResult> RetireATeam(int id)
         {
-            await _dataWriter.UpdateTeamDeletedStatus(id, DateTime.Today);
+            await _dataWriter.UpdateTeamLeaveDate(id, DateTime.Today);
 
             return Ok();
         }

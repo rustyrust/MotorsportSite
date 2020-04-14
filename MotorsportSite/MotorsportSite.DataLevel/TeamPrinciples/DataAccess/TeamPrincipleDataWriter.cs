@@ -28,5 +28,17 @@ namespace MotorsportSite.DataLevel.TeamPrinciples.DataAccess
                 return await conn.ExecuteScalarAsync<int>(sql, teamPrinciple);
             }
         }
+
+        public async Task UpdateTeamPrincipleLeaveDate(int id, DateTime deletedDate)
+        {
+            var sql = @"UPDATE [dbo].TeamPrinciple
+                        SET LeaveDate = @deletedDate
+                        WHERE id = @id";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                await conn.ExecuteAsync(sql, new { id, deletedDate });
+            }
+        }
     }
 }

@@ -84,5 +84,6 @@
     <None Include="SeedScripts\Manufactures_DataScript.sql" />
     <None Include="SeedScripts\TeamsPowerUnit_DataScript.sql" />
     <None Include="SeedScripts\Teams_DataScript.sql" />
+    <None Include="SeedScripts\Drivers_DataScript.sql" />
   </ItemGroup>
 </Project>

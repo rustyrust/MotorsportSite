@@ -28,7 +28,7 @@ namespace MotorsportSite.DataLevel.DataAccess
             }
         }
 
-        public async Task UpdateTeamDeletedStatus(int id, DateTime deletedDate)
+        public async Task UpdateTeamLeaveDate(int id, DateTime deletedDate)
         {
             var sql = @"UPDATE [dbo].Teams
                         SET LeaveDate = @deletedDate

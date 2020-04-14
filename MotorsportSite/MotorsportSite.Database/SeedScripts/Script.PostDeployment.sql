@@ -14,3 +14,4 @@ Post-Deployment Script Template
 :r .\Manufactures_DataScript.sql
 :r .\Teams_DataScript.sql
 :r .\TeamsPowerUnit_DataScript.sql
+:r .\Drivers_DataScript.sql

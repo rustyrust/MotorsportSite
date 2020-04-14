@@ -9,6 +9,7 @@ namespace MotorsportSite.DataLevel.TeamPrinciples.Interfaces
     public interface ITeamPrincipleDataWriter
     {
         Task<int> AddATeamPrinciple(TeamPrinciple teamPrinciple);
+        Task UpdateTeamPrincipleLeaveDate(int id, DateTime deletedDate);
 
     }
 }

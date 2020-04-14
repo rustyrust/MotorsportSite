@@ -50,5 +50,14 @@ namespace MotorsportSite.API.Controllers
 
             return CreatedAtAction(nameof(GetTeamPrincipleById), new { id = teamPrincipleId }, null);
         }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<ActionResult> RetireATeamPrinciple(int id)
+        {
+            await _dataWriter.UpdateTeamPrincipleLeaveDate(id, DateTime.Today);
+
+            return Ok();
+        }
     }
 }
