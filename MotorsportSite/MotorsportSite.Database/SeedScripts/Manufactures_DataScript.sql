@@ -9,24 +9,26 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-SET IDENTITY_INSERT [dbo].[TeamPrinciple] ON;
+SET IDENTITY_INSERT [dbo].[Manufactures] ON;
 
 
-MERGE INTO [dbo].[TeamPrinciple] AS T
+MERGE INTO [dbo].[Manufactures]AS T
     USING (
-           VALUES (1,  'Toto',     'Wolff',    'Austria',  '19720112',  '20130101', NULL),
-                  (2,  'Andreas',  'Seidl',    'German',   '19760106',  '20190110', NULL),
-                  (3,  'Eric',     'Boullier', 'French',   '19731109',  '20140101', '20180704')
+           VALUES (1,  'Renault',  '19900101',  NULL),
+                  (2,  'Mercedes', '19900101',  NULL),
+                  (3,  'Ferrari',  '19900101',  NULL),
+                  (4,  'Honda',    '19900101',  NULL)
           )
-    AS S (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
+    AS S (Id, [Name], EntryDate, LeaveDate)
     ON T.Id = S.Id
 WHEN MATCHED THEN
-UPDATE SET
+    UPDATE SET
     EntryDate = S.EntryDate,
-    LeaveDate = S.LeaveDate
+    LeaveDate = S.LeaveDate,
+    [Name] = S.[Name]
 WHEN NOT MATCHED THEN
-    INSERT (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
-    VALUES (S.Id, S.FirstName, S.LastName, S.Nationality, S.DOB, S.EntryDate, S.LeaveDate);
+    INSERT (Id, [Name], EntryDate, LeaveDate)
+    VALUES (S.Id, S.[Name], S.EntryDate, S.LeaveDate);
 
 
-SET IDENTITY_INSERT [dbo].[TeamPrinciple] OFF
+SET IDENTITY_INSERT [dbo].[Manufactures] OFF

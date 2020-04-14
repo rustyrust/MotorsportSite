@@ -81,5 +81,8 @@
   <ItemGroup>
     <PostDeploy Include="SeedScripts\TeamPrinciple_DataScript.sql" />
     <None Include="SeedScripts\Script.PostDeployment.sql" />
+    <None Include="SeedScripts\Manufactures_DataScript.sql" />
+    <None Include="SeedScripts\TeamsPowerUnit_DataScript.sql" />
+    <None Include="SeedScripts\Teams_DataScript.sql" />
   </ItemGroup>
 </Project>

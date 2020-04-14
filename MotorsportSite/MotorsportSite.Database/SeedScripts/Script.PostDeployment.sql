@@ -11,3 +11,6 @@ Post-Deployment Script Template
 */
 
 :r .\TeamPrinciple_DataScript.sql
+:r .\Manufactures_DataScript.sql
+:r .\Teams_DataScript.sql
+:r .\TeamsPowerUnit_DataScript.sql
