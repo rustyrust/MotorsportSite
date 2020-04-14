@@ -14,11 +14,13 @@ namespace MotorsportSite.API.Controllers
     public class TeamPrincipleController : ControllerBase
     {
         private readonly ITeamPrincipleDataReader _dataReader;
+        private readonly ITeamPrincipleDataWriter _dataWriter;
 
 
-        public TeamPrincipleController(ITeamPrincipleDataReader dataReader)
+        public TeamPrincipleController(ITeamPrincipleDataReader dataReader, ITeamPrincipleDataWriter dataWriter)
         {
             _dataReader = dataReader;
+            _dataWriter = dataWriter;
 
         }
 
@@ -33,20 +35,20 @@ namespace MotorsportSite.API.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult<TeamPrinciple>> GetATeamById(int id)
+        public async Task<ActionResult<TeamPrinciple>> GetTeamPrincipleById(int id)
         {
             var result = await _dataReader.GetTeamPrincipleById(id);
             return TeamPrinciple.MapFromDb(result);
         }
 
-        //[Route("")]
-        //[HttpPost]
-        //public async Task<ActionResult> InsertATeamPrincple([FromBody]InsertTeamPrincple teamPrincple)
-        //{
-        //    var mappedData = InsertTeamPrincple.MapFromAPI(teamPrincple);
-        //    //var teamId = await _dataWriter.CreateTeam(mappedData);
+        [Route("")]
+        [HttpPost]
+        public async Task<ActionResult> InsertATeamPrincple([FromBody]InsertTeamPrincple teamPrincple)
+        {
+            var mappedData = InsertTeamPrincple.MapFromAPI(teamPrincple);
+            var teamPrincipleId = await _dataWriter.AddATeamPrinciple(mappedData);
 
-        //    //return CreatedAtAction(nameof(GetATeamById), new { id = teamId }, null);
-        //}
+            return CreatedAtAction(nameof(GetTeamPrincipleById), new { id = teamPrincipleId }, null);
+        }
     }
 }

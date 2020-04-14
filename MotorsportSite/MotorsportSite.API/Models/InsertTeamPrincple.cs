@@ -11,9 +11,9 @@ namespace MotorsportSite.API.Models
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
 
-        public static MotorsportSite.DataLevel.Models.TeamPrinciple MapFromAPI(InsertTeamPrincple dataModel)
+        public static MotorsportSite.DataLevel.TeamPrinciples.Models.TeamPrinciple MapFromAPI(InsertTeamPrincple dataModel)
         {
-            return new MotorsportSite.DataLevel.Models.TeamPrinciple
+            return new MotorsportSite.DataLevel.TeamPrinciples.Models.TeamPrinciple
             {
                 FirstName = dataModel.FirstName,
                 LastName = dataModel.LastName,
