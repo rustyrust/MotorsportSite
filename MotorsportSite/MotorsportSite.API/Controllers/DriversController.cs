@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MotorsportSite.API.Models;
+using MotorsportSite.DataLevel.Drivers.Interfaces;
+
 
 namespace MotorsportSite.API.Controllers
 {
@@ -11,5 +14,21 @@ namespace MotorsportSite.API.Controllers
     [ApiController]
     public class DriversController : ControllerBase
     {
+        private readonly IDriverReader _dataReader;
+
+
+        public DriversController(IDriverReader dataReader)
+        {
+            _dataReader = dataReader;
+        }
+
+        [Route("")]
+        [HttpGet]
+        public async Task<ActionResult<List<Driver>>> GetAllDrivers()
+        {
+            var result = await _dataReader.GetAllDrivers();
+
+            return result.Select(x => Driver.MapFromDb(x)).ToList();
+        }
     }
 }

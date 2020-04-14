@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MotorsportSite.DataLevel.DataAccess;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
+using MotorsportSite.DataLevel.Drivers.DataAccess;
+using MotorsportSite.DataLevel.Drivers.Interfaces;
 using MotorsportSite.DataLevel.Services;
 using MotorsportSite.DataLevel.Services.Interfaces;
 using MotorsportSite.DataLevel.TeamPrinciples.DataAccess;
@@ -45,6 +47,7 @@ namespace MotorsportSite.API
             services.AddTransient<IDataWriter, DataWriter>();
             services.AddTransient<ITeamPrincipleDataReader, TeamPrincipleDataReader>();
             services.AddTransient<ITeamPrincipleDataWriter, TeamPrincipleDataWriter>();
+            services.AddTransient<IDriverReader, DriverReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
