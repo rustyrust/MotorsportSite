@@ -10,8 +10,5 @@ namespace MotorsportSite.DataLevel.DataAccess.Interfaces
     {
         Task<Team> GetTeamById(int id);
         Task<List<Team>> GetAllTeams();
-        Task<List<TeamPrinciple>> GetAllTeamPrinciples();
-        Task<TeamPrinciple> GetTeamPrincipleById(int id);
-
     }
 }

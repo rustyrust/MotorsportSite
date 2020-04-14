@@ -2,9 +2,8 @@
 
 namespace MotorsportSite.API.Models
 {
-    public class TeamPrinciple
+    public class InsertTeamPrincple
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Nationality { get; set; }
@@ -12,11 +11,10 @@ namespace MotorsportSite.API.Models
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
 
-        public static TeamPrinciple MapFromDb(MotorsportSite.DataLevel.TeamPrinciples.Models.TeamPrinciple dataModel)
+        public static MotorsportSite.DataLevel.Models.TeamPrinciple MapFromAPI(InsertTeamPrincple dataModel)
         {
-            return new TeamPrinciple
+            return new MotorsportSite.DataLevel.Models.TeamPrinciple
             {
-                Id = dataModel.Id,
                 FirstName = dataModel.FirstName,
                 LastName = dataModel.LastName,
                 Nationality = dataModel.Nationality,

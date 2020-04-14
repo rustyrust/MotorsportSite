@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MotorsportSite.DataLevel.DataAccess;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
+using MotorsportSite.DataLevel.TeamPrinciples.DataAccess;
+using MotorsportSite.DataLevel.TeamPrinciples.Interfaces;
 
 namespace MotorsportSite.API
 {
@@ -39,6 +41,7 @@ namespace MotorsportSite.API
             services.AddTransient<IDataReader, DataReader>();
             services.AddTransient<IConnectionProvider, ConnectionProvider>();
             services.AddTransient<IDataWriter, DataWriter>();
+            services.AddTransient<ITeamPrincipleDataReader, TeamPrincipleDataReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsportSite.API.Models;
-using MotorsportSite.DataLevel.DataAccess.Interfaces;
+using MotorsportSite.DataLevel.TeamPrinciples.Interfaces;
 
 namespace MotorsportSite.API.Controllers
 {
@@ -13,13 +13,13 @@ namespace MotorsportSite.API.Controllers
     [ApiController]
     public class TeamPrincipleController : ControllerBase
     {
-        private readonly IDataReader _dataReader;
-        private readonly IDataWriter _dataWriter;
+        private readonly ITeamPrincipleDataReader _dataReader;
 
-        public TeamPrincipleController(IDataReader dataReader, IDataWriter dataWriter)
+
+        public TeamPrincipleController(ITeamPrincipleDataReader dataReader)
         {
             _dataReader = dataReader;
-            _dataWriter = dataWriter;
+
         }
 
         [Route("")]
@@ -38,5 +38,15 @@ namespace MotorsportSite.API.Controllers
             var result = await _dataReader.GetTeamPrincipleById(id);
             return TeamPrinciple.MapFromDb(result);
         }
+
+        //[Route("")]
+        //[HttpPost]
+        //public async Task<ActionResult> InsertATeamPrincple([FromBody]InsertTeamPrincple teamPrincple)
+        //{
+        //    var mappedData = InsertTeamPrincple.MapFromAPI(teamPrincple);
+        //    //var teamId = await _dataWriter.CreateTeam(mappedData);
+
+        //    //return CreatedAtAction(nameof(GetATeamById), new { id = teamId }, null);
+        //}
     }
 }
