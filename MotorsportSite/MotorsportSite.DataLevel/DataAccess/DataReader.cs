@@ -24,9 +24,8 @@ namespace MotorsportSite.DataLevel.DataAccess
                                    [TeamName], 
                                    [EntryDate], 
                                    [LeaveDate],
-                                   [TeamColours]
+                                   [Livery]
                                  FROM [dbo].Teams
-                                 WHERE isDeleted = 0
                                 ";
 
             using (var conn = _connectionProvider.Get())
@@ -43,10 +42,9 @@ namespace MotorsportSite.DataLevel.DataAccess
                                    [TeamName], 
                                    [EntryDate], 
                                    [LeaveDate],
-                                   [TeamColours]
+                                   [Livery]
                                  FROM [dbo].Teams
                                  WHERE id = @id
-                                    AND isDeleted = 0
                                 ";
 
             using (var conn = _connectionProvider.Get())

@@ -70,11 +70,16 @@
     <Build Include="Tables\Manufactures.sql" />
     <Build Include="Tables\TeamsPowerUnit.sql" />
     <Build Include="Tables\RaceTracks.sql" />
+    <Build Include="Tables\TeamPrinciple.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishProfiles\LocalMotorsportSite.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="SeedScripts\TeamPrinciple_DataScript.sql" />
+    <None Include="SeedScripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
