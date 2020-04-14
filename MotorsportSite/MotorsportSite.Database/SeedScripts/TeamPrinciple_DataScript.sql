@@ -9,14 +9,20 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
---SET IDENTITY_INSERT [dbo].[TeamPrinciple] ON;
+SET IDENTITY_INSERT [dbo].[TeamPrinciple] ON;
 
---INSERT INTO [dbo].[TeamPrinciple] (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
---VALUES (1,'Toto', 'Wolff', 'Austria', 12/01/1972, 01/01/2013),
---       (2, 'Andreas', 'Seidl', 'German', 06/01/1976, 10/01/2019),
---       (3, 'Eric', 'Boullier', 'French', 09/11/1973, 01/01/2014, 04/07/2018)
 
---SET IDENTITY_INSERT [dbo].[TeamPrinciple] OFF
+MERGE INTO [dbo].[TeamPrinciple] AS T
+    USING (
+           VALUES (1,  'Toto',     'Wolff',    'Austria',  '19720112',  '20130101', NULL),
+                  (2,  'Andreas',  'Seidl',    'German',   '19760106',  '20190110', NULL),
+                  (3,  'Eric',     'Boullier', 'French',   '19731109',  '20140101', '20180704')
+          )
+    AS S (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
+    ON T.Id = S.Id
+WHEN NOT MATCHED THEN
+    INSERT (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
+    VALUES (S.Id, S.FirstName, S.LastName, S.Nationality, S.DOB, S.EntryDate, S.LeaveDate);
 
---SELECT *
---FROM dbo.Teams
+
+SET IDENTITY_INSERT [dbo].[TeamPrinciple] OFF

@@ -10,4 +10,4 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
---:r .\TeamPrinciple_DataScript.sql
+:r .\TeamPrinciple_DataScript.sql
