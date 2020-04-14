@@ -13,8 +13,8 @@ Post-Deployment Script Template
 
 --INSERT INTO [dbo].[TeamPrinciple] (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
 --VALUES (1,'Toto', 'Wolff', 'Austria', 12/01/1972, 01/01/2013),
---       (2, 'Andreas', 'Seidl', 'Gernam', 06/01/1976, 10/01/2019),
---       (3, 'Eric', 'Boullier', 'French', 09/11/1973, 01/01/2014, 24/01/2014)
+--       (2, 'Andreas', 'Seidl', 'German', 06/01/1976, 10/01/2019),
+--       (3, 'Eric', 'Boullier', 'French', 09/11/1973, 01/01/2014, 04/07/2018)
 
 --SET IDENTITY_INSERT [dbo].[TeamPrinciple] OFF
 

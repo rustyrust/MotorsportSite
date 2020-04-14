@@ -10,7 +10,7 @@ namespace MotorsportSite.DataLevel.DataAccess.Interfaces
     {
         Task<int> CreateTeam(Team team);
 
-        Task UpdateTeamDeletedStatus(int id, bool deleted);
+        Task UpdateTeamDeletedStatus(int id, DateTime deletedDate);
 
     }
 }

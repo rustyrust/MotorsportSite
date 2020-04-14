@@ -9,8 +9,9 @@ namespace MotorsportSite.DataLevel.DataAccess.Interfaces
     public interface IDataReader
     {
         Task<Team> GetTeamById(int id);
-
         Task<List<Team>> GetAllTeams();
+        Task<List<TeamPrinciple>> GetAllTeamPrinciples();
+        Task<TeamPrinciple> GetTeamPrincipleById(int id);
 
     }
 }

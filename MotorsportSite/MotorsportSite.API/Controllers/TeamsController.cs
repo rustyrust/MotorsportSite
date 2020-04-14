@@ -4,6 +4,7 @@ using MotorsportSite.DataLevel.DataAccess.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace MotorsportSite.API.Controllers
 {
@@ -49,9 +50,9 @@ namespace MotorsportSite.API.Controllers
 
         [Route("{id}")]
         [HttpDelete]
-        public async Task<ActionResult> InsertATeam(int id)
+        public async Task<ActionResult> RetireATeam(int id)
         {
-            await _dataWriter.UpdateTeamDeletedStatus(id, true);
+            await _dataWriter.UpdateTeamDeletedStatus(id, DateTime.Today);
 
             return Ok();
         }

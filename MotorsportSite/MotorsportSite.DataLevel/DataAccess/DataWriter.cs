@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
 using MotorsportSite.DataLevel.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace MotorsportSite.DataLevel.DataAccess
@@ -26,15 +27,15 @@ namespace MotorsportSite.DataLevel.DataAccess
             }
         }
 
-        public async Task UpdateTeamDeletedStatus(int id, bool deleted)
+        public async Task UpdateTeamDeletedStatus(int id, DateTime deletedDate)
         {
             var sql = @"UPDATE [dbo].Teams
-                        SET IsDeleted = @deleted
+                        SET LeaveDate = @deletedDate
                         WHERE id = @id";
 
             using (var conn = _connectionProvider.Get())
             {
-                await conn.ExecuteAsync(sql, new { id, deleted});
+                await conn.ExecuteAsync(sql, new { id, deletedDate });
             }
         }
     }
