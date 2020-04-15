@@ -9,5 +9,6 @@ namespace MotorsportSite.DataLevel.Drivers.Interfaces
     public interface IDriverReader
     {
         Task<List<Driver>> GetAllDrivers();
+        Task<Driver> GetDriverById(int id);
     }
 }

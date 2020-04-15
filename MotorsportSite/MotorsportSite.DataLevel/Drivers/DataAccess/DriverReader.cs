@@ -21,7 +21,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
         public async Task<List<Driver>> GetAllDrivers()
         {
             const string sql = @"SELECT
-                                   Id, 
+                                   Id,
+                                   CatagoryId,
                                    FirstName, 
                                    LastName, 
                                    ShortName,
@@ -36,6 +37,28 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
             {
                 var data = await conn.QueryAsync<Driver>(sql);
                 return data.AsList();
+            }
+        }
+
+        public async Task<Driver> GetDriverById(int id)
+        {
+            const string sql = @"SELECT
+                                   Id,
+                                   CatagoryId,
+                                   FirstName, 
+                                   LastName, 
+                                   ShortName,
+                                   DriverNumber,
+                                   DOB,
+                                   Country,
+                                   PlaceOfBirth
+                                 FROM [dbo].Drivers
+                                 WHERE Id = @id
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                return await conn.QuerySingleAsync<Driver>(sql, new { id });
             }
         }
     }

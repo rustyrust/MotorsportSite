@@ -32,6 +32,12 @@ namespace MotorsportSite.API.Controllers
         }
 
 
-        //GET Driver by ID
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<ActionResult<Driver>> GetDriverById(int id)
+        {
+            var result = await _dataReader.GetDriverById(id);
+            return Driver.MapFromDb(result);
+        }
     }
 }
