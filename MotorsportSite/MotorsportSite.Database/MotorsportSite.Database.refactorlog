@@ -98,4 +98,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="EntryDate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6411cac3-19d0-41ed-a49f-b5e5610f0c97" ChangeDateTime="04/16/2020 15:35:15">
+    <Property Name="ElementName" Value="[dbo].[Points].[Allication]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Points]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AllicationFor" />
+  </Operation>
 </Operations>

@@ -71,6 +71,8 @@
     <Build Include="Tables\TeamsPowerUnit.sql" />
     <Build Include="Tables\RaceTracks.sql" />
     <Build Include="Tables\TeamPrinciple.sql" />
+    <Build Include="Tables\Points.sql" />
+    <Build Include="Tables\RaceResults.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />
