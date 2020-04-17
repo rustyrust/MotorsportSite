@@ -73,6 +73,7 @@
     <Build Include="Tables\TeamPrinciple.sql" />
     <Build Include="Tables\Points.sql" />
     <Build Include="Tables\RaceResults.sql" />
+    <Build Include="Tables\RaceCalendar.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />
@@ -96,5 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SeedScripts\RaceTracks_DataScript.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedScripts\RaceCalendar_DataScript.sql" />
   </ItemGroup>
 </Project>

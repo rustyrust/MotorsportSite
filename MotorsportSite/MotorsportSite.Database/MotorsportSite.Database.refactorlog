@@ -126,4 +126,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TrackLength" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5bd71588-54f0-4226-b401-77ee9642df1d" ChangeDateTime="04/17/2020 14:36:32">
+    <Property Name="ElementName" Value="[dbo].[RaceCalendar].[Catagory]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RaceCalendar]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Category" />
+  </Operation>
 </Operations>
