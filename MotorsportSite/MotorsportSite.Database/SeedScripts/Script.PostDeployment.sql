@@ -15,3 +15,6 @@ Post-Deployment Script Template
 :r .\Teams_DataScript.sql
 :r .\TeamsPowerUnit_DataScript.sql
 :r .\Drivers_DataScript.sql
+:r .\Points_DataScript.sql
+:r .\RaceTracks_DataScript.sql
+:r .\RaceResults_DataScript.sql

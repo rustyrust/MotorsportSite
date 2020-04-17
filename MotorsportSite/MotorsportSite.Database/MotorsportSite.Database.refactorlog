@@ -105,4 +105,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="AllicationFor" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1e0a3f9e-4aaa-462e-92b2-c9684f7a5351" ChangeDateTime="04/17/2020 08:26:54">
+    <Property Name="ElementName" Value="[dbo].[Points].[StartDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Points]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartYear" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6d564a21-40dc-442e-b01a-002c39c67c57" ChangeDateTime="04/17/2020 08:27:05">
+    <Property Name="ElementName" Value="[dbo].[Points].[EndDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Points]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EndYear" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bb9c5ee6-863b-494c-843c-8d8dd597bbce" ChangeDateTime="04/17/2020 08:57:19">
+    <Property Name="ElementName" Value="[dbo].[RaceTracks].[TrackLenght]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RaceTracks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TrackLength" />
+  </Operation>
 </Operations>

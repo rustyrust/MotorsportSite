@@ -88,4 +88,13 @@
     <None Include="SeedScripts\Teams_DataScript.sql" />
     <None Include="SeedScripts\Drivers_DataScript.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedScripts\Points_DataScript.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedScripts\RaceResults_DataScript.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedScripts\RaceTracks_DataScript.sql" />
+  </ItemGroup>
 </Project>
