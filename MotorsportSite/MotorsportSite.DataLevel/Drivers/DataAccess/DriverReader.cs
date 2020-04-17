@@ -61,5 +61,24 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                 return await conn.QuerySingleAsync<Driver>(sql, new { id });
             }
         }
+
+        public async Task<List<DriverPoints>> GetDriverPoints(int id)
+        {
+            const string sql = @"SELECT
+                                    R.DriverId,
+                                    P.Points,
+                                    P.Position,
+                                    R.FastestLap
+                                 FROM [dbo].RaceResults R
+                                 INNER JOIN [dbo].Points P  ON P.Id = R.PointsId
+                                 WHERE R.DriverId = @id
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data = await conn.QueryAsync<DriverPoints>(sql, new { id });
+                return data.AsList();
+            }
+        }
     }
 }

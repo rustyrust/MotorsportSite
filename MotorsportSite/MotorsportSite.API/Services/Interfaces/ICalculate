@@ -1,0 +1,14 @@
+﻿using MotorsportSite.API.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MotorsportSite.API.Services.Interfaces
+{
+    public interface ICalculate
+    {
+        decimal TotalDriverPoints(List<DriverPoints> driverPoints);
+        int RacePositionCount(List<DriverPoints> driverPoints, int position);
+    }
+}

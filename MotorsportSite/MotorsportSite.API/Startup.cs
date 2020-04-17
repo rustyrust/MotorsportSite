@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MotorsportSite.API.Services;
+using MotorsportSite.API.Services.Interfaces;
 using MotorsportSite.DataLevel.DataAccess;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
 using MotorsportSite.DataLevel.Drivers.DataAccess;
@@ -48,6 +50,7 @@ namespace MotorsportSite.API
             services.AddTransient<ITeamPrincipleDataReader, TeamPrincipleDataReader>();
             services.AddTransient<ITeamPrincipleDataWriter, TeamPrincipleDataWriter>();
             services.AddTransient<IDriverReader, DriverReader>();
+            services.AddTransient<ICalculate, Calculate>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
