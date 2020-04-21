@@ -51,6 +51,7 @@ namespace MotorsportSite.API
             services.AddTransient<ITeamPrincipleDataWriter, TeamPrincipleDataWriter>();
             services.AddTransient<IDriverReader, DriverReader>();
             services.AddTransient<ICalculate, Calculate>();
+            services.AddTransient<IDriverInformationService, DriverInformationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,11 +17,13 @@ namespace MotorsportSite.API.Controllers
     {
         private readonly IDriverReader _dataReader;
         private readonly ICalculate _calculate;
+        private readonly IDriverInformationService _driverInformationService;
 
-        public DriversController(IDriverReader dataReader, ICalculate calculate)
+        public DriversController(IDriverReader dataReader, ICalculate calculate, IDriverInformationService driverInformationService)
         {
             _dataReader = dataReader;
             _calculate = calculate;
+            _driverInformationService = driverInformationService;
         }
 
         [Route("")]
@@ -64,7 +66,14 @@ namespace MotorsportSite.API.Controllers
             var result = await _dataReader.GetDriversRaceResults(id);
             var mappedData = result.Select(x => RaceResults.MapFromDb(x)).ToList();
             return _calculate.RacePositionCount(mappedData, position);
+        }
 
+        [Route("{id}/Information")]
+        [HttpGet]
+        public async Task<ActionResult<Models.DriverInformation>> GetDriversInformation(int id)
+        {
+            var result = await _driverInformationService.BuildDriverInfo(id);
+            return result;
         }
     }
 }

@@ -73,8 +73,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     C.StartDate
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
-                                 INNER JOIN [dbo].RaceTracks T    ON T.Id = P.TackId
-                                 INNER JOIN [dbo].RaceCalendar C  ON C.TrackId = T.Id   AND C.Event = 'Race'
+                                 INNER JOIN [dbo].RaceTracks T    ON T.Id = R.TrackId
+                                 INNER JOIN [dbo].RaceCalendar C  ON C.TrackId = T.Id   AND C.EventName = 'Race'
                                  WHERE R.DriverId = @id
                                 ";
 
