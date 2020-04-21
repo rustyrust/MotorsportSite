@@ -2,7 +2,7 @@
 
 let drivers;
 
-fetch("https://randomuser.me/api/?results=10")
+fetch("https://LocalHost:44374/api/Drivers")
     .then((response) => response.json())
     .then(function (data) {
         drivers = data.results;
@@ -18,6 +18,7 @@ function changeColour() {
         console.log("im in the if");
     }
 };
+
 
 
 
