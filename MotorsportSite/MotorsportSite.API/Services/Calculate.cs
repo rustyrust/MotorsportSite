@@ -24,8 +24,7 @@ namespace MotorsportSite.API.Services
             var TotalPoints = raceResults.Where(x => x.StartDate.Year == seasonYear)
                                          .Select(x => x.Points).Sum();
 
-            var numFastLaps = raceResults.Where(x => x.StartDate.Year == seasonYear)
-                                         .Select(x => x.FastestLap == true).Count();
+            var numFastLaps = raceResults.Where(x => x.StartDate.Year == seasonYear && x.FastestLap == true).Count();
 
             return TotalPoints + numFastLaps;
         }
@@ -38,13 +37,16 @@ namespace MotorsportSite.API.Services
             {
                 total = raceResults.Where(x => x.Position <= _topTen).Count();
             }
-            total = raceResults.Where(x => x.Position == position).Count();
+            else
+            {
+                total = raceResults.Where(x => x.Position == position).Count();
+            }
             return total;
         }
 
         public int HighestResult(List<RaceResults> raceResults)
         {
-            var position = raceResults.Max(x => x.Position);
+            var position = raceResults.Min(x => x.Position);
             return position;
         }
 
