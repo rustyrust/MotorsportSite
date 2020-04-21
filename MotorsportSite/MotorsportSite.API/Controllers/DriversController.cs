@@ -45,17 +45,24 @@ namespace MotorsportSite.API.Controllers
         [HttpGet]
         public async Task<ActionResult<decimal>> GetDriverTotalPointsById(int id)
         {
-            var result = await _dataReader.GetDriverPoints(id);
-            var points = result.Select(x => DriverPoints.MapFromDb(x)).ToList();
+            var result = await _dataReader.GetDriversRaceResults(id);
+            var points = result.Select(x => RaceResults.MapFromDb(x)).ToList();
             return _calculate.TotalDriverPoints(points);
         }
+
+        //[Route("{id}/TotalPoints/Season/{year}")]
+        //[HttpGet]
+        //public async Task<ActionResult<decimal>> GetDriverTotalPointsByIdAndSeason(int id)
+        //{
+ 
+        //}
 
         [Route("{id}/RacePositionTotal/{position}")]
         [HttpGet]
         public async Task<ActionResult<int>> GetDriversRacePositionTotalById(int id, int position)
         {
-            var result = await _dataReader.GetDriverPoints(id);
-            var mappedData = result.Select(x => DriverPoints.MapFromDb(x)).ToList();
+            var result = await _dataReader.GetDriversRaceResults(id);
+            var mappedData = result.Select(x => RaceResults.MapFromDb(x)).ToList();
             return _calculate.RacePositionCount(mappedData, position);
 
         }

@@ -8,7 +8,10 @@ namespace MotorsportSite.API.Services.Interfaces
 {
     public interface ICalculate
     {
-        decimal TotalDriverPoints(List<DriverPoints> driverPoints);
-        int RacePositionCount(List<DriverPoints> driverPoints, int position);
+        decimal TotalDriverPoints(List<RaceResults> driverPoints);
+
+        int RacePositionCount(List<RaceResults> driverPoints, int position);
+
+        decimal TotalDriverPointsOfASeason(List<RaceResults> raceResults, int seasonYear);
     }
 }

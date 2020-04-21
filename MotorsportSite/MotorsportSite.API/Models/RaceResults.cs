@@ -5,21 +5,25 @@ using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Models
 {
-    public class DriverPoints
+    public class RaceResults
     {
         public int DriverId { get; set; }
         public decimal Points { get; set; }
         public int Position { get; set; }
         public bool FastestLap { get; set; }
+        public string TrackName { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public static DriverPoints MapFromDb(DataLevel.Drivers.Models.DriverPoints dataModel)
+        public static RaceResults MapFromDb(DataLevel.Drivers.Models.RaceResults dataModel)
         {
-            return new DriverPoints
+            return new RaceResults
             {
                 DriverId = dataModel.DriverId,
                 Points = dataModel.Points,
                 Position = dataModel.Position,
-                FastestLap = dataModel.FastestLap
+                FastestLap = dataModel.FastestLap,
+                TrackName = dataModel.TrackName,
+                StartDate = dataModel.StartDate
             };
         }
     }

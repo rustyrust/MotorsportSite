@@ -16,15 +16,15 @@ namespace MotorsportSite.Tests
             // Arrange
             decimal excpected = 43;
 
-            List<DriverPoints> driverPoints = new List<DriverPoints> { 
-                new DriverPoints
+            List<RaceResults> driverPoints = new List<RaceResults> { 
+                new RaceResults
                 {
                   DriverId = 1,
                   Points = 25,
                   Position = 1,
                   FastestLap = false
                 },
-                new DriverPoints
+                new RaceResults
                 {
                   DriverId = 1,
                   Points = 18,
@@ -48,15 +48,15 @@ namespace MotorsportSite.Tests
             // Arrange
             decimal excpected = 45;
 
-            List<DriverPoints> driverPoints = new List<DriverPoints> {
-                new DriverPoints
+            List<RaceResults> driverPoints = new List<RaceResults> {
+                new RaceResults
                 {
                   DriverId = 1,
                   Points = 25,
                   Position = 1,
                   FastestLap = true
                 },
-                new DriverPoints
+                new RaceResults
                 {
                   DriverId = 1,
                   Points = 18,
