@@ -43,6 +43,13 @@ namespace MotorsportSite.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MotorsportSite Api", Version = "v1" });
             });
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             //add a new one of these for every interface
             services.AddTransient<IDataReader, DataReader>();
             services.AddTransient<IConnectionProvider, ConnectionProvider>();
@@ -75,6 +82,8 @@ namespace MotorsportSite.API
             app.UseHttpsRedirection();
                      
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

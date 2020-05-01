@@ -5,7 +5,7 @@ let drivers;
 fetch("https://LocalHost:44374/api/Drivers")
     .then((response) => response.json())
     .then(function (data) {
-        drivers = data.results;
+        drivers = data;
         console.log(drivers);
         changeColour()
     }).catch(function (error) {
@@ -15,7 +15,6 @@ fetch("https://LocalHost:44374/api/Drivers")
 function changeColour() {
     if (drivers) {
         document.querySelector("h1").style.color = "red";
-        console.log("im in the if");
     }
 };
 
