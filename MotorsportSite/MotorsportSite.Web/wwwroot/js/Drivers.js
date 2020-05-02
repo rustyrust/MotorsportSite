@@ -1,24 +1,25 @@
-﻿console.log("Hello Drivers");
+﻿console.log('Hello Drivers');
 
-let drivers;
 
-fetch("https://LocalHost:44374/api/Drivers")
+let driverData;
+
+fetch('https://LocalHost:44374/api/Drivers')
     .then((response) => response.json())
     .then(function (data) {
-        drivers = data;
-        console.log(drivers);
-        changeColour()
+        driverData = data;
+        console.log(driverData);
     }).catch(function (error) {
         console.log(error);
     });
 
-function changeColour() {
-    if (drivers) {
-        document.querySelector("h1").style.color = "red";
+
+
+let drivers = new Vue({
+    el: '#drivers',
+    data: {
+        driverNames: ['Hamilton', 'Vettel', 'Norris']
     }
-};
-
-
+})
 
 
 
