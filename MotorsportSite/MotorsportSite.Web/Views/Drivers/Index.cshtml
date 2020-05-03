@@ -2,15 +2,27 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link rel="stylesheet" href="~/css/site.css" />
+
+<style>
+    .driver-container{
+        border-style: solid;
+        margin: auto;
+    }
+
+</style>
+
 
 <div id="drivers">
     <div class="driver-page-title">
         <h1>Drivers</h1>
     </div>
-    <div>
-        <ul>
-            <li v-for="driverName in driverNames">{{driverName}}</li>
-        </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 driver-container" v-for="driverName in driverNames">
+                {{driverName}}
+            </div>
+        </div>
     </div>
 
 

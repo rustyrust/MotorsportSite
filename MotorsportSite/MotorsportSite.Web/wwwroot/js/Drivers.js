@@ -17,7 +17,7 @@ fetch('https://LocalHost:44374/api/Drivers')
 let drivers = new Vue({
     el: '#drivers',
     data: {
-        driverNames: ['Hamilton', 'Vettel', 'Norris']
+        driverNames: ['Hamilton', 'Vettel', 'Norris', 'Ricardo']
     }
 })
 
