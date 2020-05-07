@@ -3,7 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-
 <div id="drivers-vueapp">
     <div class="driver-page-title">
         <h1>Drivers</h1>
@@ -11,13 +10,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3" v-for="driver in drivers">
-                <div class="driver-container">
+                <div class="driver-container" v-on:click="activeDetails = !activeDetails">
                     <p class="driver-firstname">
                         {{driver.firstName}}
                     </p>
                     <h3 class="driver-lastname">
                         {{driver.lastName}}
                     </h3>
+                </div>
+                <div class="drivers-details" v-show="activeDetails">
+                    <div class="driver-number">
+                        <span class="driver-number-title">Driver Number:</span>
+                        <span class="driver-number-value">{{driver.driverNumber}}</span>
+                    </div>
+                    <div class="driver-country">
+                        <span class="driver-country-title">Country:</span>
+                        <span class="driver-country-value">{{driver.country}}</span>
+                    </div>
+                    <div class="driver-dob">
+                        <span class="driver-dob-title">DOB:</span>
+                        <span class="driver-dob-value">{{driver.dob}}</span>
+                    </div>
+                    <div class="driver-placeOfBirth">
+                        <span class="driver-placeOfBirth-title">Place Of Birth:</span>
+                        <span class="driver-placeOfBirth-value">{{driver.placeOfBirth}}</span>
+                    </div>
+                    <div class="driver-shortName">
+                        <span class="driver-shortName-title">On Track Name:</span>
+                        <span class="driver-shortName-value">{{driver.shortName}}</span>
+                    </div>
+
                 </div>
             </div>
         </div>

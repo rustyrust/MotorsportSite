@@ -75,5 +75,13 @@ namespace MotorsportSite.API.Controllers
             var result = await _driverInformationService.BuildDriverInfo(id);
             return result;
         }
+
+        //[Route("Information")]
+        //[HttpGet]
+        //public async Task<ActionResult<Models.DriverInformation>> GetAllDriversInformation()
+        //{
+
+        //}
+
     }
 }
