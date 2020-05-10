@@ -60,6 +60,10 @@ namespace MotorsportSite.API.Services
             return bestTrack;
         }
 
+        public int NumberOfRaceFastestLap()
+        {
+            return 1;
+        }
 
     }
 }

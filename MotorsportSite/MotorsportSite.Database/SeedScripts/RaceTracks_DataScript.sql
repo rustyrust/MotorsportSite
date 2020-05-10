@@ -15,8 +15,9 @@ SET IDENTITY_INSERT [dbo].[RaceTracks] ON;
 
 MERGE INTO [dbo].[RaceTracks] AS T
     USING (
-           VALUES (1, 'Melbourne', 'Austraila', 'Albert Park',                   5.303, 58, 16, 1, 0),
-                  (2, 'Sakhir',    'Bahrain',   'Bahrain International Circuit', 5.412, 57, 15, 1, 0)
+           VALUES (1, 'Melbourne', 'Austraila', 'Albert Park',                    5.303, 58, 16, 1, 0),
+                  (2, 'Sakhir',    'Bahrain',   'Bahrain International Circuit',  5.412, 57, 15, 1, 0),
+                  (3, 'Shanghai',  'China',     'Shanghai International Circuit', 5.451, 57, 16, 1, 0)
           )
     AS S (Id, [Location], Country, TrackName, TrackLength, Laps, NumberOfCorners, IsClockwise, IsDeleted)
     ON T.Id = S.Id

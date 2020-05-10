@@ -24,7 +24,18 @@ MERGE INTO [dbo].[Points]AS T
                   (7,    6,  7,  'Both', 2019, NULL),
                   (8,    4,  8,  'Both', 2019, NULL),
                   (9,    2,  9,  'Both', 2019, NULL),
-                  (10,   1,  10, 'Both', 2019, NULL)
+                  (10,   1,  10, 'Both', 2019, NULL),
+                  (11,   0,  11, 'Both', 2019, NULL),
+                  (12,   0,  12, 'Both', 2019, NULL),
+                  (13,   0,  13, 'Both', 2019, NULL),
+                  (14,   0,  14, 'Both', 2019, NULL),
+                  (15,   0,  15, 'Both', 2019, NULL),
+                  (16,   0,  16, 'Both', 2019, NULL),
+                  (17,   0,  17, 'Both', 2019, NULL),
+                  (18,   0,  18, 'Both', 2019, NULL),
+                  (19,   0,  19, 'Both', 2019, NULL),
+                  (20,   0,  20, 'Both', 2019, NULL),
+                  (21,   0,  0,  'Both', 2019, NULL)
           )
     AS S (Id, Points, Position, AllicationFor, StartYear, EndYear)
     ON T.Id = S.Id
