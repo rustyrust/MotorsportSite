@@ -62,6 +62,28 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
             }
         }
 
+        public async Task<List<RaceResults>> GetAllDriversRaceResults()
+        {
+            const string sql = @"SELECT
+                                    R.DriverId,
+                                    P.Points,
+                                    P.Position,
+                                    R.FastestLap,
+                                    T.TrackName,
+                                    C.StartDate
+                                 FROM [dbo].RaceResults R
+                                 INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
+                                 INNER JOIN [dbo].RaceTracks T    ON T.Id = R.TrackId
+                                 INNER JOIN [dbo].RaceCalendar C  ON C.TrackId = T.Id   AND C.EventName = 'Race'
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data = await conn.QueryAsync<RaceResults>(sql);
+                return data.AsList();
+            }
+        }
+
         public async Task<List<RaceResults>> GetDriversRaceResults(int id)
         {
             const string sql = @"SELECT

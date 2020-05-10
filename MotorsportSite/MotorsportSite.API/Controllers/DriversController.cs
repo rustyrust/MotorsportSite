@@ -70,18 +70,19 @@ namespace MotorsportSite.API.Controllers
 
         [Route("{id}/Information")]
         [HttpGet]
-        public async Task<ActionResult<Models.DriverInformation>> GetDriversInformation(int id)
+        public async Task<ActionResult<DriverInformation>> GetDriversInformation(int id)
         {
             var result = await _driverInformationService.BuildDriverInfo(id);
             return result;
         }
 
-        //[Route("Information")]
-        //[HttpGet]
-        //public async Task<ActionResult<Models.DriverInformation>> GetAllDriversInformation()
-        //{
-
-        //}
+        [Route("Information")]
+        [HttpGet]
+        public async Task<ActionResult<List<DriverInformation>>> GetAllDriversInformation()
+        {
+            var result = await _driverInformationService.BuildDriversInfo();
+            return result;
+        }
 
     }
 }

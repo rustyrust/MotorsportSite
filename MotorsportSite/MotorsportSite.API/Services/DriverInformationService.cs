@@ -32,13 +32,41 @@ namespace MotorsportSite.API.Services
             var highestResult = _calculate.HighestResult(results);
             var totalNumOfHighestResult = _calculate.RacePositionCount(results, highestResult);
 
-            var driverInfo = DriverInformation.Mapper(driverData, bestTrack, totalPoints, currentSeasonPoints, highestResult, totalNumOfHighestResult);
-            return driverInfo;
+            //var driverInfo = DriverInformation.Mapper(driverData, bestTrack, totalPoints, currentSeasonPoints, highestResult, totalNumOfHighestResult);
+            return new DriverInformation();
         }
 
-        public List<DriverInformation> BuildDriversInfo()
+        public async Task<List<DriverInformation>> BuildDriversInfo()
         {
-            return new List<DriverInformation>();
+            List<DriverInformation> driverInformation = new List<DriverInformation>();
+
+            var alldriversData = await _driverReader.GetAllDrivers();
+
+            foreach (var driver in alldriversData)
+            {
+
+                var raceData = await _driverReader.GetDriversRaceResults(driver.Id);
+                var results = raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+                var calcData = CalculateDriverData(results);
+
+                driverInformation.Add(DriverInformation.Mapper(driver, calcData));
+            }
+
+            return driverInformation;
+        }
+
+        private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
+        {
+            var bestTrack = _calculate.DriversBestTrack(driverResults);
+            var totalPoints = _calculate.TotalDriverPoints(driverResults);
+            var currentSeasonPoints = _calculate.TotalDriverPointsOfASeason(driverResults, DateTime.Now.Year);
+            var highestResult = _calculate.HighestResult(driverResults);
+            var totalNumOfHighestResult = _calculate.RacePositionCount(driverResults, highestResult);
+
+            var calcData = new DriverCalculationInfo { BestTrack = bestTrack, TotalPoints = totalPoints, TotalPointsOfCurrentSeason = currentSeasonPoints, HighestResult = highestResult, 
+                                                       TotalNumOfHighestResult = totalNumOfHighestResult };
+
+            return calcData;
         }
     }
 }

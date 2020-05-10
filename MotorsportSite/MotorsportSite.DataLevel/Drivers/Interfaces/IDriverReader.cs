@@ -10,6 +10,7 @@ namespace MotorsportSite.DataLevel.Drivers.Interfaces
     {
         Task<List<Driver>> GetAllDrivers();
         Task<Driver> GetDriverById(int id);
+        Task<List<RaceResults>> GetAllDriversRaceResults();
         Task<List<RaceResults>> GetDriversRaceResults(int id);
     }
 }
