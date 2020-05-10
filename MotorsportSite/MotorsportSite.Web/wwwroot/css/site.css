@@ -115,3 +115,9 @@ body {
         border-color: aqua;
         padding-top: 10px;
     }
+
+.driver-flag {
+    border: solid 2px;
+    border-color: darkgrey;
+    border-radius: 5px;
+}

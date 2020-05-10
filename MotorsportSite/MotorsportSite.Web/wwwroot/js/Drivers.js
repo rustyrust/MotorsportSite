@@ -2,7 +2,9 @@
     el: '#drivers-vueapp',
     data: {
         drivers: null,
-        activeDetails: false
+        activeDetails: false,
+        info: [],
+        driverid: null
     },
     mounted:
 
@@ -17,7 +19,15 @@
             });
     },
     methods:{
-
+        driverInfo: function (driverid) {
+            let self = this;
+            for (let driver in self.drivers) {
+                if (driver.id === driverid) {
+                    info = [driver.driverNumber, driver.country]
+                }
+            }
+            return info;
+        }
     }
 
 

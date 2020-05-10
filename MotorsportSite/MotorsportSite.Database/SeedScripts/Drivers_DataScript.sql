@@ -15,9 +15,9 @@ SET IDENTITY_INSERT [dbo].[Drivers] ON;
 
 MERGE INTO [dbo].[Drivers] AS T
     USING (
-           VALUES (1,  'Lewis',     'Hamilton',    'HAM', 44,  '19850107', 'Stevenage',   'English',      1),
+           VALUES (1,  'Lewis',     'Hamilton',    'HAM', 44,  '19850107', 'Stevenage',   'England',      1),
                   (2,  'Valtteri',  'Botas',       'BOT', 77,  '19890828', 'Nastola',     'Finland',      1),
-                  (3,  'Sebastian', 'Vettel',      'VET', 5,   '19870703', 'Heppenheim',  'Germany',      1),
+                  (3,  'Sebastian', 'Vettel',      'VET', 5,   '19870703', 'Heppenheim',  'German',       1),
                   (4,  'Charles',   'Leclerc',     'LEC', 16,  '19971016', 'Monaco',      'Italy',        1),
                   (5,  'Max',       'Verstappen',  'VER', 33,  '19970930', 'Belgium',     'Netherlands',  1),
                   (6,  'Alexander', 'Albon',       'ALB', 23,  '19960323', 'London',      'Thailand',     1),
