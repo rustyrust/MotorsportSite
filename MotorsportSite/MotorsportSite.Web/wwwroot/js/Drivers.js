@@ -2,7 +2,8 @@
     el: '#drivers-vueapp',
     data: {
         drivers: null,
-        driverid: null
+        driverid: null,
+        selectedDriver: null
     },
     mounted:
 
@@ -12,21 +13,18 @@
                 .then((response) => response.json())
                 .then(function (data) {
                     self.drivers = data;
+                    self.selectedDriver = self.drivers[0];
                 }).catch(function (error) {
                     console.log(error);
                 });
         },
     methods: {
-        closeDriverDetails: function (id) {
+        toggleDriverDetails: function (id) {
             let self = this;
             for (let driver of self.drivers) {
                 if (id === driver.id) {
-                    driver.isVisable = !driver.isVisable;
+                    self.selectedDriver = driver;
                 }
-                else {
-                    driver.isVisable = false;
-                }
-
             }
         }
 

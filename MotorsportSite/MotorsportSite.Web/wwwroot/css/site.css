@@ -124,6 +124,14 @@ body {
     height: 30.6px;*/
 }
 
+.details-driver-flag {
+    border: solid 2px;
+    border-color: darkgrey;
+    border-radius: 5px;
+    width: 120px;
+    height: 68px;
+}
+
 .flag-container {
     float: right;
     position: relative;
@@ -131,12 +139,35 @@ body {
     right: 10px;
 }
 
+
+.drivers-details {
+    border-top: solid;
+    border-right: solid;
+    border-top-right-radius: 10px;
+    background-color: #EEEDED;
+}
+
+.diver-name-container {
+    border-left: solid 5px;
+    margin: 10px 0px 20px 0px;
+}
+
+.details-driver-firstname {
+    margin: 0px 0px 0px 10px;
+    font-size: 23px;
+}
+
 .driver-lastname {
-    margin: 0;
+    margin: 0px;
+}
+
+.details-driver-lastname {
+    margin: 0px 0px 0px 10px;
+    font-size: 40px;
 }
 
 .driver-firstname {
-    margin: 0;
+    margin: 0px;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -146,3 +177,9 @@ body {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
+
+.driver-number-title, .driver-country-title, .driver-dob-title, .driver-placeOfBirth-title, .driver-shortName-title, .driver-highest-result-title, .driver-best-track-title, .driver-total-points-title, .driver-current-points-title {
+    font-weight: bold;
+}
+
+
