@@ -10,42 +10,62 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3" v-for="driver in drivers">
-                    <div class="driver-container" v-on:click="activeDetails = !activeDetails; driverInfo(driver.id)">
+                    <div class="driver-container" v-on:click="closeDriverDetails(driver.id)">
                         <p class="driver-firstname">
                             {{driver.firstName}}
                         </p>
                         <div class="flag-container">
-                            <img v-bind:src="'CountryFlags/' + driver.country +'.png'" class="driver-flag" width="46" height="30.6"/>
+                            <img v-bind:src="'CountryFlags/' + driver.country +'.png'" class="driver-flag" width="46" height="30.6" />
                         </div>
                         <h3 class="driver-lastname">
                             {{driver.lastName}}
                         </h3>
+                        <transition name="fade">
+                            <div class="drivers-details" v-show="driver.isVisable">
+                                <div class="driver-number">
+                                    <span class="driver-number-title">Driver Number:</span>
+                                    <span class="driver-number-value">{{driver.driverNumber}}</span>
+                                </div>
+                                <div class="driver-country">
+                                    <span class="driver-country-title">Country:</span>
+                                    <span class="driver-country-value">{{driver.country}}</span>
+                                </div>
+                                <div class="driver-dob">
+                                    <span class="driver-dob-title">DOB:</span>
+                                    <span class="driver-dob-value">{{driver.dob}}</span>
+                                </div>
+                                <div class="driver-place-of-birth">
+                                    <span class="driver-placeOfBirth-title">Place Of Birth:</span>
+                                    <span class="driver-placeOfBirth-value">{{driver.placeOfBirth}}</span>
+                                </div>
+                                <div class="driver-short-name">
+                                    <span class="driver-shortName-title">On Track Name:</span>
+                                    <span class="driver-shortName-value">{{driver.shortName}}</span>
+                                </div>
+                                <div class="driver-highest-result">
+                                    <span class="driver-highest-result-title">Highest Result:</span>
+                                    <span class="driver-highest-result-value">{{driver.highestResult}}</span>
+                                </div>
+                                <div class="driver-best-track">
+                                    <span class="driver-best-track-title">Most Succeful Track:</span>
+                                    <span class="driver-best-track-value">{{driver.bestTrack}}</span>
+                                </div>
+                                <div class="driver-total-points">
+                                    <span class="driver-total-points-title">All time number of points:</span>
+                                    <span class="driver-total-points-value">{{driver.totalPoints}}</span>
+                                </div>
+                                <div class="driver-current-points">
+                                    <span class="driver-current-points-title">Current seasons points:</span>
+                                    <span class="driver-current-points-value">{{driver.totalPointsOfCurrentSeason}}</span>
+                                </div>
+                            </div>
+                        </transition>
+                        
                     </div>
                 </div>
             </div>
         </div>
-        <div class="drivers-details" v-show="activeDetails">
-            <div class="driver-number">
-                <span class="driver-number-title">Driver Number:</span>
-                <span class="driver-number-value">{{info.driverNumber}}</span>
-            </div>
-            <div class="driver-country">
-                <span class="driver-country-title">Country:</span>
-                <span class="driver-country-value">{{info.country}}</span>
-            </div>
-            <div class="driver-dob">
-                <span class="driver-dob-title">DOB:</span>
-                <span class="driver-dob-value">{{info.dob}}</span>
-            </div>
-            <div class="driver-placeOfBirth">
-                <span class="driver-placeOfBirth-title">Place Of Birth:</span>
-                <span class="driver-placeOfBirth-value">{{info.placeOfBirth}}</span>
-            </div>
-            <div class="driver-shortName">
-                <span class="driver-shortName-title">On Track Name:</span>
-                <span class="driver-shortName-value">{{info.shortName}}</span>
-            </div>
-        </div>
+
 
 
 

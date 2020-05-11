@@ -108,16 +108,41 @@ body {
     margin: auto;
     width: 80%;
     cursor: pointer;
+    transition: all 1s ease;
 }
 
     .driver-container:hover {
         border-right: solid;
         border-color: aqua;
-        padding-top: 10px;
     }
 
 .driver-flag {
     border: solid 2px;
     border-color: darkgrey;
     border-radius: 5px;
+    /*width: 46px;
+    height: 30.6px;*/
+}
+
+.flag-container {
+    float: right;
+    position: relative;
+    top: -18px;
+    right: 10px;
+}
+
+.driver-lastname {
+    margin: 0;
+}
+
+.driver-firstname {
+    margin: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }

@@ -21,6 +21,7 @@ namespace MotorsportSite.API.Models
         public int HighestResult { get; set; }
         public int TotalNumOfHighestResult { get; set; }
         public string BestTrack { get; set; }
+        public bool IsVisable { get; set; }
 
         //public static DriverInformation Mapper(MotorsportSite.DataLevel.Drivers.Models.Driver dataModel, string bestTrack, decimal totalPoints, decimal currentSeasonPoints, int highestResult, int totalNumOfHighestResult)
         //{
@@ -61,8 +62,8 @@ namespace MotorsportSite.API.Models
                 TotalPointsOfCurrentSeason = calcInfo.TotalPointsOfCurrentSeason,
                 HighestResult = calcInfo.HighestResult,
                 TotalNumOfHighestResult = calcInfo.TotalNumOfHighestResult,
-                BestTrack = calcInfo.BestTrack
-
+                BestTrack = calcInfo.BestTrack,
+                IsVisable = false
             };
         }
     }
