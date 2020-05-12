@@ -8,6 +8,8 @@ namespace MotorsportSite.API.Models
     public class RaceResults
     {
         public int DriverId { get; set; }
+        public int LapsCompleted { get; set; }
+        public bool IsChampion { get; set; }
         public decimal Points { get; set; }
         public int Position { get; set; }
         public bool FastestLap { get; set; }
@@ -19,6 +21,8 @@ namespace MotorsportSite.API.Models
             return new RaceResults
             {
                 DriverId = dataModel.DriverId,
+                LapsCompleted = dataModel.LapsCompleted,
+                IsChampion = dataModel.IsChampion,
                 Points = dataModel.Points,
                 Position = dataModel.Position,
                 FastestLap = dataModel.FastestLap,

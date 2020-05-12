@@ -15,7 +15,6 @@ namespace MotorsportSite.API.Services
         {
             var TotalPoints = raceResults.Select(x => x.Points).Sum();
             var numFastLaps = raceResults.Where(x => x.FastestLap == true).Count();
-
             return TotalPoints + numFastLaps;
         }
 
@@ -25,7 +24,6 @@ namespace MotorsportSite.API.Services
                                          .Select(x => x.Points).Sum();
 
             var numFastLaps = raceResults.Where(x => x.StartDate.Year == seasonYear && x.FastestLap == true).Count();
-
             return TotalPoints + numFastLaps;
         }
 
@@ -60,10 +58,47 @@ namespace MotorsportSite.API.Services
             return bestTrack;
         }
 
-        public int NumberOfRaceFastestLap()
+        public int NumberOfRaceFastestLaps(List<RaceResults> raceResults)
         {
-            return 1;
+            var amount = raceResults.Count(x => x.FastestLap == true);
+            return amount;
         }
 
+        public int NumberOfRacesCompleted(List<RaceResults> raceResults)
+        {
+            var amount = raceResults.Count();
+            return amount;
+        }
+
+        public int NumberOfDnfs(List<RaceResults> raceResults)
+        {
+            var amount = raceResults.Count(x => x.Position == 0);
+            return amount;
+        }
+
+        public int TotalNumberOfLapsCompleted(List<RaceResults> raceResults)
+        {
+            var amount = raceResults.Sum(x => x.LapsCompleted);
+            return amount;
+        }
+
+        public int BestSeason(List<RaceResults> raceResults)
+        {
+            var totalPointsPerSeason = raceResults.GroupBy(x => x.StartDate.Year)
+                                                  .Select(y => new {
+                                                      season = y.Key,
+                                                      total = y.Sum(x => x.Points)
+                                                  });
+            var bestSeason = totalPointsPerSeason.OrderByDescending(x => x.total).Select(x => x.season).FirstOrDefault();
+            return bestSeason;
+        }
+
+        public int NumberOfChampionshipsWon(List<RaceResults> raceResults)
+        {
+            var amount = raceResults.Count(x => x.IsChampion == true);
+            return amount;
+        }
+
+        //Calculations for Qually
     }
 }

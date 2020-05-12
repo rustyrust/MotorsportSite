@@ -13,6 +13,12 @@ namespace MotorsportSite.API.Services.Interfaces
         decimal TotalDriverPointsOfASeason(List<RaceResults> raceResults, int seasonYear);
         int HighestResult(List<RaceResults> raceResults);
         string DriversBestTrack(List<RaceResults> raceResults);
+        int NumberOfRaceFastestLaps(List<RaceResults> raceResults);
+        int NumberOfRacesCompleted(List<RaceResults> raceResults);
+        int NumberOfDnfs(List<RaceResults> raceResults);
+        int TotalNumberOfLapsCompleted(List<RaceResults> raceResults);
+        int BestSeason(List<RaceResults> raceResults);
+        int NumberOfChampionshipsWon(List<RaceResults> raceResults);
 
 
     }

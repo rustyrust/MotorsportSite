@@ -21,28 +21,13 @@ namespace MotorsportSite.API.Models
         public int HighestResult { get; set; }
         public int TotalNumOfHighestResult { get; set; }
         public string BestTrack { get; set; }
+        public int NumRaceFastestLaps { get; set; }
+        public int NumOfRacesCompleted { get; set; }
+        public int NumDNFs { get; set; }
+        public int TotalLapsComplete { get; set; }
+        public int BestSeason { get; set; }
+        public int NumChapionships { get; set; }
 
-        //public static DriverInformation Mapper(MotorsportSite.DataLevel.Drivers.Models.Driver dataModel, string bestTrack, decimal totalPoints, decimal currentSeasonPoints, int highestResult, int totalNumOfHighestResult)
-        //{
-        //    return new DriverInformation
-        //    {
-        //        Id = dataModel.Id,
-        //        CatagoryId = dataModel.CatagoryId,
-        //        FirstName = dataModel.FirstName,
-        //        LastName = dataModel.LastName,
-        //        ShortName = dataModel.ShortName,
-        //        DriverNumber = dataModel.DriverNumber,
-        //        DOB = dataModel.DOB,
-        //        Country = dataModel.Country,
-        //        PlaceOfBirth = dataModel.PlaceOfBirth,
-        //        TotalPoints = totalPoints,
-        //        TotalPointsOfCurrentSeason = currentSeasonPoints,
-        //        HighestResult = highestResult,
-        //        TotalNumOfHighestResult = totalNumOfHighestResult,
-        //        BestTrack = bestTrack
-
-        //    };
-        //}
 
         public static DriverInformation Mapper(MotorsportSite.DataLevel.Drivers.Models.Driver dataModel, DriverCalculationInfo calcInfo)
         {
@@ -61,7 +46,13 @@ namespace MotorsportSite.API.Models
                 TotalPointsOfCurrentSeason = calcInfo.TotalPointsOfCurrentSeason,
                 HighestResult = calcInfo.HighestResult,
                 TotalNumOfHighestResult = calcInfo.TotalNumOfHighestResult,
-                BestTrack = calcInfo.BestTrack
+                BestTrack = calcInfo.BestTrack,
+                NumRaceFastestLaps = calcInfo.NumRaceFastestLaps,
+                NumOfRacesCompleted = calcInfo.NumOfRacesCompleted,
+                NumDNFs = calcInfo.NumDNFs,
+                TotalLapsComplete = calcInfo.TotalLapsComplete,
+                BestSeason = calcInfo.BestSeason,
+                NumChapionships = calcInfo.NumChapionships
             };
         }
     }

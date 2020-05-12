@@ -66,6 +66,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
         {
             const string sql = @"SELECT
                                     R.DriverId,
+                                    R.LapsCompleted,
+                                    R.IsChampion,
                                     P.Points,
                                     P.Position,
                                     R.FastestLap,
@@ -88,6 +90,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
         {
             const string sql = @"SELECT
                                     R.DriverId,
+                                    R.LapsCompleted,
+                                    R.IsChampion,
                                     P.Points,
                                     P.Position,
                                     R.FastestLap,
