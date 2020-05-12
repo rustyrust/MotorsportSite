@@ -15,29 +15,29 @@ SET IDENTITY_INSERT [dbo].[RaceResults] ON;
 
 MERGE INTO [dbo].[RaceResults] AS T
     USING (
-           VALUES (1,  1, 2, 1,  0, 58, 2, 1),
-                  (2,  1, 1, 2,  0, 58, 2, 0),
-                  (3,  1, 5, 3,  0, 58, 2, 0),
-                  (4,  1, 3, 4,  0, 58, 2, 0),
-                  (5,  1, 4, 5,  0, 58, 2, 0),
-                  (6,  2, 1, 1,  0, 57, 2, 0),
-                  (7,  2, 2, 2,  0, 57, 2, 0),
-                  (8,  2, 4, 3,  0, 57, 2, 1),
-                  (9,  2, 5, 4,  0, 57, 2, 0),
-                  (10, 2, 3, 5,  0, 57, 2, 0),
-                  (11, 1, 6, 14, 0, 57, 2, 0),
-                  (12, 1, 7, 21, 0, 9,  1, 0),
-                  (13, 1, 8, 12, 0, 57, 2, 0),
-                  (14, 2, 6, 8,  0, 57, 2, 0),
-                  (15, 2, 7, 21, 0, 53, 2, 0),
-                  (16, 2, 8, 6,  0, 57, 2, 0)
+           VALUES (1,  5,  2, 1,  0, 58, 2, 1),
+                  (2,  5,  1, 2,  0, 58, 2, 0),
+                  (3,  5,  5, 3,  0, 58, 2, 0),
+                  (4,  5,  3, 4,  0, 58, 2, 0),
+                  (5,  5,  4, 5,  0, 58, 2, 0),
+                  (6,  10, 1, 1,  0, 57, 2, 0),
+                  (7,  10, 2, 2,  0, 57, 2, 0),
+                  (8,  10, 4, 3,  0, 57, 2, 1),
+                  (9,  10, 5, 4,  0, 57, 2, 0),
+                  (10, 10, 3, 5,  0, 57, 2, 0),
+                  (11, 5,  6, 14, 0, 57, 2, 0),
+                  (12, 5,  7, 21, 0, 9,  1, 0),
+                  (13, 5,  8, 12, 0, 57, 2, 0),
+                  (14, 10, 6, 8,  0, 57, 2, 0),
+                  (15, 10, 7, 21, 0, 53, 2, 0),
+                  (16, 10, 8, 6,  0, 57, 2, 0)
 
           )
-    AS S (Id, TrackId, DriverId, PointsId, IsChampion, LapsCompleted, NumStops, FastestLap)
+    AS S (Id, CalId, DriverId, PointsId, IsChampion, LapsCompleted, NumStops, FastestLap)
     ON T.Id = S.Id
 WHEN MATCHED THEN
 UPDATE SET
-    TrackId = S.TrackId,
+    CalId = S.CalId,
     DriverId = S.DriverId,
     PointsId = S.PointsId,
     IsChampion = S.IsChampion,
@@ -45,8 +45,8 @@ UPDATE SET
     NumStops = S.NumStops,
     FastestLap = S.FastestLap
 WHEN NOT MATCHED THEN
-    INSERT (Id, TrackId, DriverId, PointsId, IsChampion, LapsCompleted, NumStops, FastestLap)
-    VALUES (S.Id, S.TrackId, S.DriverId, S.PointsId, S.IsChampion, S.LapsCompleted, S.NumStops, S.FastestLap);
+    INSERT (Id, CalId, DriverId, PointsId, IsChampion, LapsCompleted, NumStops, FastestLap)
+    VALUES (S.Id, S.CalId, S.DriverId, S.PointsId, S.IsChampion, S.LapsCompleted, S.NumStops, S.FastestLap);
 
 
 SET IDENTITY_INSERT [dbo].[RaceResults] OFF

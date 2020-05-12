@@ -75,8 +75,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     C.StartDate
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
-                                 INNER JOIN [dbo].RaceTracks T    ON T.Id = R.TrackId
-                                 INNER JOIN [dbo].RaceCalendar C  ON C.TrackId = T.Id   AND C.EventName = 'Race'
+                                 INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
+								 INNER JOIN [dbo].RaceTracks T    ON T.Id = C.TrackId
                                 ";
 
             using (var conn = _connectionProvider.Get())
@@ -99,8 +99,8 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     C.StartDate
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
-                                 INNER JOIN [dbo].RaceTracks T    ON T.Id = R.TrackId
-                                 INNER JOIN [dbo].RaceCalendar C  ON C.TrackId = T.Id   AND C.EventName = 'Race'
+                                 INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
+								 INNER JOIN [dbo].RaceTracks T    ON T.Id = C.TrackId
                                  WHERE R.DriverId = @id
                                 ";
 
