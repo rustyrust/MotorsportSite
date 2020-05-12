@@ -19,3 +19,4 @@ Post-Deployment Script Template
 :r .\RaceTracks_DataScript.sql
 :r .\RaceResults_DataScript.sql
 :r .\RaceCalendar_DataScript.sql
+:r .\DriversTeamMovement_DataScript.sql

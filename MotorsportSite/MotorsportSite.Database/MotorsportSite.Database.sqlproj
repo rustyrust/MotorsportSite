@@ -101,4 +101,7 @@
   <ItemGroup>
     <None Include="SeedScripts\RaceCalendar_DataScript.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedScripts\DriversTeamMovement_DataScript.sql" />
+  </ItemGroup>
 </Project>
