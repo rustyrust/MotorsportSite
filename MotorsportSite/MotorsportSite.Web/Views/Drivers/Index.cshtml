@@ -43,46 +43,62 @@
                                 <span class="driver-shortName-title">On Track Name:</span>
                                 <span class="driver-shortName-value">{{selectedDriver.shortName}}</span>
                             </div>
-                            <div class="driver-highest-result">
-                                <span class="driver-highest-result-title">Highest Result:</span>
-                                <span class="driver-highest-result-value">{{selectedDriver.highestResult}}</span>
-                            </div>
                             <div class="driver-best-track">
                                 <span class="driver-best-track-title">Most Successful Track:</span>
                                 <span class="driver-best-track-value">{{selectedDriver.bestTrack}}</span>
-                            </div>
-                            <div class="driver-total-points">
-                                <span class="driver-total-points-title">All time number of points:</span>
-                                <span class="driver-total-points-value">{{selectedDriver.totalPoints}}</span>
-                            </div>
-                            <div class="driver-current-points">
-                                <span class="driver-current-points-title">Current seasons points:</span>
-                                <span class="driver-current-points-value">{{selectedDriver.totalPointsOfCurrentSeason}}</span>
-                            </div>
-                            <div class="driver-fastest-laps">
-                                <span class="driver-fastest-laps-title">Total Race Fastest laps:</span>
-                                <span class="driver-fastest-laps-value">{{selectedDriver.numRaceFastestLaps}}</span>
-                            </div>
-                            <div class="driver-races-completed">
-                                <span class="driver-races-completed-title">Total Races completed:</span>
-                                <span class="driver-races-completed-value">{{selectedDriver.numOfRacesCompleted}}</span>
-                            </div>
-                            <div class="driver-dnfs">
-                                <span class="driver-dnfs-title">Total Number of DNFs:</span>
-                                <span class="driver-dnfs-value">{{selectedDriver.numDNFs}}</span>
-                            </div>
-                            <div class="driver-completed-laps">
-                                <span class="driver-completed-laps-title">Total laps completed:</span>
-                                <span class="driver-completed-laps-value">{{selectedDriver.totalLapsComplete}}</span>
-                            </div>
-                            <div class="driver-total-championships">
-                                <span class="driver-total-championships-title">Total Number of Championships:</span>
-                                <span class="driver-total-championships-value">{{selectedDriver.numChapionships}}</span>
                             </div>
                             <div class="driver-best-season">
                                 <span class="driver-best-season-title">Best Season:</span>
                                 <span class="driver-best-season-value">{{selectedDriver.bestSeason}}</span>
                             </div>
+
+                            <div>
+                                <table class="driver-stats-table">
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>W</th>     @*wins*@
+                                        <th>LL</th>    @*Laps Lead*@
+                                        <th>HR</th>    @*Highest Result and times achived*@
+                                        <th>CR</th>    @*Completed Races*@
+                                        <th>O</th>     @*Overtakes*@
+                                        <th>DNF</th>   @*DNF*@
+                                        <th>FL</th>    @*Fastest Laps*@
+                                        <th>TP</th>    @*Total Points*@
+                                        <th>TP10</th>  @*Top 10 finishes*@
+                                        <th>CR</th>    @*Qually to Race Finish conversion*@
+                                    </tr>
+                                    <tr>
+                                        <td>{{currentSeason}} Stats</td>
+                                        <td>0</td>
+                                        <td>90</td>
+                                        <td>{{selectedDriver.highestResult}}</td>
+                                        <td>{{selectedDriver.numOfRacesCompleted}}</td>
+                                        <td>10</td>
+                                        <td>{{selectedDriver.numDNFs}}</td>
+                                        <td>{{selectedDriver.numRaceFastestLaps}}</td>
+                                        <td>{{selectedDriver.totalPoints}}</td>
+                                        <td>90</td>
+                                        <td>30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Career Stats</td>
+                                        <td>0</td>
+                                        <td>90</td>
+                                        <td>{{selectedDriver.highestResult}}</td>
+                                        <td>{{selectedDriver.numOfRacesCompleted}}</td>
+                                        <td>10</td>
+                                        <td>{{selectedDriver.numDNFs}}</td>
+                                        <td>{{selectedDriver.numRaceFastestLaps}}</td>
+                                        <td>{{selectedDriver.totalPoints}}</td>
+                                        <td>90</td>
+                                        <td>30</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+
                         </div>
                     </transition>
                 </div>

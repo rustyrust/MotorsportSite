@@ -3,7 +3,8 @@
     data: {
         drivers: null,
         driverid: null,
-        selectedDriver: null
+        selectedDriver: null,
+        currentSeason: null
     },
     mounted:
 
@@ -14,6 +15,10 @@
                 .then(function (data) {
                     self.drivers = data;
                     self.selectedDriver = self.drivers[0];
+
+                    let date = new Date();
+                    self.currentSeason = date.getFullYear();
+
                 }).catch(function (error) {
                     console.log(error);
                 });
