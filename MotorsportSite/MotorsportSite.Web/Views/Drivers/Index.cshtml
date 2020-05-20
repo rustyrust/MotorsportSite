@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="~/js/Drivers.js" charset="utf-8"></script>
+}
 
 <div id="drivers-vueapp">
     <div class="driver-page-title">
@@ -9,7 +13,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" v-if="selectedDriver">
                 <transition name="fade">
                     <div class="drivers-details">
                         <div class="diver-name-container">
@@ -59,19 +63,19 @@
                                     <th data-toggle="tooltip" data-placement="top" title="Wins">W</th>
                                     <th data-toggle="tooltip" data-placement="top" title="Laps Lead">LL</th>
                                     <th data-toggle="tooltip" data-placement="top" title="Highest Result and Times Achived">HR</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Completed Races">CR</th>    
-                                    <th data-toggle="tooltip" data-placement="top" title="Overtakes">O</th>    
-                                    <th data-toggle="tooltip" data-placement="top" title="Did Not Finish">DNF</th>   
-                                    <th data-toggle="tooltip" data-placement="top" title="Fastest Laps">FL</th>   
-                                    <th data-toggle="tooltip" data-placement="top" title="Total Points">TP</th>   
-                                    <th data-toggle="tooltip" data-placement="top" title="Top 10 finishes">TP10</th> 
+                                    <th data-toggle="tooltip" data-placement="top" title="Completed Races">CR</th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Overtakes">O</th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Did Not Finish">DNF</th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Fastest Laps">FL</th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Total Points">TP</th>
+                                    <th data-toggle="tooltip" data-placement="top" title="Top 10 finishes">TP10</th>
                                     <th data-toggle="tooltip" data-placement="top" title="Qually to Race Finish conversion">CR</th>
                                 </tr>
                                 <tr>
                                     <td>{{currentSeason}} Stats</td>
                                     <td>0</td>
                                     <td>90</td>
-                                    <td>{{selectedDriver.highestResult}} / 14</td>
+                                    <td>{{selectedDriver.highestResult}} / {{selectedDriver.totalNumOfHighestResult}}</td>
                                     <td>{{selectedDriver.numOfRacesCompleted}}</td>
                                     <td>10</td>
                                     <td>{{selectedDriver.numDNFs}}</td>
@@ -84,7 +88,7 @@
                                     <td>Career Stats</td>
                                     <td>0</td>
                                     <td>90</td>
-                                    <td>{{selectedDriver.highestResult}} / 423</td>
+                                    <td>{{selectedDriver.highestResult}} / {{selectedDriver.totalNumOfHighestResult}}</td>
                                     <td>{{selectedDriver.numOfRacesCompleted}}</td>
                                     <td>10</td>
                                     <td>{{selectedDriver.numDNFs}}</td>
@@ -126,11 +130,5 @@
 
 
 </div>
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="~/js/Drivers.js" charset="utf-8"></script>
+
 

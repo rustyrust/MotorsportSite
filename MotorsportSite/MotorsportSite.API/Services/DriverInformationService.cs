@@ -20,23 +20,14 @@ namespace MotorsportSite.API.Services
             _calculate = calculate;
         }
 
-        public async Task<DriverInformation> BuildDriverInfo(int driverid)
+        public async Task<List<Driver>> BuildAllDriversBio()
         {
-            var driverData = await _driverReader.GetDriverById(driverid);
-            var raceData = await _driverReader.GetDriversRaceResults(driverid);
-            var results = raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+            var result = await _driverReader.GetAllDrivers();
 
-            var bestTrack = _calculate.DriversBestTrack(results);
-            var totalPoints = _calculate.TotalDriverPoints(results);
-            var currentSeasonPoints = _calculate.TotalDriverPointsOfASeason(results, DateTime.Now.Year);
-            var highestResult = _calculate.HighestResult(results);
-            var totalNumOfHighestResult = _calculate.RacePositionCount(results, highestResult);
-
-            //var driverInfo = DriverInformation.Mapper(driverData, bestTrack, totalPoints, currentSeasonPoints, highestResult, totalNumOfHighestResult);
-            return new DriverInformation();
+            return result.Select(x => Driver.MapFromDb(x)).ToList();
         }
 
-        public async Task<List<DriverInformation>> BuildDriversInfo()
+        public async Task<List<DriverInformation>> BuildDriversStats()
         {
             List<DriverInformation> driverInformation = new List<DriverInformation>();
 
@@ -44,7 +35,6 @@ namespace MotorsportSite.API.Services
 
             foreach (var driver in alldriversData)
             {
-
                 var raceData = await _driverReader.GetDriversRaceResults(driver.Id);
                 var results = raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
                 var calcData = CalculateDriverData(results);
@@ -53,6 +43,24 @@ namespace MotorsportSite.API.Services
             }
 
             return driverInformation;
+        }
+
+        public async Task<List<DriverStats>> BuildDriversSeasonStats(int season)
+        {
+            List<DriverStats> driverStats = new List<DriverStats>();
+
+            var raceData = await _driverReader.GetDriversSeasonRaceResults(season);
+            var driverData = raceData.GroupBy(x => x.DriverId);
+
+            foreach (var driver in driverData)
+            {
+                var result = driver.Select(x => RaceResults.MapFromDb(x)).ToList();
+                var calcData = CalculateDriverData(result);
+
+                driverStats.Add(DriverStats.Mapper(driver.Key, calcData));
+            }
+
+            return driverStats;
         }
 
         private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)

@@ -8,7 +8,8 @@ namespace MotorsportSite.API.Services.Interfaces
 {
     public interface IDriverInformationService
     {
-        Task<List<DriverInformation>> BuildDriversInfo();
-        Task<DriverInformation> BuildDriverInfo(int driverid);
+        Task<List<Driver>> BuildAllDriversBio();
+        Task<List<DriverInformation>> BuildDriversStats();
+        Task<List<DriverStats>> BuildDriversSeasonStats(int season);
     }
 }

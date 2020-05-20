@@ -68,19 +68,27 @@ namespace MotorsportSite.API.Controllers
             return _calculate.RacePositionCount(mappedData, position);
         }
 
-        [Route("{id}/Information")]
+        [Route("Bio")]
         [HttpGet]
-        public async Task<ActionResult<DriverInformation>> GetDriversInformation(int id)
+        public async Task<ActionResult<List<Driver>>> GetAllDriversBio()
         {
-            var result = await _driverInformationService.BuildDriverInfo(id);
+            var result = await _driverInformationService.BuildAllDriversBio();
             return result;
         }
 
-        [Route("Information")]
+        [Route("CareerStats")]
         [HttpGet]
-        public async Task<ActionResult<List<DriverInformation>>> GetAllDriversInformation()
+        public async Task<ActionResult<List<DriverInformation>>> GetAllDriversStats()
         {
-            var result = await _driverInformationService.BuildDriversInfo();
+            var result = await _driverInformationService.BuildDriversStats();
+            return result;
+        }
+
+        [Route("SeasonStats/{season}")]
+        [HttpGet]
+        public async Task<ActionResult<List<DriverStats>>> GetAllDriversSeasonStats(int season)
+        {
+            var result = await _driverInformationService.BuildDriversSeasonStats(season);
             return result;
         }
 

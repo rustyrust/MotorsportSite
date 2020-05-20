@@ -99,6 +99,10 @@ namespace MotorsportSite.API.Services
             return amount;
         }
 
+        //Starting postition to final race positon
+
+
+
         //Calculations for Qually
     }
 }
