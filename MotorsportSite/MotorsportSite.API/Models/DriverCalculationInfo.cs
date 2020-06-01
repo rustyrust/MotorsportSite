@@ -18,5 +18,9 @@ namespace MotorsportSite.API.Models
         public int TotalLapsComplete { get; set; }
         public int BestSeason { get; set; }
         public int NumChapionships { get; set; }
+        public int TopTenFinishes { get; set; }
+        public int NumOfRaceWins { get; set; }
+
+
     }
 }

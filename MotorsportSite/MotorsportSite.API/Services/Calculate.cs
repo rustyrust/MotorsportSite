@@ -9,7 +9,6 @@ namespace MotorsportSite.API.Services
 {
     public class Calculate : ICalculate
     {
-        const int _topTen = 10;
 
         public decimal TotalDriverPoints(List<RaceResults> raceResults)
         {
@@ -29,16 +28,16 @@ namespace MotorsportSite.API.Services
 
         public int RacePositionCount(List<RaceResults> raceResults, int position)
         {
-            var total = 0;
 
-            if (position == _topTen)
-            {
-                total = raceResults.Where(x => x.Position <= _topTen).Count();
-            }
-            else
-            {
-                total = raceResults.Where(x => x.Position == position).Count();
-            }
+            var total = raceResults.Where(x => x.Position == position).Count();
+
+            return total;
+        }
+
+        public int TopTenPositionCount(List<RaceResults> raceResults)
+        {
+           var total = raceResults.Where(x => x.Position <= 10 && x.Position != 0).Count();
+
             return total;
         }
 
@@ -51,9 +50,11 @@ namespace MotorsportSite.API.Services
         public string DriversBestTrack(List<RaceResults> raceResults)
         {
             var totalPositionsForTracks = raceResults.GroupBy(x => x.TrackName)
-                                                     .Select(y => new { trackName = y.Key,
-                                                                        total = y.Sum(x => x.Position)
-                                                                      });
+                                                     .Select(y => new
+                                                     {
+                                                         trackName = y.Key,
+                                                         total = y.Sum(x => x.Position)
+                                                     });
             var bestTrack = totalPositionsForTracks.OrderBy(x => x.total).Select(x => x.trackName).FirstOrDefault();
             return bestTrack ?? "Not enough information";
         }
@@ -85,7 +86,8 @@ namespace MotorsportSite.API.Services
         public int BestSeason(List<RaceResults> raceResults)
         {
             var totalPointsPerSeason = raceResults.GroupBy(x => x.StartDate.Year)
-                                                  .Select(y => new {
+                                                  .Select(y => new
+                                                  {
                                                       season = y.Key,
                                                       total = y.Sum(x => x.Points)
                                                   });

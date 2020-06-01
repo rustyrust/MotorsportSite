@@ -111,10 +111,13 @@ namespace MotorsportSite.API.Services
             var totalLapsComplete = _calculate.TotalNumberOfLapsCompleted(driverResults);
             var bestSeason = _calculate.BestSeason(driverResults);
             var numChapionships = _calculate.NumberOfChampionshipsWon(driverResults);
+            var TopTenFinishes = _calculate.TopTenPositionCount(driverResults);
+            var numOfWins = _calculate.RacePositionCount(driverResults, 1);
 
             var calcData = new DriverCalculationInfo { BestTrack = bestTrack, TotalPoints = totalPoints, TotalPointsOfCurrentSeason = currentSeasonPoints, HighestResult = highestResult, 
                                                        TotalNumOfHighestResult = totalNumOfHighestResult, NumRaceFastestLaps = numRaceFastestLaps, NumChapionships = numChapionships,
-                                                       BestSeason = bestSeason, NumDNFs = numDNFs, NumOfRacesCompleted = numOfRacesCompleted, TotalLapsComplete = totalLapsComplete
+                                                       BestSeason = bestSeason, NumDNFs = numDNFs, NumOfRacesCompleted = numOfRacesCompleted, TotalLapsComplete = totalLapsComplete,
+                                                       TopTenFinishes = TopTenFinishes, NumOfRaceWins = numOfWins
             };
 
             return calcData;

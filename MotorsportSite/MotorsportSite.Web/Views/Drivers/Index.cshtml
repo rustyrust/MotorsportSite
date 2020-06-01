@@ -18,42 +18,42 @@
                     <div class="drivers-details">
                         <div class="diver-name-container">
                             <p class="details-driver-firstname">
-                                {{selectedDriver.firstName}}
+                                {{selectedDriver.driverBio.firstName}}
                             </p>
                             <div class="flag-container">
-                                <img v-bind:src="'CountryFlags/' + selectedDriver.country +'.png'" class="details-driver-flag" />
+                                <img v-bind:src="'CountryFlags/' + selectedDriver.driverBio.country +'.png'" class="details-driver-flag" />
                             </div>
                             <h3 class="details-driver-lastname">
-                                {{selectedDriver.lastName}}
+                                {{selectedDriver.driverBio.lastName}}
                             </h3>
                         </div>
                         <div class="driver-number">
                             <span class="driver-number-title">Driver Number:</span>
-                            <span class="driver-number-value">{{selectedDriver.driverNumber}}</span>
+                            <span class="driver-number-value">{{selectedDriver.driverBio.driverNumber}}</span>
                         </div>
                         <div class="driver-country">
                             <span class="driver-country-title">Country:</span>
-                            <span class="driver-country-value">{{selectedDriver.country}}</span>
+                            <span class="driver-country-value">{{selectedDriver.driverBio.country}}</span>
                         </div>
                         <div class="driver-dob">
                             <span class="driver-dob-title">DOB:</span>
-                            <span class="driver-dob-value">{{selectedDriver.dob}}</span>
+                            <span class="driver-dob-value">{{selectedDriver.driverBio.dob}}</span>
                         </div>
                         <div class="driver-place-of-birth">
                             <span class="driver-placeOfBirth-title">Place Of Birth:</span>
-                            <span class="driver-placeOfBirth-value">{{selectedDriver.placeOfBirth}}</span>
+                            <span class="driver-placeOfBirth-value">{{selectedDriver.driverBio.placeOfBirth}}</span>
                         </div>
                         <div class="driver-short-name">
                             <span class="driver-shortName-title">On Track Name:</span>
-                            <span class="driver-shortName-value">{{selectedDriver.shortName}}</span>
+                            <span class="driver-shortName-value">{{selectedDriver.driverBio.shortName}}</span>
                         </div>
                         <div class="driver-best-track">
                             <span class="driver-best-track-title">Most Successful Track:</span>
-                            <span class="driver-best-track-value">{{selectedDriver.bestTrack}}</span>
+                            <span class="driver-best-track-value">{{selectedDriver.driverCareerStats.bestTrack}}</span>
                         </div>
                         <div class="driver-best-season">
                             <span class="driver-best-season-title">Best Season:</span>
-                            <span class="driver-best-season-value">{{selectedDriver.bestSeason}}</span>
+                            <span class="driver-best-season-value">{{selectedDriver.driverCareerStats.bestSeason}}</span>
                         </div>
 
                         <div>
@@ -73,28 +73,28 @@
                                 </tr>
                                 <tr>
                                     <td>{{currentSeason}} Stats</td>
-                                    <td>0</td>
+                                    <td>{{selectedDriver.driverSeasonStats.numOfRaceWins}}</td>
                                     <td>90</td>
-                                    <td>{{selectedDriver.highestResult}} / {{selectedDriver.totalNumOfHighestResult}}</td>
-                                    <td>{{selectedDriver.numOfRacesCompleted}}</td>
+                                    <td>{{selectedDriver.driverSeasonStats.highestResult}} / {{selectedDriver.driverSeasonStats.totalNumOfHighestResult}}</td>
+                                    <td>{{selectedDriver.driverSeasonStats.numOfRacesCompleted}}</td>
                                     <td>10</td>
-                                    <td>{{selectedDriver.numDNFs}}</td>
-                                    <td>{{selectedDriver.numRaceFastestLaps}}</td>
-                                    <td>{{selectedDriver.totalPoints}}</td>
-                                    <td>90</td>
+                                    <td>{{selectedDriver.driverSeasonStats.numDNFs}}</td>
+                                    <td>{{selectedDriver.driverSeasonStats.numRaceFastestLaps}}</td>
+                                    <td>{{selectedDriver.driverSeasonStats.totalPoints}}</td>
+                                    <td>{{selectedDriver.driverSeasonStats.topTenFinishes}}</td>
                                     <td>30</td>
                                 </tr>
                                 <tr>
                                     <td>Career Stats</td>
-                                    <td>0</td>
+                                    <td>{{selectedDriver.driverCareerStats.numOfRaceWins}}</td>
                                     <td>90</td>
-                                    <td>{{selectedDriver.highestResult}} / {{selectedDriver.totalNumOfHighestResult}}</td>
-                                    <td>{{selectedDriver.numOfRacesCompleted}}</td>
+                                    <td>{{selectedDriver.driverCareerStats.highestResult}} / {{selectedDriver.driverCareerStats.totalNumOfHighestResult}}</td>
+                                    <td>{{selectedDriver.driverCareerStats.numOfRacesCompleted}}</td>
                                     <td>10</td>
-                                    <td>{{selectedDriver.numDNFs}}</td>
-                                    <td>{{selectedDriver.numRaceFastestLaps}}</td>
-                                    <td>{{selectedDriver.totalPoints}}</td>
-                                    <td>90</td>
+                                    <td>{{selectedDriver.driverCareerStats.numDNFs}}</td>
+                                    <td>{{selectedDriver.driverCareerStats.numRaceFastestLaps}}</td>
+                                    <td>{{selectedDriver.driverCareerStats.totalPoints}}</td>
+                                    <td>{{selectedDriver.driverCareerStats.topTenFinishes}}</td>
                                     <td>30</td>
                                 </tr>
                             </table>
@@ -106,17 +106,17 @@
                     </div>
                 </transition>
             </div>
-            <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in driverBio">
-                <div class="driver-container" v-on:click="toggleDriverDetails(driver.id)">
+            <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in drivers">
+                <div class="driver-container" v-on:click="toggleDriverDetails(driver.driverBio.id)">
                     <div class="diver-name-container">
                         <p class="driver-firstname">
-                            {{driver.firstName}}
+                            {{driver.driverBio.firstName}}
                         </p>
                         <div class="flag-container">
-                            <img v-bind:src="'CountryFlags/' + driver.country +'.png'" class="driver-flag" width="46" height="30.6" />
+                            <img v-bind:src="'CountryFlags/' + driver.driverBio.country +'.png'" class="driver-flag" width="46" height="30.6" />
                         </div>
                         <h3 class="driver-lastname">
-                            {{driver.lastName}}
+                            {{driver.driverBio.lastName}}
                         </h3>
                     </div>
                 </div>

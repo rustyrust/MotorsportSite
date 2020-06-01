@@ -19,6 +19,8 @@ namespace MotorsportSite.API.Models
         public int TotalLapsComplete { get; set; }
         public int BestSeason { get; set; }
         public int NumChapionships { get; set; }
+        public int TopTenFinishes { get; set; }
+        public int NumOfRaceWins { get; set; }
 
 
         public static DriverStats Mapper(int driverId, DriverCalculationInfo calcInfo)
@@ -36,7 +38,9 @@ namespace MotorsportSite.API.Models
                 NumDNFs = calcInfo.NumDNFs,
                 TotalLapsComplete = calcInfo.TotalLapsComplete,
                 BestSeason = calcInfo.BestSeason,
-                NumChapionships = calcInfo.NumChapionships
+                NumChapionships = calcInfo.NumChapionships,
+                TopTenFinishes = calcInfo.TopTenFinishes,
+                NumOfRaceWins = calcInfo.NumOfRaceWins
             };
         }
     }

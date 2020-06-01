@@ -17,28 +17,12 @@
             let date = new Date();
             self.currentSeason = date.getFullYear();
 
-            fetch('https://LocalHost:44374/api/Drivers/Bio')
+            fetch('https://LocalHost:44374/api/Drivers/FullInformation/2019')
                 .then((response) => response.json())
                 .then(function (data) {
-                    self.driverBio = data;
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                    self.drivers = data;
+                    self.selectedDriver = self.drivers[0];
 
-            fetch('https://LocalHost:44374/api/Drivers/CareerStats')
-                .then((response) => response.json())
-                .then(function (data) {
-                    self.careerStats = data;
-                    //self.selectedDriver = self.careerStats[0];
-
-                }).catch(function (error) {
-                    console.log(error);
-                });
-
-            fetch('https://LocalHost:44374/api/Drivers/SeasonStats/2019')
-                .then((response) => response.json())
-                .then(function (data) {
-                    self.currentSeasonStats = data;
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -52,13 +36,8 @@
         toggleDriverDetails: function (id) {
             let self = this;
             for (let driver of self.drivers) {
-                if (id === driver.id) {
+                if (id === driver.driverBio.id) {
                     self.selectedDriver = driver;
-                }
-            }
-            for (let driver of self.seasonStats) {
-                if (id === driver.id) {
-                    self.selectedDriverSeasonStats = driver;
                 }
             }
         }
