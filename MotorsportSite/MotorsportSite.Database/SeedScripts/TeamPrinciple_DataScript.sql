@@ -14,19 +14,19 @@ SET IDENTITY_INSERT [dbo].[TeamPrinciple] ON;
 
 MERGE INTO [dbo].[TeamPrinciple] AS T
     USING (
-           VALUES (1,  'Toto',     'Wolff',    'Austria',  '19720112',  '20130101', NULL),
-                  (2,  'Andreas',  'Seidl',    'German',   '19760106',  '20190110', NULL),
-                  (3,  'Eric',     'Boullier', 'French',   '19731109',  '20140101', '20180704')
+           VALUES (1,  'Toto',     'Wolff',    'Austria',  '19720112'),
+                  (2,  'Andreas',  'Seidl',    'German',   '19760106'),
+                  (3,  'Eric',     'Boullier', 'French',   '19731109')
           )
-    AS S (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
+    AS S (Id, FirstName, LastName, Nationality, DOB)
     ON T.Id = S.Id
 WHEN MATCHED THEN
 UPDATE SET
     EntryDate = S.EntryDate,
     LeaveDate = S.LeaveDate
 WHEN NOT MATCHED THEN
-    INSERT (Id, FirstName, LastName, Nationality, DOB, EntryDate, LeaveDate)
-    VALUES (S.Id, S.FirstName, S.LastName, S.Nationality, S.DOB, S.EntryDate, S.LeaveDate);
+    INSERT (Id, FirstName, LastName, Nationality, DOB)
+    VALUES (S.Id, S.FirstName, S.LastName, S.Nationality, S.DOB);
 
 
 SET IDENTITY_INSERT [dbo].[TeamPrinciple] OFF

@@ -86,7 +86,9 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     P.Position,
                                     R.FastestLap,
                                     T.TrackName,
-                                    C.StartDate
+                                    C.StartDate,
+                                    R.LapsLead,
+                                    R.Overtakes
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
                                  INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
@@ -110,7 +112,9 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     P.Position,
                                     R.FastestLap,
                                     T.TrackName,
-                                    C.StartDate
+                                    C.StartDate,
+                                    R.LapsLead,
+                                    R.Overtakes
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
                                  INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
@@ -135,7 +139,9 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     P.Position,
                                     R.FastestLap,
                                     T.TrackName,
-                                    C.StartDate
+                                    C.StartDate,
+                                    R.LapsLead,
+                                    R.Overtakes
                                  FROM [dbo].RaceResults R
                                  INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
                                  INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
