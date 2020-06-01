@@ -78,9 +78,9 @@ namespace MotorsportSite.API.Controllers
 
         [Route("CareerStats")]
         [HttpGet]
-        public async Task<ActionResult<List<DriverInformation>>> GetAllDriversStats()
+        public async Task<ActionResult<List<DriverStats>>> GetAllDriversStats()
         {
-            var result = await _driverInformationService.BuildDriversStats();
+            var result = await _driverInformationService.BuildDriversCareerStats();
             return result;
         }
 
@@ -89,6 +89,14 @@ namespace MotorsportSite.API.Controllers
         public async Task<ActionResult<List<DriverStats>>> GetAllDriversSeasonStats(int season)
         {
             var result = await _driverInformationService.BuildDriversSeasonStats(season);
+            return result;
+        }
+
+        [Route("FullInformation/{season}")]
+        [HttpGet]
+        public async Task<ActionResult<List<DriversFullInfomation>>> GetAllDriversFullInfo(int season)
+        {
+            var result = await _driverInformationService.BuildDriversFullInformation(season);
             return result;
         }
 

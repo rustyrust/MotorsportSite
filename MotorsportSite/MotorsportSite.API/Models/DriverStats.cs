@@ -8,17 +8,17 @@ namespace MotorsportSite.API.Models
     public class DriverStats
     {
         public int Id { get; set; }
-        public decimal TotalPoints { get; set; } = 0;
-        public decimal TotalPointsOfCurrentSeason { get; set; } = 0;
-        public int HighestResult { get; set; } = 0;
-        public int TotalNumOfHighestResult { get; set; } = 0;
+        public decimal TotalPoints { get; set; }
+        public decimal TotalPointsOfCurrentSeason { get; set; }
+        public int HighestResult { get; set; }
+        public int TotalNumOfHighestResult { get; set; }
         public string BestTrack { get; set; }
-        public int NumRaceFastestLaps { get; set; } = 0;
-        public int NumOfRacesCompleted { get; set; } = 0;
-        public int NumDNFs { get; set; } = 0;
-        public int TotalLapsComplete { get; set; } = 0;
-        public int BestSeason { get; set; } = 0;
-        public int NumChapionships { get; set; } = 0;
+        public int NumRaceFastestLaps { get; set; }
+        public int NumOfRacesCompleted { get; set; }
+        public int NumDNFs { get; set; }
+        public int TotalLapsComplete { get; set; }
+        public int BestSeason { get; set; }
+        public int NumChapionships { get; set; }
 
 
         public static DriverStats Mapper(int driverId, DriverCalculationInfo calcInfo)

@@ -106,7 +106,7 @@
                     </div>
                 </transition>
             </div>
-            <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in drivers">
+            <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in driverBio">
                 <div class="driver-container" v-on:click="toggleDriverDetails(driver.id)">
                     <div class="diver-name-container">
                         <p class="driver-firstname">

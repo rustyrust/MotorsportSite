@@ -55,7 +55,7 @@ namespace MotorsportSite.API.Services
                                                                         total = y.Sum(x => x.Position)
                                                                       });
             var bestTrack = totalPositionsForTracks.OrderBy(x => x.total).Select(x => x.trackName).FirstOrDefault();
-            return bestTrack;
+            return bestTrack ?? "Not enough information";
         }
 
         public int NumberOfRaceFastestLaps(List<RaceResults> raceResults)
