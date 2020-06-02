@@ -13,6 +13,8 @@ namespace MotorsportSite.API.Models
         public DateTime DOB { get; set; }
         public string Country { get; set; }
         public string PlaceOfBirth { get; set; }
+        public string TeamName { get; set; }
+        public string TeamColour { get; set; }
 
         public static Driver MapFromDb(MotorsportSite.DataLevel.Drivers.Models.Driver dataModel)
         {
@@ -26,7 +28,9 @@ namespace MotorsportSite.API.Models
                 DriverNumber = dataModel.DriverNumber,
                 DOB = dataModel.DOB,
                 Country = dataModel.Country,
-                PlaceOfBirth = dataModel.PlaceOfBirth
+                PlaceOfBirth = dataModel.PlaceOfBirth,
+                TeamName = dataModel.TeamName,
+                TeamColour = dataModel.TeamColour
             };
         }
     }

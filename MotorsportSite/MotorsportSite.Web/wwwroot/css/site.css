@@ -178,7 +178,7 @@ body {
     opacity: 0;
 }
 
-.driver-number-title, .driver-country-title, .driver-dob-title, .driver-placeOfBirth-title, .driver-shortName-title, .driver-highest-result-title, .driver-best-track-title, .driver-total-points-title, .driver-current-points-title, .driver-fastest-laps-title, .driver-races-completed-title, .driver-dnfs-title, .driver-completed-laps-title, .driver-total-championships-title, .driver-best-season-title {
+.data-title {
     font-weight: bold;
 }
 

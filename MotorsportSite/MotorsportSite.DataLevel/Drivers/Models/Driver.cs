@@ -15,5 +15,7 @@ namespace MotorsportSite.DataLevel.Drivers.Models
         public DateTime DOB { get; set; }
         public string Country { get; set; }
         public string PlaceOfBirth { get; set; }
+        public string TeamName { get; set; }
+        public string TeamColour { get; set; }
     }
 }

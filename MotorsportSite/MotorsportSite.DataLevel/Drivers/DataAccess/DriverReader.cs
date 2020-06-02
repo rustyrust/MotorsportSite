@@ -35,7 +35,7 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
         public async Task<List<Driver>> GetAllDrivers()
         {
             const string sql = @"SELECT
-                                   Id,
+                                   D.Id,
                                    CatagoryId,
                                    FirstName, 
                                    LastName, 
@@ -43,8 +43,12 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                    DriverNumber,
                                    DOB,
                                    Country,
-                                   PlaceOfBirth
-                                 FROM [dbo].Drivers
+                                   PlaceOfBirth,
+                                   T.TeamName,
+                                   T.PrimaryColour AS TeamColour
+                                 FROM [dbo].Drivers D
+                                 INNER JOIN [dbo].DriverMarket M ON M.DriverId = D.ID
+                                 INNER JOIN [dbo].Teams T        ON T.id = M.TeamId
                                 ";
 
             using (var conn = _connectionProvider.Get())
@@ -57,7 +61,7 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
         public async Task<Driver> GetDriverById(int id)
         {
             const string sql = @"SELECT
-                                   Id,
+                                   D.Id,
                                    CatagoryId,
                                    FirstName, 
                                    LastName, 
@@ -65,8 +69,12 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                    DriverNumber,
                                    DOB,
                                    Country,
-                                   PlaceOfBirth
-                                 FROM [dbo].Drivers
+                                   PlaceOfBirth,
+                                   T.TeamName,
+                                   T.PrimaryColour AS TeamColour
+                                 FROM [dbo].Drivers D
+                                 INNER JOIN [dbo].DriverMarket M ON M.DriverId = D.ID
+                                 INNER JOIN [dbo].Teams T        ON T.id = M.TeamId
                                  WHERE Id = @id
                                 ";
 
