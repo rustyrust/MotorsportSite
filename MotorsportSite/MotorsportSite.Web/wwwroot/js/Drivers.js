@@ -17,7 +17,7 @@
             let date = new Date();
             self.currentSeason = date.getFullYear();
 
-            fetch('https://LocalHost:44374/api/Drivers/FullInformation/2019')
+            fetch('https://LocalHost:44374/api/Drivers/FullInformation/2020')
                 .then((response) => response.json())
                 .then(function (data) {
                     self.drivers = data;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Services
@@ -20,44 +21,53 @@ namespace MotorsportSite.API.Services
 
         public decimal TotalDriverPointsOfASeason(List<RaceResults> raceResults, int seasonYear)
         {
+
             var TotalPoints = raceResults.Where(x => x.StartDate.Year == seasonYear)
-                                         .Select(x => x.Points).Sum();
+                                     .Select(x => x.Points).Sum();
 
             var numFastLaps = raceResults.Where(x => x.StartDate.Year == seasonYear && x.FastestLap == true).Count();
             return TotalPoints + numFastLaps;
+
         }
 
         public int RacePositionCount(List<RaceResults> raceResults, int position)
         {
-
             var total = raceResults.Where(x => x.Position == position).Count();
-
             return total;
         }
 
         public int TopTenPositionCount(List<RaceResults> raceResults)
         {
-           var total = raceResults.Where(x => x.Position <= 10 && x.Position != 0).Count();
-
-            return total;
+  
+                var total = raceResults.Where(x => x.Position <= 10 && x.Position != 0).Count();
+                return total;
+  
         }
 
         public int LapsLead(List<RaceResults> raceResults)
         {
-            var result = raceResults.Select(x => x.LapsLead).Sum();
-            return result;
+
+                var result = raceResults.Select(x => x.LapsLead).Sum();
+                return result;
+
         }
 
         public int Overtakes(List<RaceResults> raceResults)
         {
-            var result = raceResults.Select(x => x.Overtakes).Sum();
-            return result;
+
+                var result = raceResults.Select(x => x.Overtakes).Sum();
+                return result;
+
         }
 
         public int HighestResult(List<RaceResults> raceResults)
         {
-            var position = raceResults.Min(x => x.Position);
-            return position;
+            if (raceResults != null)
+            {
+                var position = raceResults.Min(x => x.Position);
+                return position;
+            }
+            return 0;
         }
 
         public string DriversBestTrack(List<RaceResults> raceResults)
@@ -74,44 +84,68 @@ namespace MotorsportSite.API.Services
 
         public int NumberOfRaceFastestLaps(List<RaceResults> raceResults)
         {
-            var amount = raceResults.Count(x => x.FastestLap == true);
-            return amount;
+            if (raceResults != null)
+            {
+                var amount = raceResults.Count(x => x.FastestLap == true);
+                return amount;
+            }
+            return 0;
         }
 
         public int NumberOfRacesCompleted(List<RaceResults> raceResults)
         {
-            var amount = raceResults.Count();
-            return amount;
+            if (raceResults != null)
+            {
+                var amount = raceResults.Count();
+                return amount;
+            }
+            return 0;
         }
 
         public int NumberOfDnfs(List<RaceResults> raceResults)
         {
-            var amount = raceResults.Count(x => x.Position == 0);
-            return amount;
+            if (raceResults != null)
+            {
+                var amount = raceResults.Count(x => x.Position == 0);
+                return amount;
+            }
+            return 0;
         }
 
         public int TotalNumberOfLapsCompleted(List<RaceResults> raceResults)
         {
-            var amount = raceResults.Sum(x => x.LapsCompleted);
-            return amount;
+            if (raceResults != null)
+            {
+                var amount = raceResults.Sum(x => x.LapsCompleted);
+                return amount;
+            }
+            return 0;
         }
 
         public int BestSeason(List<RaceResults> raceResults)
         {
-            var totalPointsPerSeason = raceResults.GroupBy(x => x.StartDate.Year)
+            if (raceResults != null)
+            {
+                var totalPointsPerSeason = raceResults.GroupBy(x => x.StartDate.Year)
                                                   .Select(y => new
                                                   {
                                                       season = y.Key,
                                                       total = y.Sum(x => x.Points)
                                                   });
-            var bestSeason = totalPointsPerSeason.OrderByDescending(x => x.total).Select(x => x.season).FirstOrDefault();
-            return bestSeason;
+                var bestSeason = totalPointsPerSeason.OrderByDescending(x => x.total).Select(x => x.season).FirstOrDefault();
+                return bestSeason;
+            }
+            return 0;
         }
 
         public int NumberOfChampionshipsWon(List<RaceResults> raceResults)
         {
-            var amount = raceResults.Count(x => x.IsChampion == true);
-            return amount;
+            if (raceResults != null)
+            {
+                var amount = raceResults.Count(x => x.IsChampion == true);
+                return amount;
+            }
+            return 0;
         }
 
         //Starting postition to final race positon

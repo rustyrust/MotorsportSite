@@ -7,11 +7,11 @@ namespace MotorsportSite.API.Models
 {
     public class RaceResults
     {
-        public int DriverId { get; set; }
-        public int LapsCompleted { get; set; }
-        public bool IsChampion { get; set; }
-        public decimal Points { get; set; }
-        public int Position { get; set; }
+        public int DriverId { get; set; } 
+        public int LapsCompleted { get; set; } 
+        public bool IsChampion { get; set; } 
+        public decimal Points { get; set; } 
+        public int Position { get; set; } 
         public bool FastestLap { get; set; }
         public string TrackName { get; set; }
         public DateTime StartDate { get; set; }

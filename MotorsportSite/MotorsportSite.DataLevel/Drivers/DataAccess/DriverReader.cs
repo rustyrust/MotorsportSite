@@ -139,22 +139,27 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
 
         public async Task<List<RaceResults>> GetDriversSeasonRaceResults(int season)
         {
-            const string sql = @"SELECT
-                                    R.DriverId,
-                                    R.LapsCompleted,
-                                    R.IsChampion,
-                                    P.Points,
-                                    P.Position,
-                                    R.FastestLap,
-                                    T.TrackName,
+            const string sql = @"SELECT 
+                                    D.Id AS DriverId,
+                                    ISNULL(R.LapsCompleted, 0) LapsCompleted,
+                                    ISNULL(R.IsChampion, 0) IsChampion,
+                                    ISNULL(P.Points, 0) Points,
+                                    ISNULL(P.Position, 0) Position,
+                                    ISNULL(R.FastestLap, 0) FastestLap,
+                                    ISNULL(T.TrackName, 'None') TrackName,
                                     C.StartDate,
-                                    R.LapsLead,
-                                    R.Overtakes
-                                 FROM [dbo].RaceResults R
-                                 INNER JOIN [dbo].Points P        ON P.Id = R.PointsId
-                                 INNER JOIN [dbo].RaceCalendar C  ON C.Id = R.CalId
-								 INNER JOIN [dbo].RaceTracks T    ON T.Id = C.TrackId
-                                 WHERE YEAR(C.StartDate) = @season
+                                    ISNULL(R.LapsLead, 0) LapsLead,
+                                    ISNULL(R.Overtakes, 0) Overtakes
+                                 FROM [dbo].Drivers D
+								 LEFT JOIN [dbo].RaceResults R	  ON R.DriverId = D.Id AND R.CalId IN (
+								                                                                        SELECT Id 
+																									    FROM [dbo].RaceCalendar
+																									    WHERE YEAR(StartDate) = @season 
+																										   AND EventName = 'Race'
+                                                                                                       )
+								 LEFT JOIN [dbo].Points P         ON P.Id = R.PointsId
+								 LEFT JOIN [dbo].RaceCalendar C   ON C.Id = R.CalId
+								 LEFT JOIN [dbo].RaceTracks T     ON T.Id = C.TrackId 
                                 ";
 
             using (var conn = _connectionProvider.Get())
