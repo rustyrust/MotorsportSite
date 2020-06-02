@@ -20,7 +20,7 @@ namespace MotorsportSite.API.Models
         public int NumChapionships { get; set; }
         public int TopTenFinishes { get; set; }
         public int NumOfRaceWins { get; set; }
-
-
+        public int LeadLaps { get; set; }
+        public int Overtakes { get; set; }
     }
 }

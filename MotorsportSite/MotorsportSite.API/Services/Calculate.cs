@@ -3,6 +3,7 @@ using MotorsportSite.API.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Services
@@ -39,6 +40,18 @@ namespace MotorsportSite.API.Services
            var total = raceResults.Where(x => x.Position <= 10 && x.Position != 0).Count();
 
             return total;
+        }
+
+        public int LapsLead(List<RaceResults> raceResults)
+        {
+            var result = raceResults.Select(x => x.LapsLead).Sum();
+            return result;
+        }
+
+        public int Overtakes(List<RaceResults> raceResults)
+        {
+            var result = raceResults.Select(x => x.Overtakes).Sum();
+            return result;
         }
 
         public int HighestResult(List<RaceResults> raceResults)

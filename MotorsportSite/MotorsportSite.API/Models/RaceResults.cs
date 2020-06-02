@@ -15,6 +15,8 @@ namespace MotorsportSite.API.Models
         public bool FastestLap { get; set; }
         public string TrackName { get; set; }
         public DateTime StartDate { get; set; }
+        public int LapsLead { get; set; }
+        public int Overtakes { get; set; }
 
         public static RaceResults MapFromDb(DataLevel.Drivers.Models.RaceResults dataModel)
         {
@@ -27,7 +29,9 @@ namespace MotorsportSite.API.Models
                 Position = dataModel.Position,
                 FastestLap = dataModel.FastestLap,
                 TrackName = dataModel.TrackName,
-                StartDate = dataModel.StartDate
+                StartDate = dataModel.StartDate,
+                LapsLead = dataModel.LapsLead,
+                Overtakes = dataModel.Overtakes
             };
         }
     }

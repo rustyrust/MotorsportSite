@@ -23,9 +23,11 @@ namespace MotorsportSite.DataLevel.DataAccess
             const string sql = @"SELECT
                                    Id, 
                                    TeamName, 
-                                   EntryDate, 
-                                   LeaveDate,
-                                   Livery
+                                   EntryDate,
+                                   PrimaryColourName,
+                                   PrimaryColour,
+                                   SecondaryColourName,
+                                   SecondaryColour
                                  FROM [dbo].Teams
                                 ";
 
@@ -41,9 +43,11 @@ namespace MotorsportSite.DataLevel.DataAccess
             const string sql = @"SELECT
                                    Id, 
                                    TeamName, 
-                                   EntryDate, 
-                                   LeaveDate,
-                                   Livery
+                                   EntryDate,
+                                   PrimaryColourName,
+                                   PrimaryColour,
+                                   SecondaryColourName,
+                                   SecondaryColour
                                  FROM [dbo].Teams
                                  WHERE id = @id
                                 ";

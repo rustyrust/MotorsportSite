@@ -26,18 +26,18 @@ MERGE INTO [dbo].[Teams]AS T
                   (9,  'Williams',           '19750101',  NULL, 'White',    '#00ccff'),
                   (10, 'Hass F1 Team',       '19750101',  NULL, 'Black',    '#787878')
           )
-    AS S (Id, TeamName, EntryDate, LeaveDate, Livery, ColourCode)
+    AS S (Id, TeamName, EntryDate, LeaveDate, PrimaryColourName, PrimaryColour)
     ON T.Id = S.Id
 WHEN MATCHED THEN
     UPDATE SET
     EntryDate = S.EntryDate,
     LeaveDate = S.LeaveDate,
     TeamName = S.TeamName,
-    Livery = S.Livery,
-    ColourCode = S.ColourCode
+    PrimaryColourName = S.PrimaryColourName,
+    PrimaryColour = S.PrimaryColour
 WHEN NOT MATCHED THEN
-    INSERT (Id, TeamName, EntryDate, LeaveDate, Livery, ColourCode)
-    VALUES (S.Id, S.TeamName, S.EntryDate, S.LeaveDate, S.Livery, S.ColourCode);
+    INSERT (Id, TeamName, EntryDate, LeaveDate, PrimaryColourName, PrimaryColour)
+    VALUES (S.Id, S.TeamName, S.EntryDate, S.LeaveDate, S.PrimaryColourName, S.PrimaryColour);
 
 
 SET IDENTITY_INSERT [dbo].[Teams] OFF

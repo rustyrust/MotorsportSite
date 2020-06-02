@@ -20,6 +20,8 @@ namespace MotorsportSite.API.Services.Interfaces
         int BestSeason(List<RaceResults> raceResults);
         int NumberOfChampionshipsWon(List<RaceResults> raceResults);
         int TopTenPositionCount(List<RaceResults> raceResults);
+        int Overtakes(List<RaceResults> raceResults);
+        int LapsLead(List<RaceResults> raceResults);
 
 
     }

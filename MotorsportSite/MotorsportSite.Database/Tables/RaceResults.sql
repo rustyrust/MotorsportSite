@@ -9,7 +9,7 @@
     [NumStops] INT NOT NULL, 
     [FastestLap] BIT NOT NULL DEFAULT 0
     CONSTRAINT [FK_RaceResults_CalId] FOREIGN KEY([CalId]) REFERENCES [dbo].[RaceCalendar]([Id]),
-    [LeadLaps] INT NOT NULL DEFAULT 0, 
+    [LapsLead] INT NOT NULL DEFAULT 0, 
     [Overtakes] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_RaceResults_DriverId] FOREIGN KEY([DriverId]) REFERENCES [dbo].[Drivers]([Id]),
     CONSTRAINT [FK_RaceResults_PointsId] FOREIGN KEY([PointsId]) REFERENCES [dbo].[Points]([Id])

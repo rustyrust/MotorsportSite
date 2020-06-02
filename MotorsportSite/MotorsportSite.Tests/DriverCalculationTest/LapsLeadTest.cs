@@ -7,7 +7,7 @@ using MotorsportSite.API.Models;
 
 namespace MotorsportSite.Tests.DriverCalculationTest
 {
-    public class RacePositionTest
+    public class LapsLeadTest
     {
         [Fact]
         public void RacePositionCount_CalFirstPlaceFinishes()
@@ -15,40 +15,27 @@ namespace MotorsportSite.Tests.DriverCalculationTest
             Calculate calculate = new Calculate();
 
             //Arange
-            int expected = 4;
+            int expected = 8;
 
-            var position = 1;
             List<RaceResults> raceResults = new List<RaceResults>
             {
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 1
+                     LapsLead = 5
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 1
-                },
-                new RaceResults
-                {
-                     DriverId = 1,
-                     Position = 1
-                },
-                new RaceResults
-                {
-                     DriverId = 1,
-                     Position = 1
+                     LapsLead = 3
                 }
             };
 
             //Act
-            int actual = calculate.RacePositionCount(raceResults,position);
+            int actual = calculate.LapsLead(raceResults);
 
             //Assert
             Assert.Equal(expected, actual);
         }
-
     }
 }
-

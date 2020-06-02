@@ -9,8 +9,9 @@ namespace MotorsportSite.Web.Models
     {
         public int Id { get; set; }
         public string TeamName { get; set; }
-        public DateTime EntryDate { get; set; }
-        public DateTime? LeaveDate { get; set; }
-        public string Livery { get; set; }
+        public string PrimaryColourName { get; set; }
+        public string PrimaryColour { get; set; }
+        public string SecondaryColourName { get; set; }
+        public string SecondaryColour { get; set; }
     }
 }

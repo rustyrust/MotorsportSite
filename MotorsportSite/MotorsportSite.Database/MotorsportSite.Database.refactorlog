@@ -133,4 +133,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Category" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4a61adf6-bb55-468e-8ca8-fadae05e37b0" ChangeDateTime="06/02/2020 07:55:34">
+    <Property Name="ElementName" Value="[dbo].[Teams].[Livery]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Teams]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PrimaryColourName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7ee39fdf-0e0b-4349-9d0f-a8a4fb1c00af" ChangeDateTime="06/02/2020 07:55:45">
+    <Property Name="ElementName" Value="[dbo].[Teams].[ColourCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Teams]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PrimaryColour" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f13d8ef9-c16e-4a16-ad63-72b576155e44" ChangeDateTime="06/02/2020 08:23:54">
+    <Property Name="ElementName" Value="[dbo].[RaceResults].[LeadLaps]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RaceResults]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LapsLead" />
+  </Operation>
 </Operations>

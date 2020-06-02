@@ -22,8 +22,10 @@ MERGE INTO [dbo].[TeamPrinciple] AS T
     ON T.Id = S.Id
 WHEN MATCHED THEN
 UPDATE SET
-    EntryDate = S.EntryDate,
-    LeaveDate = S.LeaveDate
+    FirstName = S.FirstName,
+    LastName = S.LastName,
+    Nationality = S.Nationality,
+    DOB = S.DOB
 WHEN NOT MATCHED THEN
     INSERT (Id, FirstName, LastName, Nationality, DOB)
     VALUES (S.Id, S.FirstName, S.LastName, S.Nationality, S.DOB);
