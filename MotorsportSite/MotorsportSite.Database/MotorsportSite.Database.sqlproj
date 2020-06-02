@@ -75,6 +75,9 @@
     <Build Include="Tables\RaceResults.sql" />
     <Build Include="Tables\RaceCalendar.sql" />
     <Build Include="Tables\TeamPrincipleMarket.sql" />
+    <Build Include="Tables\Qualifying.sql" />
+    <Build Include="Tables\Tires.sql" />
+    <Build Include="Tables\StartingGrid.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />

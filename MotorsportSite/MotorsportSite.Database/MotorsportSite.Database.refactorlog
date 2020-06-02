@@ -154,4 +154,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LapsLead" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0f5bd5c2-b119-46d9-91a6-30933dbbc66b" ChangeDateTime="06/02/2020 14:27:55">
+    <Property Name="ElementName" Value="[dbo].[Qualifying].[TrackId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Qualifying]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CalId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d3e6498a-9f9a-48d4-bf96-de29140f9176" ChangeDateTime="06/02/2020 14:29:08">
+    <Property Name="ElementName" Value="[dbo].[RaceGrid].[Penalty]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RaceGrid]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PenaltyDescription" />
+  </Operation>
 </Operations>
