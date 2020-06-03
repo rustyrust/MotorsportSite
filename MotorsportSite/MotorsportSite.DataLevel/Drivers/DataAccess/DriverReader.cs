@@ -168,5 +168,27 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                 return data.AsList();
             }
         }
+
+        public async Task<List<DriverChampionship>> GetDriversChampionships()
+        {
+            const string sql = @"SELECT 
+                                   R.DriverId,
+                     		       T.TeamName,
+                     		       Year(C.StartDate) AS Season
+                                 FROM [dbo].RaceResults R
+                                 INNER JOIN [dbo].DriverMarket M ON M.DriverId = R.DriverId
+                                 INNER JOIN [dbo].Teams T ON T.Id = M.TeamId
+                                 INNER JOIN [dbo].RaceCalendar C ON C.Id = R.CalId
+                                 WHERE R.IsChampion = 1
+                                 GROUP BY Year(C.StartDate),
+                                          R.DriverId,
+                     		              T.TeamName";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data = await conn.QueryAsync<DriverChampionship>(sql);
+                return data.AsList();
+            }
+        }
     }
 }

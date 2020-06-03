@@ -97,6 +97,13 @@ namespace MotorsportSite.API.Services
             return driverStats;
         }
 
+        public async Task<List<DriverChampionship>> GetAllDriversChampionships()
+        {
+            var result = await _driverReader.GetDriversChampionships();
+
+            return result.Select(x => DriverChampionship.MapFromDB(x)).ToList();
+        }
+
 
         private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
         {

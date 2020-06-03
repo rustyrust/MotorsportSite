@@ -61,7 +61,19 @@
                         </div>
                         <div class="driver-best-season">
                             <span class="data-title">World Championships:</span>
-                            <span class="data-value">None</span>
+                            <span class="data-value">{{selectedDriver.driverCareerStats.numChapionships}}</span>
+                        </div>
+                        <div v-if="selectedDriverChamp">
+                            <table class="champ-table">
+                                <tr>
+                                    <th>Team</th>
+                                    <th>Season</th>
+                                </tr>
+                                <tr>
+                                    <td>{{selectedDriverChamp.teamName}}</td>
+                                    <td>{{selectedDriverChamp.season}}</td>
+                                </tr>
+                            </table>
                         </div>
 
                         <div>

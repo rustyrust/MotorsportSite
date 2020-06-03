@@ -8,7 +8,9 @@
         selectedDriver: null,
         currentSeason: null,
         selectedDriverSeasonStats: null,
-        drivers: null
+        drivers: null,
+        driversChamp: null,
+        selectedDriverChamp: null
     },
     mounted:
 
@@ -27,10 +29,24 @@
                     console.log(error);
                 });
 
+            fetch('https://LocalHost:44374/api/Drivers/Championships')
+                .then((response) => response.json())
+                .then(function (data) {
+                    self.driversChamp = data;
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
             window.setTimeout(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             }, 500);
         },
+
+    computed: {
+
+
+    },
 
     methods: {
         toggleDriverDetails: function (id) {
@@ -40,7 +56,20 @@
                     self.selectedDriver = driver;
                 }
             }
+            self.filterDriverChamp();
+        },
+
+        filterDriverChamp: function () {
+            let self = this;
+            self.selectedDriverChamp = 0;
+
+            for (let driver of self.driversChamp) {
+                if (self.selectedDriver.driverBio.id === driver.driverId) {
+                    self.selectedDriverChamp = driver;
+                }
+            }
         }
+
 
     }
 

@@ -100,5 +100,12 @@ namespace MotorsportSite.API.Controllers
             return result;
         }
 
+        [Route("Championships")]
+        [HttpGet]
+        public async Task<ActionResult<List<DriverChampionship>>> GetAllDriversChampionships()
+        {
+            var result = await _driverInformationService.GetAllDriversChampionships();
+            return result;
+        }
     }
 }
