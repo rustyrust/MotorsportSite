@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="default.aspx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="default.aspx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\CountryFlags\England.png" />
     <None Include="wwwroot\CountryFlags\Geman.png" />
     <None Include="wwwroot\js\Drivers.js" />

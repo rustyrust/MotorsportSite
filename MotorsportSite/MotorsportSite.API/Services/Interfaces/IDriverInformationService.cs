@@ -13,5 +13,6 @@ namespace MotorsportSite.API.Services.Interfaces
         Task<List<DriverStats>> BuildDriversCareerStats();
         Task<List<DriversFullInfomation>> BuildDriversFullInformation(int season);
         Task<List<DriverChampionship>> GetAllDriversChampionships();
+        Task<List<RaceResults>> GetAllDriversRaceResultsForASeason(int season);
     }
 }

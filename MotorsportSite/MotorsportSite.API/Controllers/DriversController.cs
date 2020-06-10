@@ -52,13 +52,6 @@ namespace MotorsportSite.API.Controllers
             return _calculate.TotalDriverPoints(points);
         }
 
-        //[Route("{id}/TotalPoints/Season/{year}")]
-        //[HttpGet]
-        //public async Task<ActionResult<decimal>> GetDriverTotalPointsByIdAndSeason(int id)
-        //{
- 
-        //}
-
         [Route("{id}/RacePositionTotal/{position}")]
         [HttpGet]
         public async Task<ActionResult<int>> GetDriversRacePositionTotalById(int id, int position)
@@ -105,6 +98,14 @@ namespace MotorsportSite.API.Controllers
         public async Task<ActionResult<List<DriverChampionship>>> GetAllDriversChampionships()
         {
             var result = await _driverInformationService.GetAllDriversChampionships();
+            return result;
+        }
+
+        [Route("{season}/RaceResults")]
+        [HttpGet]
+        public async Task<ActionResult<List<RaceResults>>> GetAllDriversRaceResultsForASeason(int season)
+        {
+            var result = await _driverInformationService.GetAllDriversRaceResultsForASeason(season);
             return result;
         }
     }

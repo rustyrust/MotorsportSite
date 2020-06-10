@@ -4,7 +4,10 @@
 }
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <script src="~/js/Drivers.js" charset="utf-8"></script>
+    <script src="~/js/Components/LineChart.js" charset="utf-8"></script>
 }
 
 <div id="drivers-vueapp">
@@ -75,7 +78,6 @@
                                 </tr>
                             </table>
                         </div>
-
                         <div>
                             <table class="driver-stats-table">
                                 <tr>
@@ -120,6 +122,11 @@
                             </table>
                         </div>
 
+                             
+                                <line-chart
+                                            :chartdata="chartdata"
+                                            :options="options">
+                                </line-chart>
 
 
 

@@ -20,6 +20,46 @@ namespace MotorsportSite.API.Services
             _calculate = calculate;
         }
 
+        private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
+        {
+            var bestTrack = _calculate.DriversBestTrack(driverResults);
+            var totalPoints = _calculate.TotalDriverPoints(driverResults);
+            var currentSeasonPoints = _calculate.TotalDriverPointsOfASeason(driverResults, DateTime.Now.Year);
+            var highestResult = _calculate.HighestResult(driverResults);
+            var totalNumOfHighestResult = _calculate.RacePositionCount(driverResults, highestResult);
+            var numRaceFastestLaps = _calculate.NumberOfRaceFastestLaps(driverResults);
+            var numOfRacesCompleted = _calculate.NumberOfRacesCompleted(driverResults);
+            var numDNFs = _calculate.NumberOfDnfs(driverResults);
+            var totalLapsComplete = _calculate.TotalNumberOfLapsCompleted(driverResults);
+            var bestSeason = _calculate.BestSeason(driverResults);
+            var numChapionships = _calculate.NumberOfChampionshipsWon(driverResults);
+            var TopTenFinishes = _calculate.TopTenPositionCount(driverResults);
+            var numOfWins = _calculate.RacePositionCount(driverResults, 1);
+            var numOfLapsLead = _calculate.LapsLead(driverResults);
+            var numOfOvertakes = _calculate.Overtakes(driverResults);
+
+            var calcData = new DriverCalculationInfo
+            {
+                BestTrack = bestTrack,
+                TotalPoints = totalPoints,
+                TotalPointsOfCurrentSeason = currentSeasonPoints,
+                HighestResult = highestResult,
+                TotalNumOfHighestResult = totalNumOfHighestResult,
+                NumRaceFastestLaps = numRaceFastestLaps,
+                NumChapionships = numChapionships,
+                BestSeason = bestSeason,
+                NumDNFs = numDNFs,
+                NumOfRacesCompleted = numOfRacesCompleted,
+                TotalLapsComplete = totalLapsComplete,
+                TopTenFinishes = TopTenFinishes,
+                NumOfRaceWins = numOfWins,
+                LeadLaps = numOfLapsLead,
+                Overtakes = numOfOvertakes
+            };
+
+            return calcData;
+        }
+
         public async Task<List<Driver>> BuildAllDriversBio()
         {
             var result = await _driverReader.GetAllDrivers();
@@ -104,32 +144,14 @@ namespace MotorsportSite.API.Services
             return result.Select(x => DriverChampionship.MapFromDB(x)).ToList();
         }
 
-
-        private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
+        public async Task<List<RaceResults>> GetAllDriversRaceResultsForASeason(int season)
         {
-            var bestTrack = _calculate.DriversBestTrack(driverResults);
-            var totalPoints = _calculate.TotalDriverPoints(driverResults);
-            var currentSeasonPoints = _calculate.TotalDriverPointsOfASeason(driverResults, DateTime.Now.Year);
-            var highestResult = _calculate.HighestResult(driverResults);
-            var totalNumOfHighestResult = _calculate.RacePositionCount(driverResults, highestResult);
-            var numRaceFastestLaps = _calculate.NumberOfRaceFastestLaps(driverResults);
-            var numOfRacesCompleted = _calculate.NumberOfRacesCompleted(driverResults);
-            var numDNFs = _calculate.NumberOfDnfs(driverResults);
-            var totalLapsComplete = _calculate.TotalNumberOfLapsCompleted(driverResults);
-            var bestSeason = _calculate.BestSeason(driverResults);
-            var numChapionships = _calculate.NumberOfChampionshipsWon(driverResults);
-            var TopTenFinishes = _calculate.TopTenPositionCount(driverResults);
-            var numOfWins = _calculate.RacePositionCount(driverResults, 1);
-            var numOfLapsLead = _calculate.LapsLead(driverResults);
-            var numOfOvertakes = _calculate.Overtakes(driverResults);
+            var raceData = await _driverReader.GetDriversSeasonRaceResults(season);
+            var orderedData = raceData.OrderBy(x => x.StartDate);
 
-            var calcData = new DriverCalculationInfo { BestTrack = bestTrack, TotalPoints = totalPoints, TotalPointsOfCurrentSeason = currentSeasonPoints, HighestResult = highestResult, 
-                                                       TotalNumOfHighestResult = totalNumOfHighestResult, NumRaceFastestLaps = numRaceFastestLaps, NumChapionships = numChapionships,
-                                                       BestSeason = bestSeason, NumDNFs = numDNFs, NumOfRacesCompleted = numOfRacesCompleted, TotalLapsComplete = totalLapsComplete,
-                                                       TopTenFinishes = TopTenFinishes, NumOfRaceWins = numOfWins, LeadLaps = numOfLapsLead, Overtakes = numOfOvertakes
-            };
-
-            return calcData;
+            return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
         }
+
+
     }
 }
