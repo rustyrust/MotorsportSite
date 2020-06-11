@@ -12,34 +12,8 @@
         driversChamp: null,
         selectedDriverChamp: null,
         driversRaceResults: null,
-        chartdata: {
-            labels: ['Austraila', 'Barhain', 'Japan', 'England', 'France', 'Italy', 'Duabi'],
-            datasets: [{
-                label: 'Positions',
-                backgroundColor: '#f87979',
-                data: [1, 3, 2, 4, 1, 1, 2]
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Race Circuit'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        beginAtZero: false,
-                        reverse: true
-                    }
-                }]
-            }
-        }
+        chartdata: null,
+        options: null
     },
 
     mounted:
@@ -101,8 +75,11 @@
 
         selectedDriverChartData: function (id) {
             let self = this;
-            //self.chartdata = 0;
             let driversPositions = [];
+            let circuitCountry = [];
+            let raceTeamColour = null;
+
+            let numDrivers = self.drivers.length;
 
             for (let driver of self.driversRaceResults) {
                 if (id == driver.driverId) {
@@ -110,22 +87,70 @@
                 }
             }
 
+            for (let driver of self.driversRaceResults) {
+                if (id == driver.driverId) {
+                    circuitCountry.push(driver.trackCountry);
+                }
+            }
+
+            for (let driver of self.drivers) {
+                if (id == driver.driverBio.id) {
+                    raceTeamColour = driver.driverBio.teamColour;
+                }
+            }
+
             self.chartdata = {
-                labels: ['Austraila', 'Barhain', 'Japan', 'England', 'France', 'Italy', 'Duabi'],
+                labels: circuitCountry,
                 datasets: [{
-                    label: 'Positions',
-                    backgroundColor: '#f87979',
+                    fill: false,
+                    label: 'selected Diver Positions',
+                    borderColor: raceTeamColour,
                     data: driversPositions
+                },
+                {
+                    fill: false,
+                    label: 'Teammate Positions',
+                    borderColor: '#000000',
+                    borderDash: [5, 5],
+                    data: self.GetTeamMateRaceResults(id)
                 }]
             }
 
-            //self.options = {
-            //    responsive: true,
-            //        maintainAspectRatio: false
-            //}
-
-            console.log(self.chartdata);
-
+            self.options = {
+                responsive: true,
+                maintainAspectRatio: false,
+                //tooltips: {
+                //    callbacks: {
+                //        afterBody: function (t, d) {
+                //            return 'some stuff here'; //return a string that you wish to append
+                //        }
+                //    }
+                //},
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Grand Prix'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Positions'
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            reverse: true,
+                            stepsSize: 1,
+                            fixedStepSize: 1,
+                            max: numDrivers,
+                            min: 1
+                        }
+                    }]
+                }
+            }
         },
 
         filterDriverChamp: function () {
@@ -137,8 +162,41 @@
                     self.selectedDriverChamp = driver;
                 }
             }
-        }
+        },
 
+        GetTeamMateRaceResults: function (selectedDriverId) {
+            let self = this;
+            let selectedDriversTeam = null;
+            let teamsDrivers = [];
+            let teamMateId = null;
+            let teamMatesPositions = [];
+
+            for (let driver of self.drivers) {
+                if (selectedDriverId == driver.driverBio.id) {
+                    selectedDriversTeam = driver.driverBio.teamName;
+                }
+            }
+
+            for (let driver of self.drivers) {
+                if (selectedDriversTeam == driver.driverBio.teamName) {
+                    teamsDrivers.push(driver.driverBio.id);
+                }
+            }
+
+            for (let driverId of teamsDrivers) {
+                if (driverId != selectedDriverId) {
+                    teamMateId = driverId;
+                }
+            }
+
+            for (let driver of self.driversRaceResults) {
+                if (teamMateId == driver.driverId) {
+                    teamMatesPositions.push(driver.position);
+                }
+            }
+
+            return teamMatesPositions;
+        }
 
     }
 

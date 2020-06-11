@@ -120,6 +120,7 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     P.Position,
                                     R.FastestLap,
                                     T.TrackName,
+                                    T.Country,
                                     C.StartDate,
                                     R.LapsLead,
                                     R.Overtakes
@@ -147,6 +148,7 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                     ISNULL(P.Position, 0) Position,
                                     ISNULL(R.FastestLap, 0) FastestLap,
                                     ISNULL(T.TrackName, 'None') TrackName,
+                                    ISNULL(T.Country, 'None') TrackCountry,
                                     C.StartDate,
                                     ISNULL(R.LapsLead, 0) LapsLead,
                                     ISNULL(R.Overtakes, 0) Overtakes

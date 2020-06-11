@@ -13,6 +13,7 @@ namespace MotorsportSite.DataLevel.Drivers.Models
         public int Position { get; set; }
         public bool FastestLap { get; set; }
         public string TrackName { get; set; }
+        public string TrackCountry { get; set; }
         public DateTime StartDate { get; set; }
         public int LapsLead { get; set; }
         public int Overtakes { get; set; }
