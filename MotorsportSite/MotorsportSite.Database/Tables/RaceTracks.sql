@@ -7,6 +7,7 @@
     [TrackLength] DECIMAL NOT NULL, 
     [Laps] INT NOT NULL, 
     [NumberOfCorners] INT NOT NULL, 
-    [IsClockwise] BIT NOT NULL DEFAULT 1, 
+    [IsClockwise] BIT NOT NULL DEFAULT 1,
+    [IsStreetCircuit] BIT NOT NULL DEFAULT 0,
     [IsDeleted] BIT NOT NULL DEFAULT 0
 )

@@ -75,17 +75,11 @@
 
         selectedDriverChartData: function (id) {
             let self = this;
-            let driversPositions = [];
             let circuitCountry = [];
             let raceTeamColour = null;
 
-            let numDrivers = self.drivers.length;
-
-            for (let driver of self.driversRaceResults) {
-                if (id == driver.driverId) {
-                    driversPositions.push(driver.position);
-                }
-            }
+            let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
+            let yAxisiScale = yAxisiData < 5 ? 5 : yAxisiData;
 
             for (let driver of self.driversRaceResults) {
                 if (id == driver.driverId) {
@@ -103,13 +97,13 @@
                 labels: circuitCountry,
                 datasets: [{
                     fill: false,
-                    label: 'selected Diver Positions',
+                    label: self.selectedDriver.driverBio.lastName + ' Positions',
                     borderColor: raceTeamColour,
-                    data: driversPositions
+                    data: self.GetSelectedDriversPositions(id)
                 },
                 {
                     fill: false,
-                    label: 'Teammate Positions',
+                    label: 'Teammate ' + self.GetTeammateLastName(id) + ' Positions',
                     borderColor: '#000000',
                     borderDash: [5, 5],
                     data: self.GetTeamMateRaceResults(id)
@@ -119,13 +113,16 @@
             self.options = {
                 responsive: true,
                 maintainAspectRatio: false,
-                //tooltips: {
-                //    callbacks: {
-                //        afterBody: function (t, d) {
-                //            return 'some stuff here'; //return a string that you wish to append
-                //        }
-                //    }
-                //},
+                tooltips: {
+                    callbacks: {
+                        afterBody: function (t, d) {
+                            return 'some stuff here'; //return a string that you wish to append
+                        }
+                    },
+                    filter: function (tooltipItem) {
+                        return tooltipItem.datasetIndex === 0;
+                    }
+                },
                 scales: {
                     xAxes: [{
                         display: true,
@@ -145,7 +142,7 @@
                             reverse: true,
                             stepsSize: 1,
                             fixedStepSize: 1,
-                            max: numDrivers,
+                            max: yAxisiScale,
                             min: 1
                         }
                     }]
@@ -166,10 +163,36 @@
 
         GetTeamMateRaceResults: function (selectedDriverId) {
             let self = this;
+            let teamMateId = self.GetTeammateDriverId(selectedDriverId);
+            let teamMatesPositions = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (teamMateId == driver.driverId) {
+                    teamMatesPositions.push(driver.position);
+                }
+            }
+
+            return teamMatesPositions;
+        },
+
+        GetSelectedDriversPositions: function (selectedDriverId) {
+            let self = this;
+            let driversPositions = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversPositions.push(driver.position);
+                }
+            }
+
+            return driversPositions;
+        },
+
+        GetTeammateDriverId: function (selectedDriverId) {
+            let self = this;
             let selectedDriversTeam = null;
             let teamsDrivers = [];
             let teamMateId = null;
-            let teamMatesPositions = [];
 
             for (let driver of self.drivers) {
                 if (selectedDriverId == driver.driverBio.id) {
@@ -188,15 +211,24 @@
                     teamMateId = driverId;
                 }
             }
+            return teamMateId;
+        },
 
-            for (let driver of self.driversRaceResults) {
-                if (teamMateId == driver.driverId) {
-                    teamMatesPositions.push(driver.position);
+        GetTeammateLastName: function (selectedDriverId) {
+            let self = this;
+            let teammateId = self.GetTeammateDriverId(selectedDriverId);
+            let teamateLastName = null;
+
+            for (let driver of self.drivers) {
+                if (teammateId == driver.driverBio.id) {
+                    teamateLastName = driver.driverBio.lastName;
                 }
             }
-
-            return teamMatesPositions;
+            return teamateLastName;
         }
+
+
+
 
     }
 
