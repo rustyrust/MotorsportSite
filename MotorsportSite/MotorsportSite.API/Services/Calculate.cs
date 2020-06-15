@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace MotorsportSite.API.Services
@@ -62,9 +63,11 @@ namespace MotorsportSite.API.Services
 
         public int HighestResult(List<RaceResults> raceResults)
         {
-            if (raceResults != null)
+            var totalLaps = raceResults.Sum(x => x.LapsCompleted);
+
+            if (totalLaps != 0)
             {
-                var position = raceResults.Min(x => x.Position);
+                var position = raceResults.Where(x => x.Position != 0).Min(x => x.Position);
                 return position;
             }
             return 0;
@@ -78,7 +81,7 @@ namespace MotorsportSite.API.Services
                                                          trackName = y.Key,
                                                          total = y.Sum(x => x.Position)
                                                      });
-            var bestTrack = totalPositionsForTracks.OrderBy(x => x.total).Select(x => x.trackName).FirstOrDefault();
+            var bestTrack = totalPositionsForTracks.Where(x => x.total != 0).OrderBy(x => x.total).Select(x => x.trackName).FirstOrDefault();
             return bestTrack ?? "Not enough information";
         }
 
@@ -148,10 +151,5 @@ namespace MotorsportSite.API.Services
             return 0;
         }
 
-        //Starting postition to final race positon
-
-
-
-        //Calculations for Qually
     }
 }

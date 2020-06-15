@@ -87,5 +87,83 @@ namespace MotorsportSite.Tests.DriverCalculationTest
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void HighestResult_DNFTest()
+        {
+            Calculate calculate = new Calculate();
+
+            //Arange
+            var expected = 1;
+
+            List<RaceResults> raceResults = new List<RaceResults>
+            {
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 1
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 2
+                }
+            };
+
+            //Act
+            var actual = calculate.HighestResult(raceResults);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void HighestResult_AllDNFsResults()
+        {
+            Calculate calculate = new Calculate();
+
+            //Arange
+            var expected = 0;
+
+            List<RaceResults> raceResults = new List<RaceResults>
+            {
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0
+                }
+            };
+
+            //Act
+            var actual = calculate.HighestResult(raceResults);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
     }
 }

@@ -55,5 +55,38 @@ namespace MotorsportSite.Tests
             //Assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void DriversBestTrack_DNFTest()
+        {
+            Calculate calculate = new Calculate();
+
+            //Arange
+            string expected = "Red Bull Ring";
+
+            List<RaceResults> raceResults = new List<RaceResults>
+            {
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0,
+                     TrackName = "Silverstone",
+                     StartDate = new DateTime(2019, 07, 27)
+                },
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 1,
+                     TrackName = "Red Bull Ring",
+                     StartDate = new DateTime(2019, 08, 27)
+                }
+            };
+
+            //Act
+            string actual = calculate.DriversBestTrack(raceResults);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
