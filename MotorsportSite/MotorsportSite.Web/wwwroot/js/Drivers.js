@@ -99,7 +99,7 @@
                     fill: false,
                     label: self.selectedDriver.driverBio.lastName + ' Positions',
                     borderColor: raceTeamColour,
-                    data: self.GetSelectedDriversPositions(id)
+                    data: self.GetSelectedDriversPositions(id),
                 },
                 {
                     fill: false,
@@ -116,7 +116,8 @@
                 tooltips: {
                     callbacks: {
                         afterBody: function (t, d) {
-                            return 'some stuff here'; //return a string that you wish to append
+                            let data = self.SelectedDriversOvertakes(id);
+                            return 'Num Of Overtakes ' + data[t[0].index];
                         }
                     },
                     filter: function (tooltipItem) {
@@ -186,6 +187,19 @@
             }
 
             return driversPositions;
+        },
+
+        SelectedDriversOvertakes: function (selectedDriverId) {
+            let self = this;
+            let driversOvertakes = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversOvertakes.push(driver.overtakes);
+                }
+            }
+
+            return driversOvertakes;
         },
 
         GetTeammateDriverId: function (selectedDriverId) {
