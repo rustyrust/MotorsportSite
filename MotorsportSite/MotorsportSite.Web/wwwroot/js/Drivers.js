@@ -100,6 +100,21 @@
                     label: self.selectedDriver.driverBio.lastName + ' Positions',
                     borderColor: raceTeamColour,
                     data: self.GetSelectedDriversPositions(id),
+                //    backgroundColor: function (context) {
+                //        var index = context.dataIndex;
+                //        var value = self.RaceNumberOfChapionWin(id);
+
+                //        return index === value ? 'white' : raceTeamColour;
+                //        return index == 1 ? 'red' : 'pink';
+
+                //    },
+                //    pointRadius: 4
+                //        function (context) {
+                //        var index = context.dataIndex;
+                //        var value = self.RaceNumberOfChapionWin(id);
+
+                //        return value === index ? 12 : 20;
+                //    }
                 },
                 {
                     fill: false,
@@ -116,8 +131,14 @@
                 tooltips: {
                     callbacks: {
                         afterBody: function (t, d) {
-                            let data = self.SelectedDriversOvertakes(id);
-                            return 'Num Of Overtakes ' + data[t[0].index];
+                            let toolTipInfo = [];
+                            let overTakes = self.SelectedDriversOvertakes(id);
+                            let leadLaps = self.SelectedDriversLeadLaps(id);
+
+                            toolTipInfo = [`Num Of Overtakes: ${overTakes[t[0].index]}`];
+                            toolTipInfo.push(`Num Lead Laps: ${leadLaps[t[0].index]}`);
+
+                            return toolTipInfo;
                         }
                     },
                     filter: function (tooltipItem) {
@@ -185,7 +206,7 @@
                     driversPositions.push(driver.position);
                 }
             }
-
+            //console.log(self.RaceNumberOfChapionWin(1));
             return driversPositions;
         },
 
@@ -200,6 +221,42 @@
             }
 
             return driversOvertakes;
+        },
+
+        SelectedDriversLeadLaps: function (selectedDriverId) {
+            let self = this;
+            let driversLeadLaps = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversLeadLaps.push(driver.lapsLead);
+                }
+            }
+
+            return driversLeadLaps;
+        },
+
+        RaceNumberOfChapionWin: function (selectedDriverId) {
+            let self = this;
+            let counter = 0;
+            let isAChampion = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    isAChampion.push(driver.isChampion);
+                }
+            }
+
+            if (isAChampion.includes(true)) {
+                for (const input of isAChampion) {
+                    if (input == true) {
+                        return counter + 1;
+                    }
+                    counter += 1;
+                }
+            }
+
+            return counter;
         },
 
         GetTeammateDriverId: function (selectedDriverId) {
