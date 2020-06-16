@@ -76,7 +76,6 @@
         selectedDriverChartData: function (id) {
             let self = this;
             let circuitCountry = [];
-            let raceTeamColour = null;
 
             let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
             let yAxisiScale = yAxisiData < 5 ? 5 : yAxisiData;
@@ -87,34 +86,15 @@
                 }
             }
 
-            for (let driver of self.drivers) {
-                if (id == driver.driverBio.id) {
-                    raceTeamColour = driver.driverBio.teamColour;
-                }
-            }
-
             self.chartdata = {
                 labels: circuitCountry,
                 datasets: [{
                     fill: false,
                     label: self.selectedDriver.driverBio.lastName + ' Positions',
-                    borderColor: raceTeamColour,
+                    borderColor: self.teamRaceColour(id),
                     data: self.GetSelectedDriversPositions(id),
-                //    backgroundColor: function (context) {
-                //        var index = context.dataIndex;
-                //        var value = self.RaceNumberOfChapionWin(id);
-
-                //        return index === value ? 'white' : raceTeamColour;
-                //        return index == 1 ? 'red' : 'pink';
-
-                //    },
-                //    pointRadius: 4
-                //        function (context) {
-                //        var index = context.dataIndex;
-                //        var value = self.RaceNumberOfChapionWin(id);
-
-                //        return value === index ? 12 : 20;
-                //    }
+                    pointBackgroundColor: self.dataPointColours(id),
+                    pointRadius: self.dataPointRadius(id)
                 },
                 {
                     fill: false,
@@ -134,9 +114,14 @@
                             let toolTipInfo = [];
                             let overTakes = self.SelectedDriversOvertakes(id);
                             let leadLaps = self.SelectedDriversLeadLaps(id);
+                            let champRaceNum = self.trackNumChapionshipWon(id);
 
                             toolTipInfo = [`Num Of Overtakes: ${overTakes[t[0].index]}`];
                             toolTipInfo.push(`Num Lead Laps: ${leadLaps[t[0].index]}`);
+
+                            //if (champRaceNum != null) {
+                            //    toolTipInfo.push('Won the Chapionship');
+                            //}
 
                             return toolTipInfo;
                         }
@@ -206,7 +191,7 @@
                     driversPositions.push(driver.position);
                 }
             }
-            //console.log(self.RaceNumberOfChapionWin(1));
+            console.log(self.trackNumChapionshipWon(1));
             return driversPositions;
         },
 
@@ -236,9 +221,20 @@
             return driversLeadLaps;
         },
 
-        RaceNumberOfChapionWin: function (selectedDriverId) {
+        teamRaceColour: function (selectedDriverId) {
             let self = this;
-            let counter = 0;
+            let raceTeamColour = null;
+
+            for (let driver of self.drivers) {
+                if (selectedDriverId == driver.driverBio.id) {
+                    raceTeamColour = driver.driverBio.teamColour;
+                }
+            }
+            return raceTeamColour;
+        },
+
+        championshipTrackWon: function (selectedDriverId) {
+            let self = this;
             let isAChampion = [];
 
             for (let driver of self.driversRaceResults) {
@@ -246,6 +242,13 @@
                     isAChampion.push(driver.isChampion);
                 }
             }
+            return isAChampion;
+        },
+
+        trackNumChapionshipWon: function (selectedDriverId) {
+            let self = this;
+            let isAChampion = self.championshipTrackWon(selectedDriverId);
+            let counter = 0;
 
             if (isAChampion.includes(true)) {
                 for (const input of isAChampion) {
@@ -255,8 +258,39 @@
                     counter += 1;
                 }
             }
-
             return counter;
+        },
+
+        dataPointColours: function (selectedDriverId) {
+            let self = this;
+            let champData = self.championshipTrackWon(selectedDriverId);
+            let colours = [];
+
+            for (let data of champData) {
+                if (data == true) {
+                    colours.push('gold');
+                }
+                else {
+                    colours.push(self.teamRaceColour(selectedDriverId));
+                }
+            }
+            return colours;
+        },
+
+        dataPointRadius: function (selectedDriverId) {
+            let self = this;
+            let champData = self.championshipTrackWon(selectedDriverId);
+            let radius = [];
+
+            for (let data of champData) {
+                if (data == true) {
+                    radius.push(8);
+                }
+                else {
+                    radius.push(4);
+                }
+            }
+            return radius;
         },
 
         GetTeammateDriverId: function (selectedDriverId) {
