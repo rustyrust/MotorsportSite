@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
     <script src="~/js/Drivers.js" charset="utf-8"></script>
     <script src="~/js/Components/LineChart.js" charset="utf-8"></script>
+    <script src="~/js/Components/PieChart.js" charset="utf-8"></script>
 }
 
 <div id="drivers-vueapp">
@@ -120,11 +121,21 @@
                                     <td>30</td>
                                 </tr>
                             </table>
-                            <div>{{driversRaceResults.overtakes}}</div>
                         </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn-primary">Performance</button>
+                            <button type="button" class="btn-primary">Career Performance</button>
+                            <button type="button" class="btn-primary">First Place Finishes</button>
+                        </div>
+
                         <line-chart :chartdata="chartdata"
                                     :options="options">
                         </line-chart>
+
+                        <pie-chart :chartdata="piechartdata"
+                                   :options="pieoptions">
+                        </pie-chart>
                     </div>
                 </transition>
             </div>
