@@ -9,6 +9,7 @@
     <script src="~/js/Drivers.js" charset="utf-8"></script>
     <script src="~/js/Components/LineChart.js" charset="utf-8"></script>
     <script src="~/js/Components/PieChart.js" charset="utf-8"></script>
+    <script src="lodash.js"></script>
 }
 
 <div id="drivers-vueapp">
@@ -124,24 +125,29 @@
                         </div>
 
                         <div class="btn-group">
-                            <button type="button" class="btn-primary">Performance</button>
+                            <button type="button" class="btn-primary active" v-on:click="showLineChart()">Performance</button>
+                            <button type="button" class="btn-primary" v-on:click="showPieChart()">Podiums</button>
                             <button type="button" class="btn-primary">Career Performance</button>
-                            <button type="button" class="btn-primary">First Place Finishes</button>
                         </div>
 
-                        <line-chart :chartdata="chartdata"
-                                    :options="options">
-                        </line-chart>
+                        <div v-show="lineChartShow">
+                            <line-chart :chartdata="chartdata"
+                                        :options="options">
+                            </line-chart>
+                        </div>
 
-                        <pie-chart :chartdata="piechartdata"
-                                   :options="pieoptions">
-                        </pie-chart>
+                        <div v-show="pieChartShow">
+                            <pie-chart :chartdata="piechartdata"
+                                       :options="pieoptions">
+                            </pie-chart>
+                        </div>
+
                     </div>
                 </transition>
             </div>
             <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in drivers">
                 <div class="driver-container" v-on:click="toggleDriverDetails(driver.driverBio.id)">
-                    <div class="diver-name-container">
+                    <div class="diver-name-container" style="border-bottom-color: driver.driverBio.teamColour">
                         <p class="driver-firstname">
                             {{driver.driverBio.firstName}}
                         </p>

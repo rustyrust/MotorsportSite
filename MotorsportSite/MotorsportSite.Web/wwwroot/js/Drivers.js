@@ -15,7 +15,10 @@
         chartdata: null,
         options: null,
         piechartdata: null,
-        pieoptions: null
+        pieoptions: null,
+
+        lineChartShow: false,
+        pieChartShow: true
     },
 
     mounted:
@@ -60,6 +63,15 @@
 
     computed: {
 
+        showLineChart: function () {
+            lineChartShow = true;
+            pieChartShow = false;
+        },
+
+        showPieChart: function () {
+            lineChartShow = false;
+            pieChartShow = true;
+        }
 
     },
 
@@ -171,231 +183,226 @@
         PieFirstPlaceData: function (id) {
             let self = this;
             let pieData = [];
+            let dataLables = [];
+            let dataColours = [];
 
             for (let driver of self.driversRaceResults) {
-                if (driver.position === 1) {
+                if (driver.position <= 3 && driver.position != 0) {
                     pieData.push(driver.driverId)
                 };
             }
 
-            const result = pieData.reduce((total, value) => {
+            const data = pieData.reduce((total, value) => {
                 total[value] = (total[value] || 0) + 1;
                 return total;
             }, {});
 
-            console.log(pieData);
-            console.log(result);
+            for (let d in data) {
+                dataLables.push(self.GetDriverShortName(d));
+            }
 
-        self.piechartdata = {
-            labels: ["Ham", "Bot", "Vet", "Lec","Ver"],
-            datasets: [{
-                borderWidth: 1,
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'purple'
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'purple'
-                ],
-                data: [11, 4, 1, 2, 3]
-                //data: result
-            }]
-        }
+            for (let d in data) {
+                dataColours.push(self.teamRaceColour(d));
+            }
+
+            self.piechartdata = {
+                labels: dataLables,
+                datasets: [{
+                    borderWidth: 1,
+                    borderColor: 'White',
+                    backgroundColor: dataColours,
+                    data: Object.values(data)
+                }]
+            }
 
             self.pieoptions = {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    },
-
-    filterDriverChamp: function () {
-        let self = this;
-        self.selectedDriverChamp = 0;
-
-        for (let driver of self.driversChamp) {
-            if (self.selectedDriver.driverBio.id === driver.driverId) {
-                self.selectedDriverChamp = driver;
+                legend: {
+                    display: true
+                },
+                responsive: true,
+                maintainAspectRatio: false
             }
-        }
-    },
+        },
 
-    GetTeamMateRaceResults: function (selectedDriverId) {
-        let self = this;
-        let teamMateId = self.GetTeammateDriverId(selectedDriverId);
-        let teamMatesPositions = [];
+        filterDriverChamp: function () {
+            let self = this;
+            self.selectedDriverChamp = 0;
 
-        for (let driver of self.driversRaceResults) {
-            if (teamMateId == driver.driverId) {
-                teamMatesPositions.push(driver.position);
-            }
-        }
-
-        return teamMatesPositions;
-    },
-
-    GetSelectedDriversPositions: function (selectedDriverId) {
-        let self = this;
-        let driversPositions = [];
-
-        for (let driver of self.driversRaceResults) {
-            if (selectedDriverId == driver.driverId) {
-                driversPositions.push(driver.position);
-            }
-        }
-        return driversPositions;
-    },
-
-    SelectedDriversOvertakes: function (selectedDriverId) {
-        let self = this;
-        let driversOvertakes = [];
-
-        for (let driver of self.driversRaceResults) {
-            if (selectedDriverId == driver.driverId) {
-                driversOvertakes.push(driver.overtakes);
-            }
-        }
-
-        return driversOvertakes;
-    },
-
-    SelectedDriversLeadLaps: function (selectedDriverId) {
-        let self = this;
-        let driversLeadLaps = [];
-
-        for (let driver of self.driversRaceResults) {
-            if (selectedDriverId == driver.driverId) {
-                driversLeadLaps.push(driver.lapsLead);
-            }
-        }
-
-        return driversLeadLaps;
-    },
-
-    teamRaceColour: function (selectedDriverId) {
-        let self = this;
-        let raceTeamColour = null;
-
-        for (let driver of self.drivers) {
-            if (selectedDriverId == driver.driverBio.id) {
-                raceTeamColour = driver.driverBio.teamColour;
-            }
-        }
-        return raceTeamColour;
-    },
-
-    championshipTrackWon: function (selectedDriverId) {
-        let self = this;
-        let isAChampion = [];
-
-        for (let driver of self.driversRaceResults) {
-            if (selectedDriverId == driver.driverId) {
-                isAChampion.push(driver.isChampion);
-            }
-        }
-        return isAChampion;
-    },
-
-    trackNumChapionshipWon: function (selectedDriverId) {
-        let self = this;
-        let isAChampion = self.championshipTrackWon(selectedDriverId);
-        let counter = 0;
-
-        if (isAChampion.includes(true)) {
-            for (const input of isAChampion) {
-                if (input == true) {
-                    return counter + 1;
+            for (let driver of self.driversChamp) {
+                if (self.selectedDriver.driverBio.id === driver.driverId) {
+                    self.selectedDriverChamp = driver;
                 }
-                counter += 1;
             }
-        }
-        return counter;
-    },
+        },
 
-    dataPointColours: function (selectedDriverId) {
-        let self = this;
-        let champData = self.championshipTrackWon(selectedDriverId);
-        let colours = [];
+        GetTeamMateRaceResults: function (selectedDriverId) {
+            let self = this;
+            let teamMateId = self.GetTeammateDriverId(selectedDriverId);
+            let teamMatesPositions = [];
 
-        for (let data of champData) {
-            if (data == true) {
-                colours.push('gold');
+            for (let driver of self.driversRaceResults) {
+                if (teamMateId == driver.driverId) {
+                    teamMatesPositions.push(driver.position);
+                }
             }
-            else {
-                colours.push(self.teamRaceColour(selectedDriverId));
+
+            return teamMatesPositions;
+        },
+
+        GetSelectedDriversPositions: function (selectedDriverId) {
+            let self = this;
+            let driversPositions = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversPositions.push(driver.position);
+                }
             }
-        }
-        return colours;
-    },
+            return driversPositions;
+        },
 
-    dataPointRadius: function (selectedDriverId) {
-        let self = this;
-        let champData = self.championshipTrackWon(selectedDriverId);
-        let radius = [];
+        SelectedDriversOvertakes: function (selectedDriverId) {
+            let self = this;
+            let driversOvertakes = [];
 
-        for (let data of champData) {
-            if (data == true) {
-                radius.push(8);
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversOvertakes.push(driver.overtakes);
+                }
             }
-            else {
-                radius.push(4);
+
+            return driversOvertakes;
+        },
+
+        SelectedDriversLeadLaps: function (selectedDriverId) {
+            let self = this;
+            let driversLeadLaps = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    driversLeadLaps.push(driver.lapsLead);
+                }
             }
-        }
-        return radius;
-    },
 
-    GetTeammateDriverId: function (selectedDriverId) {
-        let self = this;
-        let selectedDriversTeam = null;
-        let teamsDrivers = [];
-        let teamMateId = null;
+            return driversLeadLaps;
+        },
 
-        for (let driver of self.drivers) {
-            if (selectedDriverId == driver.driverBio.id) {
-                selectedDriversTeam = driver.driverBio.teamName;
+        teamRaceColour: function (selectedDriverId) {
+            let self = this;
+            let raceTeamColour = null;
+
+            for (let driver of self.drivers) {
+                if (selectedDriverId == driver.driverBio.id) {
+                    raceTeamColour = driver.driverBio.teamColour;
+                }
             }
-        }
+            return raceTeamColour;
+        },
 
-        for (let driver of self.drivers) {
-            if (selectedDriversTeam == driver.driverBio.teamName) {
-                teamsDrivers.push(driver.driverBio.id);
+        championshipTrackWon: function (selectedDriverId) {
+            let self = this;
+            let isAChampion = [];
+
+            for (let driver of self.driversRaceResults) {
+                if (selectedDriverId == driver.driverId) {
+                    isAChampion.push(driver.isChampion);
+                }
             }
-        }
+            return isAChampion;
+        },
 
-        for (let driverId of teamsDrivers) {
-            if (driverId != selectedDriverId) {
-                teamMateId = driverId;
+        trackNumChapionshipWon: function (selectedDriverId) {
+            let self = this;
+            let isAChampion = self.championshipTrackWon(selectedDriverId);
+            let result = isAChampion.indexOf(true) === -1 ? 0 : isAChampion.indexOf(true);
+
+            return result;
+        },
+
+        dataPointColours: function (selectedDriverId) {
+            let self = this;
+            let champData = self.championshipTrackWon(selectedDriverId);
+            let colours = [];
+
+            for (let data of champData) {
+                if (data == true) {
+                    colours.push('gold');
+                }
+                else {
+                    colours.push(self.teamRaceColour(selectedDriverId));
+                }
             }
-        }
-        return teamMateId;
-    },
+            return colours;
+        },
 
-    GetTeammateLastName: function (selectedDriverId) {
-        let self = this;
-        let teammateId = self.GetTeammateDriverId(selectedDriverId);
-        let teamateLastName = null;
+        dataPointRadius: function (selectedDriverId) {
+            let self = this;
+            let champData = self.championshipTrackWon(selectedDriverId);
+            let radius = [];
 
-        for (let driver of self.drivers) {
-            if (teammateId == driver.driverBio.id) {
-                teamateLastName = driver.driverBio.lastName;
+            for (let data of champData) {
+                if (data == true) {
+                    radius.push(8);
+                }
+                else {
+                    radius.push(4);
+                }
             }
-        }
-        return teamateLastName;
+            return radius;
+        },
+
+        GetTeammateDriverId: function (selectedDriverId) {
+            let self = this;
+            let selectedDriversTeam = null;
+            let teamsDrivers = [];
+            let teamMateId = null;
+
+            for (let driver of self.drivers) {
+                if (selectedDriverId == driver.driverBio.id) {
+                    selectedDriversTeam = driver.driverBio.teamName;
+                }
+            }
+
+            for (let driver of self.drivers) {
+                if (selectedDriversTeam == driver.driverBio.teamName) {
+                    teamsDrivers.push(driver.driverBio.id);
+                }
+            }
+
+            for (let driverId of teamsDrivers) {
+                if (driverId != selectedDriverId) {
+                    teamMateId = driverId;
+                }
+            }
+            return teamMateId;
+        },
+
+        GetTeammateLastName: function (selectedDriverId) {
+            let self = this;
+            let teammateId = self.GetTeammateDriverId(selectedDriverId);
+            let teamateLastName = null;
+
+            for (let driver of self.drivers) {
+                if (teammateId == driver.driverBio.id) {
+                    teamateLastName = driver.driverBio.lastName;
+                }
+            }
+            return teamateLastName;
+        },
+
+        GetDriverShortName: function (driverId) {
+            let self = this;
+
+            for (let driver of self.drivers) {
+                if (driverId == driver.driverBio.id) {
+                    return driver.driverBio.shortName;
+                }
+            }
+        },
+
+
+
     }
-
-
-
-
-}
 
 
 })
