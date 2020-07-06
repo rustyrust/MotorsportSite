@@ -64,8 +64,18 @@ namespace MotorsportSite.API.Services
         public int HighestResult(List<RaceResults> raceResults)
         {
             var totalLaps = raceResults.Sum(x => x.LapsCompleted);
+            var numRaces = raceResults.Count();
 
-            if (totalLaps != 0)
+            if (numRaces == 1)
+            {
+                var data = raceResults.FirstOrDefault();
+                if (data.Position == 0)
+                {
+                    return 0;
+                }                
+            }
+
+            if (totalLaps != 0 )
             {
                 var position = raceResults.Where(x => x.Position != 0).Min(x => x.Position);
                 return position;

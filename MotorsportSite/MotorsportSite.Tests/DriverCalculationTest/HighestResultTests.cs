@@ -22,22 +22,26 @@ namespace MotorsportSite.Tests.DriverCalculationTest
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 1
+                     Position = 1,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 4
+                     Position = 4,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 2
+                     Position = 2,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 10
+                     Position = 10,
+                     LapsCompleted = 71,
                 }
             };
 
@@ -61,22 +65,26 @@ namespace MotorsportSite.Tests.DriverCalculationTest
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 13
+                     Position = 13,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 14
+                     Position = 14,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 12
+                     Position = 12,
+                     LapsCompleted = 71
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 10
+                     Position = 10,
+                     LapsCompleted = 71
                 }
             };
 
@@ -100,22 +108,26 @@ namespace MotorsportSite.Tests.DriverCalculationTest
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 0
+                     Position = 0,
+                     LapsCompleted = 11
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 0
+                     Position = 0,
+                     LapsCompleted = 11
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 1
+                     Position = 1,
+                     LapsCompleted = 11
                 },
                 new RaceResults
                 {
                      DriverId = 1,
-                     Position = 2
+                     Position = 2,
+                     LapsCompleted = 11
                 }
             };
 
@@ -155,6 +167,32 @@ namespace MotorsportSite.Tests.DriverCalculationTest
                 {
                      DriverId = 1,
                      Position = 0
+                }
+            };
+
+            //Act
+            var actual = calculate.HighestResult(raceResults);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void HighestResult_FirstRaceOfSeasonDNF()
+        {
+            Calculate calculate = new Calculate();
+
+            //Arange
+            var expected = 0;
+
+            List<RaceResults> raceResults = new List<RaceResults>
+            {
+                new RaceResults
+                {
+                     DriverId = 1,
+                     Position = 0,
+                     LapsCompleted = 11
+
                 }
             };
 

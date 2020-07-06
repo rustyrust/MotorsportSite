@@ -5,7 +5,8 @@
 	[CalId] INT NOT NULL,
 	[Position] INT NOT NULL,
 	[TireId] INT NOT NULL,
-	CONSTRAINT [StartingGrid_FK_Drivers] FOREIGN KEY(DriverId) REFERENCES [dbo].[Drivers]([Id]),
+	[PitStart] BIT NOT NULL DEFAULT 0, 
+    CONSTRAINT [StartingGrid_FK_Drivers] FOREIGN KEY(DriverId) REFERENCES [dbo].[Drivers]([Id]),
     CONSTRAINT [StartingGrid_FK_RaceCalendar] FOREIGN KEY(CalId) REFERENCES [dbo].[RaceCalendar]([Id]),
 	CONSTRAINT [StartingGrid_FK_Tires] FOREIGN KEY(TireId) REFERENCES [dbo].[Tires]([Id])
 )
