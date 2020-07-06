@@ -19,133 +19,136 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" v-if="selectedDriver">
-                <transition name="fade">
-                    <div class="drivers-details">
-                        <div class="diver-name-container">
-                            <p class="details-driver-firstname">
-                                {{selectedDriver.driverBio.firstName}}
-                            </p>
-                            <div class="flag-container">
-                                <img v-bind:src="'CountryFlags/' + selectedDriver.driverBio.country +'.png'" class="details-driver-flag" />
-                            </div>
-                            <h3 class="details-driver-lastname">
-                                {{selectedDriver.driverBio.lastName}}
-                            </h3>
+                @*<transition-group name="fade">*@
+                <div class="drivers-details">
+                    <div class="diver-name-container">
+                        <p class="details-driver-firstname">
+                            {{selectedDriver.driverBio.firstName}}
+                        </p>
+                        <div class="flag-container">
+                            <img v-bind:src="'CountryFlags/' + selectedDriver.driverBio.country +'.png'" class="details-driver-flag" />
                         </div>
-                        <div class="driver-team-name">
-                            <span class="data-title">Team:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.teamName}}</span>
-                        </div>
-                        <div class="driver-number">
-                            <span class="data-title">Driver Number:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.driverNumber}}</span>
-                        </div>
-                        <div class="driver-country">
-                            <span class="data-title">Country:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.country}}</span>
-                        </div>
-                        <div class="driver-dob">
-                            <span class="data-title">DOB:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.dob}}</span>
-                        </div>
-                        <div class="driver-place-of-birth">
-                            <span class="data-title">Place Of Birth:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.placeOfBirth}}</span>
-                        </div>
-                        <div class="driver-short-name">
-                            <span class="data-title">On Track Name:</span>
-                            <span class="data-value">{{selectedDriver.driverBio.shortName}}</span>
-                        </div>
-                        <div class="driver-best-track">
-                            <span class="data-title">Most Successful Track:</span>
-                            <span class="data-value">{{selectedDriver.driverCareerStats.bestTrack}}</span>
-                        </div>
-                        <div class="driver-best-season">
-                            <span class="data-title">Best Season:</span>
-                            <span class="data-value">{{selectedDriver.driverCareerStats.bestSeason}}</span>
-                        </div>
-                        <div class="driver-best-season">
-                            <span class="data-title">World Championships:</span>
-                            <span class="data-value">{{selectedDriver.driverCareerStats.numChapionships}}</span>
-                        </div>
-                        <div v-if="selectedDriverChamp">
-                            <table class="champ-table">
-                                <tr>
-                                    <th>Team</th>
-                                    <th>Season</th>
-                                </tr>
-                                <tr>
-                                    <td>{{selectedDriverChamp.teamName}}</td>
-                                    <td>{{selectedDriverChamp.season}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div>
-                            <table class="driver-stats-table">
-                                <tr>
-                                    <th>Year</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Wins">W</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Laps Lead">LL</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Highest Result and Times Achived">HR</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Completed Races">CR</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Overtakes">O</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Did Not Finish">DNF</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Fastest Laps">FL</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Total Points">TP</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Top 10 finishes">TP10</th>
-                                    <th data-toggle="tooltip" data-placement="top" title="Qually to Race Finish conversion">CR</th>
-                                </tr>
-                                <tr>
-                                    <td>{{currentSeason}} Stats</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numOfRaceWins}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numOfLapsLead}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.highestResult}} / {{selectedDriver.driverSeasonStats.totalNumOfHighestResult}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numOfRacesCompleted}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numOfOvertakes}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numDNFs}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.numRaceFastestLaps}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.totalPoints}}</td>
-                                    <td>{{selectedDriver.driverSeasonStats.topTenFinishes}}</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
-                                    <td>Career Stats</td>
-                                    <td>{{selectedDriver.driverCareerStats.numOfRaceWins}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.numOfLapsLead}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.highestResult}} / {{selectedDriver.driverCareerStats.totalNumOfHighestResult}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.numOfRacesCompleted}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.numOfOvertakes}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.numDNFs}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.numRaceFastestLaps}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.totalPoints}}</td>
-                                    <td>{{selectedDriver.driverCareerStats.topTenFinishes}}</td>
-                                    <td>30</td>
-                                </tr>
-                            </table>
-                        </div>
+                        <h3 class="details-driver-lastname">
+                            {{selectedDriver.driverBio.lastName}}
+                        </h3>
+                    </div>
+                    <div class="driver-team-name">
+                        <span class="data-title">Team:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.teamName}}</span>
+                    </div>
+                    <div class="driver-number">
+                        <span class="data-title">Driver Number:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.driverNumber}}</span>
+                    </div>
+                    <div class="driver-country">
+                        <span class="data-title">Country:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.country}}</span>
+                    </div>
+                    <div class="driver-dob">
+                        <span class="data-title">DOB:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.dob}}</span>
+                    </div>
+                    <div class="driver-place-of-birth">
+                        <span class="data-title">Place Of Birth:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.placeOfBirth}}</span>
+                    </div>
+                    <div class="driver-short-name">
+                        <span class="data-title">On Track Name:</span>
+                        <span class="data-value">{{selectedDriver.driverBio.shortName}}</span>
+                    </div>
+                    <div class="driver-best-track">
+                        <span class="data-title">Most Successful Track:</span>
+                        <span class="data-value">{{selectedDriver.driverCareerStats.bestTrack}}</span>
+                    </div>
+                    <div class="driver-best-season">
+                        <span class="data-title">Best Season:</span>
+                        <span class="data-value">{{selectedDriver.driverCareerStats.bestSeason}}</span>
+                    </div>
+                    <div class="driver-best-season">
+                        <span class="data-title">World Championships:</span>
+                        <span class="data-value">{{selectedDriver.driverCareerStats.numChapionships}}</span>
+                    </div>
+                    <div v-if="selectedDriverChamp">
+                        <table class="champ-table">
+                            <tr>
+                                <th>Team</th>
+                                <th>Season</th>
+                            </tr>
+                            <tr>
+                                <td>{{selectedDriverChamp.teamName}}</td>
+                                <td>{{selectedDriverChamp.season}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="driver-stats-table">
+                            <tr>
+                                <th>Year</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Wins">W</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Laps Lead">LL</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Highest Result and Times Achived">HR</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Completed Races">CR</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Overtakes">O</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Did Not Finish">DNF</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Fastest Laps">FL</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Total Points">TP</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Top 10 finishes">TP10</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Qually to Race Finish conversion">CR</th>
+                            </tr>
+                            <tr>
+                                <td>{{currentSeason}} Stats</td>
+                                <td>{{selectedDriver.driverSeasonStats.numOfRaceWins}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.numOfLapsLead}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.highestResult}} / {{selectedDriver.driverSeasonStats.totalNumOfHighestResult}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.numOfRacesCompleted}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.numOfOvertakes}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.numDNFs}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.numRaceFastestLaps}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.totalPoints}}</td>
+                                <td>{{selectedDriver.driverSeasonStats.topTenFinishes}}</td>
+                                <td>30</td>
+                            </tr>
+                            <tr>
+                                <td>Career Stats</td>
+                                <td>{{selectedDriver.driverCareerStats.numOfRaceWins}}</td>
+                                <td>{{selectedDriver.driverCareerStats.numOfLapsLead}}</td>
+                                <td>{{selectedDriver.driverCareerStats.highestResult}} / {{selectedDriver.driverCareerStats.totalNumOfHighestResult}}</td>
+                                <td>{{selectedDriver.driverCareerStats.numOfRacesCompleted}}</td>
+                                <td>{{selectedDriver.driverCareerStats.numOfOvertakes}}</td>
+                                <td>{{selectedDriver.driverCareerStats.numDNFs}}</td>
+                                <td>{{selectedDriver.driverCareerStats.numRaceFastestLaps}}</td>
+                                <td>{{selectedDriver.driverCareerStats.totalPoints}}</td>
+                                <td>{{selectedDriver.driverCareerStats.topTenFinishes}}</td>
+                                <td>30</td>
+                            </tr>
+                        </table>
+                    </div>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn-primary active" v-on:click="showLineChart()">Performance</button>
-                            <button type="button" class="btn-primary" v-on:click="showPieChart()">Podiums</button>
-                            <button type="button" class="btn-primary">Career Performance</button>
-                        </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary active" v-on:click="showLineChart()">Performance</button>
+                        <button type="button" class="btn btn-primary" v-on:click="showPieChart()">Podiums</button>
+                        <button type="button" class="btn btn-primary">Career Performance</button>
+                    </div>
 
-
+                    <div v-if="lineChartShow">
                         <line-chart :chartdata="chartdata"
                                     :options="options">
                         </line-chart>
+                    </div>
 
-                        <line-chart :chartdata="LineChartCurrentVsLastSeaonData"
-                                    :options="LineChartCurrentVsLastSeaonOptions">
-                        </line-chart>
 
+                    <line-chart :chartdata="LineChartCurrentVsLastSeaonData"
+                                :options="LineChartCurrentVsLastSeaonOptions">
+                    </line-chart>
+
+                    <div v-if="pieChartShow">
                         <pie-chart :chartdata="piechartdata"
                                    :options="pieoptions">
                         </pie-chart>
-
-
                     </div>
-                </transition>
+                    @*</transition-group>*@
+                </div>
+
             </div>
             <div v-bind:class="[{'col-md-3': !driver.isVisable, 'col-md-12': driver.isVisable}]" v-for="driver in drivers">
                 <div class="driver-container" v-on:click="toggleDriverDetails(driver.driverBio.id)">
@@ -163,13 +166,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
     </div>
-
-
-
-
-
-
 </div>
-
 

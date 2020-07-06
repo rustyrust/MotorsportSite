@@ -32,17 +32,17 @@
             let date = new Date();
             self.currentSeason = date.getFullYear();
 
-            fetch('https://LocalHost:44374/api/Drivers/FullInformation/2020')
+            let promise1 = fetch('https://LocalHost:44374/api/Drivers/FullInformation/2020')
                 .then((response) => response.json())
                 .then(function (data) {
                     self.drivers = data;
-                    self.toggleDriverDetails(self.drivers[0].driverBio.id);
+                    
 
                 }).catch(function (error) {
                     console.log(error);
                 });
 
-            fetch('https://LocalHost:44374/api/Drivers/Championships')
+            let promise2 = fetch('https://LocalHost:44374/api/Drivers/Championships')
                 .then((response) => response.json())
                 .then(function (data) {
                     self.driversChamp = data;
@@ -51,7 +51,7 @@
                     console.log(error);
                 });
 
-            fetch('https://LocalHost:44374/api/Drivers/2019/RaceResults')
+            let promise3 = fetch('https://LocalHost:44374/api/Drivers/2019/RaceResults')
                 .then((response) => response.json())
                 .then(function (data) {
                     self.driversRaceResults = data;
@@ -60,7 +60,7 @@
                     console.log(error);
                 });
 
-            fetch('https://LocalHost:44374/api/Drivers/2020/CurrentSeasonVsPreviousSeason')
+            let promise4 = fetch('https://LocalHost:44374/api/Drivers/2020/CurrentSeasonVsPreviousSeason')
                 .then((response) => response.json())
                 .then(function (data) {
                     self.driversCurrentSeasonVsLast= data;
@@ -68,6 +68,16 @@
                 }).catch(function (error) {
                     console.log(error);
                 });
+
+            Promise.all([promise1, promise2, promise3, promise4])
+                .then(function () {
+                    self.toggleDriverDetails(self.drivers[0].driverBio.id);
+                    console.log(self.drivers);
+                    console.log(self.driversChamp);
+                    console.log(self.driversRaceResults);
+                    console.log(self.driversCurrentSeasonVsLast);
+                }
+                );
 
             window.setTimeout(function () {
                 $('[data-toggle="tooltip"]').tooltip();
@@ -98,8 +108,7 @@
             }
             self.filterDriverChamp();
             self.selectedDriverLineChartLastSeasonVsTeamMate(id);
-            console.log(self.driversCurrentSeasonVsLast);
-            //self.selectedDriverLineChartCurrentSeaonVsLastSeaon(id);
+            self.selectedDriverLineChartCurrentSeaonVsLastSeaon(id);
             self.selectedDriverPieChartCurrentSeasonTopPlacesVsAllDrivers(id);
         },
 
@@ -200,7 +209,7 @@
             let circuitCountry = [];
             let selectedDriverData = [];
 
-            let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id, self.driversCurrentSeasonVsLast)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
+            let yAxisiData = Math.max(Math.max.apply(Math, self.GetRacePositions(id, self.driversCurrentSeasonVsLast, 2019)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
             let yAxisiScale = yAxisiData < 5 ? 5 : yAxisiData;
 
             for (let driver of self.driversCurrentSeasonVsLast) {
@@ -222,7 +231,7 @@
                     fill: false,
                     label: 'Race Positions',
                     borderColor: self.teamRaceColour(id),
-                    data: self.GetSelectedDriversPositions(id, self.driversCurrentSeasonVsLast)
+                    data: self.GetRacePositions(id, self.driversCurrentSeasonVsLast, 2020)
                 },
                 //{
                 //    fill: false,
@@ -235,7 +244,7 @@
                     fill: false,
                     label: '2019 Race Positions',
                     borderColor: '#000000',
-                    data: self.GetSelectedDriversPositions(id, self.driversCurrentSeaonRaceResultsVsPreviousSeason)
+                    data: self.GetRacePositions(id, self.driversCurrentSeasonVsLast, 2019)
                 }]
                 //{
                 //    fill: false,
@@ -384,7 +393,8 @@
             let driversPositions = [];
 
             for (let driver of data) {
-                if (selectedDriverId == driver.driverId && driver.startDate.getFullYear() == season) {
+                let startDate = new Date(driver.startDate);
+                if (selectedDriverId == driver.driverId && startDate.getFullYear() == season) {
                     driversPositions.push(driver.position);
                 }
             }
@@ -530,6 +540,17 @@
             }
         },
 
+        showLineChart: function () {
+            let self = this;
+            self.lineChartShow = true;
+            self.pieChartShow = false;
+        },
+
+        showPieChart: function () {
+            let self = this;
+            self.lineChartShow = false;
+            self.pieChartShow = true;
+        }
 
 
     }
