@@ -4,6 +4,7 @@ using MotorsportSite.DataLevel.Models;
 using MotorsportSite.DataLevel.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,25 @@ namespace MotorsportSite.DataLevel.DataAccess
         public DataReader(IConnectionProvider connectionProvider)
         {
             _connectionProvider = connectionProvider;
+        }
+
+        public async Task<List<RaceCalendar>> GetRaceCalander(int season)
+        {
+            const string sql = @"SELECT 
+                                 	RT.TrackName,
+                                 	RT.Location,
+                                 	RC.StartDate,
+                                 	RC.EventName
+                                 FROM RaceCalendar RC
+                                 INNER JOIN RaceTracks RT ON RT.Id = RC.TrackId
+                                 WHERE YEAR(StartDate) = @season
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data = await conn.QueryAsync<RaceCalendar>(sql, new { season });
+                return data.ToList();
+            }
         }
 
         public async Task<List<Team>> GetAllTeams()

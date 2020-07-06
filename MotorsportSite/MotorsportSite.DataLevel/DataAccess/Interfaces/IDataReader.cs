@@ -8,6 +8,7 @@ namespace MotorsportSite.DataLevel.DataAccess.Interfaces
 {
     public interface IDataReader
     {
+        Task<List<RaceCalendar>> GetRaceCalander(int season);
         Task<Team> GetTeamById(int id);
         Task<List<Team>> GetAllTeams();
     }

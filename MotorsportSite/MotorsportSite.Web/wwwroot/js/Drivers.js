@@ -12,13 +12,17 @@
         driversChamp: null,
         selectedDriverChamp: null,
         driversRaceResults: null,
+        driversCurrentSeasonVsLast: null,
+
         chartdata: null,
         options: null,
+        LineChartCurrentVsLastSeaonData: null,
+        LineChartCurrentVsLastSeaonOptions: null,
         piechartdata: null,
         pieoptions: null,
 
-        lineChartShow: false,
-        pieChartShow: true
+        lineChartShow: true,
+        pieChartShow: false
     },
 
     mounted:
@@ -56,6 +60,15 @@
                     console.log(error);
                 });
 
+            fetch('https://LocalHost:44374/api/Drivers/2020/CurrentSeasonVsPreviousSeason')
+                .then((response) => response.json())
+                .then(function (data) {
+                    self.driversCurrentSeasonVsLast= data;
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
             window.setTimeout(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             }, 500);
@@ -84,16 +97,18 @@
                 }
             }
             self.filterDriverChamp();
-            self.selectedDriverChartData(id);
-            self.PieFirstPlaceData(id);
+            self.selectedDriverLineChartLastSeasonVsTeamMate(id);
+            console.log(self.driversCurrentSeasonVsLast);
+            //self.selectedDriverLineChartCurrentSeaonVsLastSeaon(id);
+            self.selectedDriverPieChartCurrentSeasonTopPlacesVsAllDrivers(id);
         },
 
-        selectedDriverChartData: function (id) {
+        selectedDriverLineChartLastSeasonVsTeamMate: function (id) {
             let self = this;
             let circuitCountry = [];
             let selectedDriverData = [];
 
-            let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
+            let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id, self.driversRaceResults)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
             let yAxisiScale = yAxisiData < 5 ? 5 : yAxisiData;
 
             for (let driver of self.driversRaceResults) {
@@ -102,7 +117,7 @@
                 }
             }
 
-            for (let driver of self.GetSelectedDriversPositions(id)) {
+            for (let driver of self.GetSelectedDriversPositions(id, self.driversRaceResults)) {
                 if (driver == 0) {
                     selectedDriverData.push(NaN);
                 }
@@ -115,7 +130,7 @@
                     fill: false,
                     label: self.selectedDriver.driverBio.lastName + ' Positions',
                     borderColor: self.teamRaceColour(id),
-                    data: selectedDriverData,//self.GetSelectedDriversPositions(id),
+                    data: selectedDriverData,
                     pointBackgroundColor: self.dataPointColours(id),
                     pointRadius: self.dataPointRadius(id)
                 },
@@ -180,7 +195,110 @@
             }
         },
 
-        PieFirstPlaceData: function (id) {
+        selectedDriverLineChartCurrentSeaonVsLastSeaon: function (id) {
+            let self = this;
+            let circuitCountry = [];
+            let selectedDriverData = [];
+
+            let yAxisiData = Math.max(Math.max.apply(Math, self.GetSelectedDriversPositions(id, self.driversCurrentSeasonVsLast)), Math.max.apply(Math, self.GetTeamMateRaceResults(id)));
+            let yAxisiScale = yAxisiData < 5 ? 5 : yAxisiData;
+
+            for (let driver of self.driversCurrentSeasonVsLast) {
+                if (id == driver.driverId) {
+                    circuitCountry.push(driver.trackCountry);
+                }
+            }
+
+            //for (let driver of self.GetRacePositions(id, self.driversCurrentSeasonVsLast, 2020)) {
+            //    if (driver == 0) {
+            //        selectedDriverData.push(NaN);
+            //    }
+            //    selectedDriverData.push(driver);
+            //}
+
+            self.LineChartCurrentVsLastSeaonData = {
+                labels: circuitCountry,
+                datasets: [{
+                    fill: false,
+                    label: 'Race Positions',
+                    borderColor: self.teamRaceColour(id),
+                    data: self.GetSelectedDriversPositions(id, self.driversCurrentSeasonVsLast)
+                },
+                //{
+                //    fill: false,
+                //    label: 'Qualifing Positions',
+                //    borderColor: self.teamRaceColour(id),
+                //    borderDash: [5, 5],
+                //    data: 4
+                //},
+                {
+                    fill: false,
+                    label: '2019 Race Positions',
+                    borderColor: '#000000',
+                    data: self.GetSelectedDriversPositions(id, self.driversCurrentSeaonRaceResultsVsPreviousSeason)
+                }]
+                //{
+                //    fill: false,
+                //    label: '2019 Qualifing Positions',
+                //    borderColor: '#000000',
+                //    borderDash: [5, 5],
+                //    data: 8
+                //}]
+            }
+
+            self.LineChartCurrentVsLastSeaonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                //tooltips: {
+                //    callbacks: {
+                //        afterBody: function (t, d) {
+                //            let toolTipInfo = [];
+                //            let overTakes = self.SelectedDriversOvertakes(id);
+                //            let leadLaps = self.SelectedDriversLeadLaps(id);
+                //            let champRaceNum = self.trackNumChapionshipWon(id);
+
+                //            toolTipInfo = [`Num Of Overtakes: ${overTakes[t[0].index]}`];
+                //            toolTipInfo.push(`Num Lead Laps: ${leadLaps[t[0].index]}`);
+
+                //            //if (champRaceNum != null) {
+                //            //    toolTipInfo.push('Won the Chapionship');
+                //            //}
+
+                //            return toolTipInfo;
+                //        }
+                //    },
+                //    filter: function (tooltipItem) {
+                //        return tooltipItem.datasetIndex === 0;
+                //    }
+                //},
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Grand Prix'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Positions'
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            reverse: true,
+                            stepsSize: 1,
+                            fixedStepSize: 1,
+                            max: yAxisiScale,
+                            min: 1
+                        }
+                    }]
+                }
+            }
+        },
+
+        selectedDriverPieChartCurrentSeasonTopPlacesVsAllDrivers: function (id) {
             let self = this;
             let pieData = [];
             let dataLables = [];
@@ -249,12 +367,24 @@
             return teamMatesPositions;
         },
 
-        GetSelectedDriversPositions: function (selectedDriverId) {
+        GetSelectedDriversPositions: function (selectedDriverId, data) {
             let self = this;
             let driversPositions = [];
 
-            for (let driver of self.driversRaceResults) {
+            for (let driver of data) {
                 if (selectedDriverId == driver.driverId) {
+                    driversPositions.push(driver.position);
+                }
+            }
+            return driversPositions;
+        },
+
+        GetRacePositions: function (selectedDriverId, data, season) {
+            let self = this;
+            let driversPositions = [];
+
+            for (let driver of data) {
+                if (selectedDriverId == driver.driverId && driver.startDate.getFullYear() == season) {
                     driversPositions.push(driver.position);
                 }
             }

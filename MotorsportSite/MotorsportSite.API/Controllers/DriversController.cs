@@ -108,5 +108,15 @@ namespace MotorsportSite.API.Controllers
             var result = await _driverInformationService.GetAllDriversRaceResultsForASeason(season);
             return result;
         }
+
+        [Route("{season}/CurrentSeasonVsPreviousSeason")]
+        [HttpGet]
+        public async Task<ActionResult<List<RaceResults>>> GetDriversCurrentSeasonResultsVsPreviousSeason(int season)
+        {
+            var result = await _driverInformationService.GetDriversCurrentSeasonVsLastSeasonResults(season);
+            return result;
+        }
+
+
     }
 }

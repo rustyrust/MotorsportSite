@@ -78,6 +78,8 @@
     <Build Include="Tables\Qualifying.sql" />
     <Build Include="Tables\Tires.sql" />
     <Build Include="Tables\StartingGrid.sql" />
+    <None Include="SeedScripts\Qualifyings_DataScript.sql" />
+    <None Include="SeedScripts\Tires_DataScript.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />

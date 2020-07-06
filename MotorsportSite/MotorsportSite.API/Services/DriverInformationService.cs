@@ -1,5 +1,6 @@
 ﻿using MotorsportSite.API.Models;
 using MotorsportSite.API.Services.Interfaces;
+using MotorsportSite.DataLevel.DataAccess.Interfaces;
 using MotorsportSite.DataLevel.Drivers.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace MotorsportSite.API.Services
     {
         private readonly IDriverReader _driverReader;
         private readonly ICalculate _calculate;
+        private readonly IDataReader _dataReader;
 
-        public DriverInformationService(IDriverReader driverReader, ICalculate calculate)
+        public DriverInformationService(IDriverReader driverReader, ICalculate calculate, IDataReader dataReader)
         {
             _driverReader = driverReader;
             _calculate = calculate;
+            _dataReader = dataReader;
         }
 
         private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
@@ -97,7 +100,7 @@ namespace MotorsportSite.API.Services
 
                 allDriversInfo.Add(driverInfo);
             }
-                        
+
             return allDriversInfo;
         }
 
@@ -150,6 +153,34 @@ namespace MotorsportSite.API.Services
             var orderedData = raceData.OrderBy(x => x.StartDate);
 
             return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+        }
+
+        public async Task<List<RaceResults>> GetDriversCurrentSeasonVsLastSeasonResults(int season)
+        {
+            var raceData = await _driverReader.GetDriversCurrentSeasonVsLastSeasonResults(season);
+            var calender = await _dataReader.GetRaceCalander(season);
+
+            if (calender.Where(x => x.EventName == "Race").GroupBy(n => n.EventName).Any(x => x.Count() > 1))
+            {
+                var raceResults = new List<RaceResults>();
+                foreach (var date in calender.Where(x => x.EventName == "Race"))
+                {
+                    foreach (var data in raceData)
+                    {
+                        if (date.TrackName == data.TrackName)
+                        {
+                            raceResults.Add(RaceResults.MapFromDb(data));
+                        }
+                    }
+                }
+
+                return raceResults;
+            }
+            else
+            {
+                return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+            }
+
         }
 
 

@@ -130,17 +130,19 @@
                             <button type="button" class="btn-primary">Career Performance</button>
                         </div>
 
-                        <div v-show="lineChartShow">
-                            <line-chart :chartdata="chartdata"
-                                        :options="options">
-                            </line-chart>
-                        </div>
 
-                        <div v-show="pieChartShow">
-                            <pie-chart :chartdata="piechartdata"
-                                       :options="pieoptions">
-                            </pie-chart>
-                        </div>
+                        <line-chart :chartdata="chartdata"
+                                    :options="options">
+                        </line-chart>
+
+                        <line-chart :chartdata="LineChartCurrentVsLastSeaonData"
+                                    :options="LineChartCurrentVsLastSeaonOptions">
+                        </line-chart>
+
+                        <pie-chart :chartdata="piechartdata"
+                                   :options="pieoptions">
+                        </pie-chart>
+
 
                     </div>
                 </transition>

@@ -192,5 +192,44 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                 return data.AsList();
             }
         }
+
+        public async Task<List<RaceResults>> GetDriversCurrentSeasonVsLastSeasonResults(int season)
+        {
+            const string sql = @"SELECT 
+                                     D.Id AS DriverId,
+                                     ISNULL(RR.LapsCompleted, 0) LapsCompleted,
+                                     ISNULL(RR.IsChampion, 0) IsChampion,
+                                     ISNULL(P.Points, 0) Points,
+                                     ISNULL(P.Position, 0) Position,
+                                     ISNULL(RR.FastestLap, 0) FastestLap,
+                                     ISNULL(T.TrackName, 'None') TrackName,
+                                     ISNULL(T.Country, 'None') TrackCountry,
+                                     RC.StartDate,
+                                     ISNULL(RR.LapsLead, 0) LapsLead,
+                                     ISNULL(RR.Overtakes, 0) Overtakes
+                                FROM RaceCalendar RC
+                                LEFT JOIN RaceResults RR      ON RR.CalId = RC.Id
+                                LEFT JOIN Drivers D	          ON D.Id = RR.DriverId
+                                LEFT JOIN [dbo].RaceTracks T  ON T.Id = RC.TrackId 
+                                LEFT JOIN [dbo].Points P      ON P.Id = RR.PointsId
+                                WHERE RC.TrackId IN (
+                                                       SELECT DISTINCT TrackId
+                                                       FROM RaceCalendar RC
+                                                       LEFT JOIN RaceResults RR ON RR.CalId = RC.Id
+                                                       WHERE YEAR(RC.StartDate) = 2020
+                                                         AND RC.EventName = 'Race'       
+                                                     )
+                                		AND RC.EventName = 'Race' 
+                                		AND YEAR(RC.StartDate) BETWEEN 2019 AND 2020
+                                		AND D.Id IS NOT NULL
+                                ORDER BY RC.StartDate
+                                ";
+
+            using (var conn = _connectionProvider.Get())
+            {
+                var data = await conn.QueryAsync<RaceResults>(sql, new { season });
+                return data.AsList();
+            }
+        }
     }
 }
