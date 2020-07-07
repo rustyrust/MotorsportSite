@@ -125,9 +125,9 @@
                     </div>
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary active" v-on:click="showLineChart()">Performance</button>
-                        <button type="button" class="btn btn-primary" v-on:click="showPieChart()">Podiums</button>
-                        <button type="button" class="btn btn-primary">Career Performance</button>
+                        <button type="button" class="btn btn-primary active" v-on:click="showVsLastSeaon()">Performance Vs Last Season</button>
+                        <button type="button" class="btn btn-primary" v-on:click="showPodiums()">Podiums</button>
+                        <button type="button" class="btn btn-primary" v-on:click="showVsTeammate()">Performance vs Teammate</button>
                     </div>
 
                     <div v-if="lineChartShow">
@@ -136,10 +136,11 @@
                         </line-chart>
                     </div>
 
-
-                    <line-chart :chartdata="LineChartCurrentVsLastSeaonData"
-                                :options="LineChartCurrentVsLastSeaonOptions">
-                    </line-chart>
+                    <div v-if="vsLastSeaonShow">
+                        <line-chart :chartdata="LineChartCurrentVsLastSeaonData"
+                                    :options="LineChartCurrentVsLastSeaonOptions">
+                        </line-chart>
+                    </div>
 
                     <div v-if="pieChartShow">
                         <pie-chart :chartdata="piechartdata"

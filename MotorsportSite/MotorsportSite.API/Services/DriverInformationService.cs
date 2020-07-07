@@ -159,15 +159,20 @@ namespace MotorsportSite.API.Services
         {
             var raceData = await _driverReader.GetDriversCurrentSeasonVsLastSeasonResults(season);
             var calender = await _dataReader.GetRaceCalander(season);
+            var raceDates = calender.Where(x => x.EventName == "Race");
 
             if (calender.Where(x => x.EventName == "Race").GroupBy(n => n.EventName).Any(x => x.Count() > 1))
             {
                 var raceResults = new List<RaceResults>();
-                foreach (var date in calender.Where(x => x.EventName == "Race"))
+                foreach (var date in raceDates)
                 {
                     foreach (var data in raceData)
                     {
-                        if (date.TrackName == data.TrackName)
+                        if (date.TrackName == data.TrackName && data.StartDate.Year != season)
+                        {
+                            raceResults.Add(RaceResults.MapFromDb(data));
+                        }
+                        else if (date.TrackName == data.TrackName && date.StartDate == data.StartDate)
                         {
                             raceResults.Add(RaceResults.MapFromDb(data));
                         }
@@ -178,6 +183,7 @@ namespace MotorsportSite.API.Services
             }
             else
             {
+                /// need to write something to pick the best result of the dupe if there is one for the previous season
                 return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
             }
 

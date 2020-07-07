@@ -21,8 +21,9 @@
         piechartdata: null,
         pieoptions: null,
 
-        lineChartShow: true,
-        pieChartShow: false
+        lineChartShow: false,
+        pieChartShow: false,
+        vsLastSeaonShow: true
     },
 
     mounted:
@@ -226,7 +227,7 @@
             //}
 
             self.LineChartCurrentVsLastSeaonData = {
-                labels: circuitCountry,
+                labels: self.GetCountryNames(id, self.driversCurrentSeasonVsLast, 2019),
                 datasets: [{
                     fill: false,
                     label: 'Race Positions',
@@ -540,18 +541,39 @@
             }
         },
 
-        showLineChart: function () {
+        GetCountryNames: function (selectedDriverId, data, season) {
             let self = this;
-            self.lineChartShow = true;
+            let circuits = [];
+
+            for (let driver of data) {
+                let startDate = new Date(driver.startDate);
+                if (selectedDriverId == driver.driverId && startDate.getFullYear() == season) {
+                    circuits.push(driver.trackCountry);
+                }
+            }
+            return circuits;
+        },
+
+        showVsLastSeaon: function () {
+            let self = this;
+            self.vsLastSeaonShow = true;
+            self.lineChartShow = false;
             self.pieChartShow = false;
         },
 
-        showPieChart: function () {
+        showPodiums: function () {
             let self = this;
             self.lineChartShow = false;
             self.pieChartShow = true;
-        }
+            self.vsLastSeaonShow = false;
+        },
 
+        showVsTeammate: function () {
+            let self = this;
+            self.lineChartShow = true;
+            self.pieChartShow = false;
+            self.vsLastSeaonShow = false;
+        }
 
     }
 
