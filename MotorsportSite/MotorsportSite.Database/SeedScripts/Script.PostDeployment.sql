@@ -22,3 +22,4 @@ Post-Deployment Script Template
 :r .\DriversTeamMovement_DataScript.sql
 :r .\Tires_DataScript.sql
 :r .\Qualifyings_DataScript.sql
+:r .\StartingGrid_DataScript.sql
