@@ -81,6 +81,12 @@
     <None Include="SeedScripts\Qualifyings_DataScript.sql" />
     <None Include="SeedScripts\Tires_DataScript.sql" />
     <None Include="SeedScripts\StartingGrid_DataScript.sql" />
+    <Build Include="Tables\DriverPenalties.sql" />
+    <Build Include="Tables\Penalties.sql" />
+    <None Include="SeedScripts\Penalties_DataScript.sql" />
+    <None Include="SeedScripts\DriverPenalties_DataScript.sql" />
+    <Build Include="Tables\DriverRacingLicensePoints.sql" />
+    <None Include="SeedScripts\DriverRacingLicensePoints_DataScript.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MotorsportSite.Database.refactorlog" />

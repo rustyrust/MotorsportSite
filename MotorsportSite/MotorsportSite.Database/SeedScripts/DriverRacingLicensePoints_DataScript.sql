@@ -10,19 +10,22 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r .\TeamPrinciple_DataScript.sql
-:r .\Manufactures_DataScript.sql
-:r .\Teams_DataScript.sql
-:r .\TeamsPowerUnit_DataScript.sql
-:r .\Drivers_DataScript.sql
-:r .\Points_DataScript.sql
-:r .\RaceTracks_DataScript.sql
-:r .\RaceResults_DataScript.sql
-:r .\RaceCalendar_DataScript.sql
-:r .\DriversTeamMovement_DataScript.sql
-:r .\Tires_DataScript.sql
-:r .\Qualifyings_DataScript.sql
-:r .\StartingGrid_DataScript.sql
-:r .\Penalties_DataScript.sql
-:r .\DriverPenalties_DataScript.sql
-:r .\DriverRacingLicensePoints_DataScript.sql
+SET IDENTITY_INSERT [dbo].[DriverRacingLicensePoints] ON;
+
+
+MERGE INTO [dbo].[DriverRacingLicensePoints] AS T
+    USING ( 
+           VALUES (1, 1, 2)
+          )
+    AS S (Id, DriverPenaltyId, Points)
+    ON T.Id = S.Id
+WHEN MATCHED THEN
+UPDATE SET
+    DriverPenaltyId = S.DriverPenaltyId,
+    Points = S.Points
+WHEN NOT MATCHED THEN
+    INSERT (Id, DriverPenaltyId, Points)
+    VALUES (S.Id, S.DriverPenaltyId, S.Points);
+
+
+SET IDENTITY_INSERT [dbo].[DriverRacingLicensePoints] OFF
