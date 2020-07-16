@@ -24,7 +24,7 @@ MERGE INTO [dbo].[StartingGrid] AS T
                   (7,  7,  109, 8, 1, 0, NULL),
                   (8,  8,  109, 3, 1, 0, NULL),
 
-                  --2019 Auustria
+                  --2019 Austria
                   (9,  1,  44,  4,  1, 0, 'received a three-place grid penalty for impeding Kimi Räikkönen during qualifying. However, because of the way the penalties were applied, Hamilton dropped two places instead of three and he would start fourth.'),
                   (10, 2,  44,  3,  1, 0, NULL),
                   (11, 3,  44,  9,  1, 0, NULL),
@@ -32,7 +32,17 @@ MERGE INTO [dbo].[StartingGrid] AS T
                   (13, 5,  44,  2,  1, 0, NULL),
                   (14, 6,  44,  18, 1, 0, 'required to start from the back of the grid for exceeding their quotas for power unit components'),
                   (15, 7,  44,  19, 1, 0, 'required to start from the back of the grid for exceeding their quotas for power unit components'),
-                  (16, 8,  44,  5,  1, 0, NULL)
+                  (16, 8,  44,  5,  1, 0, NULL),
+
+                  --2020 Austria
+                  (17, 1,  115,  1,  1, 0, NULL),
+                  (18, 2,  115,  4,  1, 0, NULL),
+                  (19, 3,  115,  10, 1, 0, NULL),
+                  (20, 4,  115,  11, 1, 0, NULL),
+                  (21, 5,  115,  2,  1, 0, NULL),
+                  (22, 6,  115,  6,  1, 0, NULL),
+                  (23, 7,  115,  3,  1, 0, NULL),
+                  (24, 8,  115,  9,  1, 0, NULL)
 
           )
     AS S (Id, DriverId, CalId, Position, TireId, PitStart, Discription)

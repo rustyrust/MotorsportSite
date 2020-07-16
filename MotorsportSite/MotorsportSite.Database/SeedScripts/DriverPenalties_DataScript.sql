@@ -15,7 +15,8 @@ SET IDENTITY_INSERT [dbo].[DriverPenalties] ON;
 
 MERGE INTO [dbo].[DriverPenalties] AS T
     USING (        
-           VALUES (1,   8,  111, 'For ignoring the yellow flag, 3 place grid penalty',  2)
+           VALUES (1,   8,  111, 'For ignoring the yellow flag, 3 place grid penalty',  2),
+                  (2,   4,  114, 'Penalised 3 grid places for impeding Kvyat during qualifying', 2)
 
           )
     AS S (Id, DriverId, CalId, [Description], PenaltyId)

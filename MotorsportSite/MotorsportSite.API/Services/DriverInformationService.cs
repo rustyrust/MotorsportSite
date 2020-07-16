@@ -2,6 +2,7 @@
 using MotorsportSite.API.Services.Interfaces;
 using MotorsportSite.DataLevel.DataAccess.Interfaces;
 using MotorsportSite.DataLevel.Drivers.Interfaces;
+using MotorsportSite.DataLevel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,14 @@ namespace MotorsportSite.API.Services
         private readonly IDriverReader _driverReader;
         private readonly ICalculate _calculate;
         private readonly IDataReader _dataReader;
+        private readonly IDriverQualifyingReader _driverQualifyingReader;
 
-        public DriverInformationService(IDriverReader driverReader, ICalculate calculate, IDataReader dataReader)
+        public DriverInformationService(IDriverReader driverReader, ICalculate calculate, IDataReader dataReader, IDriverQualifyingReader driverQualifyingReader)
         {
             _driverReader = driverReader;
             _calculate = calculate;
             _dataReader = dataReader;
+            _driverQualifyingReader = driverQualifyingReader;
         }
 
         private DriverCalculationInfo CalculateDriverData(List<RaceResults> driverResults)
@@ -158,37 +161,79 @@ namespace MotorsportSite.API.Services
         public async Task<List<RaceResults>> GetDriversCurrentSeasonVsLastSeasonResults(int season)
         {
             var raceData = await _driverReader.GetDriversCurrentSeasonVsLastSeasonResults(season);
-            var calender = await _dataReader.GetRaceCalander(season);
-            var raceDates = calender.Where(x => x.EventName == "Race");
+            return await BuildRaceWeekendDataIfRacingAtSamePlaceMoreThanOnce(raceData, season);
+            //var calender = await _dataReader.GetRaceCalander(season);
+            //var raceDates = calender.Where(x => x.EventName == "Race").ToList();
 
-            if (calender.Where(x => x.EventName == "Race").GroupBy(n => n.EventName).Any(x => x.Count() > 1))
+            //if (calender.Where(x => x.EventName == "Race").GroupBy(n => n.EventName).Any(x => x.Count() > 1))
+            //{
+            //    var raceResults = new List<RaceResults>();
+            //    foreach (var date in raceDates)
+            //    {
+            //        foreach (var data in raceData)
+            //        {
+            //            if (date.TrackName == data.TrackName && data.StartDate.Year != season)
+            //            {
+            //                raceResults.Add(RaceResults.MapFromDb(data));
+            //            }
+            //            else if (date.TrackName == data.TrackName && date.StartDate == data.StartDate)
+            //            {
+            //                raceResults.Add(RaceResults.MapFromDb(data));
+            //            }
+            //        }
+            //    }
+
+            //    return raceResults;
+            //    //return BuildRaceWeekendDataIfRacingAtSamePlaceMoreThanOnce(raceData, raceDates, season);
+            //}
+            //else
+            //{
+            //    /// need to write something to pick the best result of the dupe if there is one for the previous season
+            //    return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+            //}
+
+        }
+
+        public async Task<> GetDriversCurrentAndLastSeasonsQuallyResults(int season)
+        {
+            var quallyData = _driverQualifyingReader.GetDriversCurrentSeasonVsLastSeasonQualifingResults(season);
+            return await BuildRaceWeekendDataIfRacingAtSamePlaceMoreThanOnce(quallyData, season);
+        }
+
+        private async Task<List<RaceCalendar>> GetTheRaceCalanderForASeason(int season)
+        {
+            var calender = await _dataReader.GetRaceCalander(season);
+            return calender.Where(x => x.EventName == "Race").ToList();
+        }
+
+        private async Task<List<T>> BuildRaceWeekendDataIfRacingAtSamePlaceMoreThanOnce<T>(int season) where T: class, new()
+        {
+            var raceDates = await GetTheRaceCalanderForASeason(season);
+
+            if (raceDates.GroupBy(n => n.EventName).Any(x => x.Count() > 1))
             {
-                var raceResults = new List<RaceResults>();
+                var raceResults = new List<T>();
                 foreach (var date in raceDates)
                 {
-                    foreach (var data in raceData)
+                    foreach (var data in T)
                     {
                         if (date.TrackName == data.TrackName && data.StartDate.Year != season)
                         {
-                            raceResults.Add(RaceResults.MapFromDb(data));
+                            raceResults.Add(data);
                         }
                         else if (date.TrackName == data.TrackName && date.StartDate == data.StartDate)
                         {
-                            raceResults.Add(RaceResults.MapFromDb(data));
+                            raceResults.Add(data);
                         }
                     }
                 }
-
                 return raceResults;
             }
             else
             {
                 /// need to write something to pick the best result of the dupe if there is one for the previous season
-                return raceData.Select(x => RaceResults.MapFromDb(x)).ToList();
+                return raceData;
             }
-
         }
-
-
     }
 }

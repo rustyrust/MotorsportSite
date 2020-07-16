@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using MotorsportSite.DataLevel.Drivers.Interfaces;
 using MotorsportSite.DataLevel.Drivers.Models;
 using MotorsportSite.DataLevel.Services.Interfaces;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MotorsportSite.DataLevel.Drivers.DataAccess
 {
-    public class DriverQualifyingReader
+    public class DriverQualifyingReader : IDriverQualifyingReader
     {
         private readonly IConnectionProvider _connectionProvider;
 
@@ -32,6 +33,7 @@ namespace MotorsportSite.DataLevel.Drivers.DataAccess
                                    INNER JOIN RaceCalendar RC ON RC.Id = Q.CalId
                                    INNER JOIN Tires T		 ON T.Id = Q.TireId
                                    INNER JOIN RaceTracks RT	 ON RT.Id = RC.TrackId
+                                   ORDER BY RC.StartDate
                                 ";
 
             using (var conn = _connectionProvider.Get())
